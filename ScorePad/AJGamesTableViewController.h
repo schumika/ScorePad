@@ -10,6 +10,9 @@
 
 @interface AJGamesTableViewController : UITableViewController {
     NSArray *_gamesArray;
+    
+    UIBarButtonItem *_editBarButton;
+    UIBarButtonItem *_doneBarButton;
 }
 
 @property (nonatomic, retain) NSArray *gamesArray;

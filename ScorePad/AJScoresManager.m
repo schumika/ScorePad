@@ -127,6 +127,12 @@ static AJScoresManager *sharedAJScoresManager = nil;
     [self saveContext];
 }
 
+- (void)deleteGame:(AJGame *)game {
+    [[self managedObjectContext] deleteObject:game];
+    
+    [self saveContext];
+}
+
 #pragma mark - Other public methods
 
 - (BOOL)saveContext {

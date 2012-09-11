@@ -23,12 +23,17 @@
 - (void)dealloc {
     [_gamesArray release];
     
+    [_editBarButton release];
+    [_doneBarButton release];
+    
     [super dealloc];
 }
 
-- (void)loadData {
+- (void)loadDataAndUpdateUI:(BOOL)updateUI {
     self.gamesArray = [[AJScoresManager sharedInstance] getGamesArray];
-    [self.tableView reloadData];
+    if (updateUI) {
+        [self.tableView reloadData];
+    }
 }
 
 - (void)viewDidLoad
@@ -36,7 +41,13 @@
     [super viewDidLoad];
     
     self.title = @"Score Pad";
-    [self loadData];
+    
+    _editBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonClicked:)];
+    _doneBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonClicked:)];
+    
+    self.navigationItem.rightBarButtonItem = _editBarButton;
+    
+    [self loadDataAndUpdateUI:YES];
 }
 
 #pragma mark - Table view data source
@@ -80,44 +91,38 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return (indexPath.section == 0);
 }
-*/
 
-/*
-// Override to support editing the table view.
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    self.navigationItem.rightBarButtonItem = editing ? _doneBarButton : _editBarButton;
+    
+    [super setEditing:editing animated:animated];
+}
+
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        [[AJScoresManager sharedInstance] deleteGame:[self.gamesArray objectAtIndex:indexPath.row]];
+        [self loadDataAndUpdateUI:NO];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }  
 }
-*/
 
-/*
-// Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+    [self loadDataAndUpdateUI:YES];
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    return (indexPath.section == 0);
 }
-*/
 
 #pragma mark - Table view delegate
 
@@ -128,19 +133,20 @@
         int maxNo = [tableView numberOfRowsInSection:0];
         [[AJScoresManager sharedInstance] addGameWithName:[NSString stringWithFormat:@"Game %d", maxNo] andRowId:maxNo+1];
         
-        [self loadData];
+        [self loadDataAndUpdateUI:YES];
         [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
                          atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
-    
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+}
+
+#pragma mark - Buttons Actions
+
+- (IBAction)editButtonClicked:(id)sender {
+    [self setEditing:YES animated:YES];
+}
+
+- (IBAction)doneButtonClicked:(id)sender {
+    [self setEditing:NO animated:YES];
 }
 
 @end

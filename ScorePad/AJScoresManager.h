@@ -21,6 +21,7 @@
 // Public methods
 - (NSArray *)getGamesArray;
 - (void)addGameWithName:(NSString *)name andRowId:(int)rowId;
+- (void)deleteGame:(AJGame *)game;
 
 // Other public methods
 - (BOOL)saveContext;
