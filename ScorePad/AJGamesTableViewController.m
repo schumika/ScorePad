@@ -7,6 +7,7 @@
 //
 
 #import "AJGamesTableViewController.h"
+#import "AJPlayersTableViewController.h"
 #import "AJScoresManager.h"
 
 #import "AJGame+Additions.h"
@@ -161,11 +162,16 @@
     if (indexPath.section == 1) {
         [_newGametextField becomeFirstResponder];
     } else {
-        NSArray *players = [[AJScoresManager sharedInstance] getDummyData];
+        /*NSArray *players = [[AJScoresManager sharedInstance] getDummyData];
         //NSLog(@"players: %@", players);
         for (AJPlayer *player in players) {
             NSLog(@"player name: %@", player.name);
-        }
+        }*/
+        
+        AJPlayersTableViewController *playersViewController = [[AJPlayersTableViewController alloc] initWithStyle:UITableViewStylePlain];
+        playersViewController.game = (AJGame *)[_gamesArray objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:playersViewController animated:YES];
+        [playersViewController release];
     }
 }
 

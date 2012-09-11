@@ -23,6 +23,8 @@
 - (NSArray *)getGamesArray;
 - (void)addGameWithName:(NSString *)name andRowId:(int)rowId;
 - (void)deleteGame:(AJGame *)game;
+- (NSArray *)getAllPlayersForGame:(AJGame *)game;
+- (AJPlayer *)createPlayerWithName:(NSString *)playerName forGame:(AJGame *)game;
 
 // Other public methods
 - (BOOL)saveContext;
