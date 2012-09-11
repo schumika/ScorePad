@@ -81,8 +81,8 @@
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
             CGRect textFieldRect = cell.contentView.bounds;
-            textFieldRect.origin.y = ceil((textFieldRect.size.height - 42) / 2.0);
-            textFieldRect.size.height = 42.0;
+            textFieldRect.origin.y = ceil((textFieldRect.size.height - 31.0) / 2.0);
+            textFieldRect.size.height = 31.0;
             _newGametextField= [[UITextField alloc] initWithFrame:textFieldRect];
             _newGametextField.borderStyle = UITextBorderStyleNone;
             _newGametextField.backgroundColor = [UIColor clearColor];
