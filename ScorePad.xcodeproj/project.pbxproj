@@ -13,6 +13,7 @@
 		525CC23715FE2A1F00E8F903 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 525CC23515FE2A1F00E8F903 /* InfoPlist.strings */; };
 		525CC23915FE2A1F00E8F903 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CC23815FE2A1F00E8F903 /* main.m */; };
 		525CC23D15FE2A1F00E8F903 /* AJAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CC23C15FE2A1F00E8F903 /* AJAppDelegate.m */; };
+		525CC24515FE2C8200E8F903 /* AJGamesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CC24415FE2C8200E8F903 /* AJGamesTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		525CC23A15FE2A1F00E8F903 /* ScorePad-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ScorePad-Prefix.pch"; sourceTree = "<group>"; };
 		525CC23B15FE2A1F00E8F903 /* AJAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AJAppDelegate.h; sourceTree = "<group>"; };
 		525CC23C15FE2A1F00E8F903 /* AJAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AJAppDelegate.m; sourceTree = "<group>"; };
+		525CC24315FE2C8200E8F903 /* AJGamesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJGamesTableViewController.h; sourceTree = "<group>"; };
+		525CC24415FE2C8200E8F903 /* AJGamesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJGamesTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,7 @@
 		525CC23215FE2A1F00E8F903 /* ScorePad */ = {
 			isa = PBXGroup;
 			children = (
+				525CC24615FE2C8900E8F903 /* Controllers */,
 				525CC23B15FE2A1F00E8F903 /* AJAppDelegate.h */,
 				525CC23C15FE2A1F00E8F903 /* AJAppDelegate.m */,
 				525CC23315FE2A1F00E8F903 /* Supporting Files */,
@@ -88,6 +92,15 @@
 				525CC23A15FE2A1F00E8F903 /* ScorePad-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		525CC24615FE2C8900E8F903 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				525CC24315FE2C8200E8F903 /* AJGamesTableViewController.h */,
+				525CC24415FE2C8200E8F903 /* AJGamesTableViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +168,7 @@
 			files = (
 				525CC23915FE2A1F00E8F903 /* main.m in Sources */,
 				525CC23D15FE2A1F00E8F903 /* AJAppDelegate.m in Sources */,
+				525CC24515FE2C8200E8F903 /* AJGamesTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

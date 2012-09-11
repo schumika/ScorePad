@@ -7,6 +7,7 @@
 //
 
 #import "AJAppDelegate.h"
+#import "AJGamesTableViewController.h"
 
 @implementation AJAppDelegate
 
@@ -20,15 +21,10 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
     
-    UIViewController *viewController = [[UIViewController alloc] init];
-    viewController.view.backgroundColor = [UIColor purpleColor];
-    viewController.title = @"First View";    
-    UINavigationController *navCtrl = [[UINavigationController alloc] initWithRootViewController:viewController];
-    [viewController release];
-    [self.window addSubview:navCtrl.view];
-    [navCtrl release];
+    AJGamesTableViewController *gamesViewController = [[[AJGamesTableViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
+    UINavigationController *navCtrl = [[[UINavigationController alloc] initWithRootViewController:gamesViewController] autorelease];
+    self.window.rootViewController = navCtrl;
     
     [self.window makeKeyAndVisible];
     return YES;
