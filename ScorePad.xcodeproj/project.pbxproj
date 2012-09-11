@@ -10,6 +10,8 @@
 		5253287615FF115D00A28B84 /* ScorePad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5253287415FF115D00A28B84 /* ScorePad.xcdatamodeld */; };
 		5253287D15FF128600A28B84 /* AJScoresManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5253287C15FF128600A28B84 /* AJScoresManager.m */; };
 		5253287F15FF15D000A28B84 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5253287E15FF15D000A28B84 /* CoreData.framework */; };
+		5253289D15FF20DE00A28B84 /* AJGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5253289C15FF20DE00A28B84 /* AJGame.m */; };
+		525328A415FF213400A28B84 /* AJGame+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 525328A315FF213400A28B84 /* AJGame+Additions.m */; };
 		525CC22D15FE2A1F00E8F903 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525CC22C15FE2A1F00E8F903 /* UIKit.framework */; };
 		525CC22F15FE2A1F00E8F903 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525CC22E15FE2A1F00E8F903 /* Foundation.framework */; };
 		525CC23115FE2A1F00E8F903 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525CC23015FE2A1F00E8F903 /* CoreGraphics.framework */; };
@@ -24,6 +26,10 @@
 		5253287B15FF128600A28B84 /* AJScoresManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJScoresManager.h; sourceTree = "<group>"; };
 		5253287C15FF128600A28B84 /* AJScoresManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJScoresManager.m; sourceTree = "<group>"; };
 		5253287E15FF15D000A28B84 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5253289B15FF20DE00A28B84 /* AJGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJGame.h; sourceTree = "<group>"; };
+		5253289C15FF20DE00A28B84 /* AJGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJGame.m; sourceTree = "<group>"; };
+		525328A215FF213400A28B84 /* AJGame+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AJGame+Additions.h"; sourceTree = "<group>"; };
+		525328A315FF213400A28B84 /* AJGame+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AJGame+Additions.m"; sourceTree = "<group>"; };
 		525CC22815FE2A1F00E8F903 /* ScorePad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScorePad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		525CC22C15FE2A1F00E8F903 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		525CC22E15FE2A1F00E8F903 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -57,6 +63,10 @@
 			isa = PBXGroup;
 			children = (
 				5253287415FF115D00A28B84 /* ScorePad.xcdatamodeld */,
+				5253289B15FF20DE00A28B84 /* AJGame.h */,
+				5253289C15FF20DE00A28B84 /* AJGame.m */,
+				525328A215FF213400A28B84 /* AJGame+Additions.h */,
+				525328A315FF213400A28B84 /* AJGame+Additions.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -199,6 +209,8 @@
 				525CC24515FE2C8200E8F903 /* AJGamesTableViewController.m in Sources */,
 				5253287615FF115D00A28B84 /* ScorePad.xcdatamodeld in Sources */,
 				5253287D15FF128600A28B84 /* AJScoresManager.m in Sources */,
+				5253289D15FF20DE00A28B84 /* AJGame.m in Sources */,
+				525328A415FF213400A28B84 /* AJGame+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

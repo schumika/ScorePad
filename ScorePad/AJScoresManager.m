@@ -111,8 +111,23 @@ static AJScoresManager *sharedAJScoresManager = nil;
     return __persistentStoreCoordinator;
 }
 
-
 #pragma mark - Public methods
+
+- (NSArray *)getGamesArray {        
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"AJGame"];
+    fetchRequest.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"rowId" ascending:NO]];
+    
+    return [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+}
+
+- (void)addGameWithName:(NSString *)name andRowId:(int)rowId {
+    AJGame *game = [AJGame createGameWithName:name inManagedObjectContext:self.managedObjectContext];
+    game.rowId = [NSNumber numberWithInt:rowId];
+    
+    [self saveContext];
+}
+
+#pragma mark - Other public methods
 
 - (BOOL)saveContext {
     NSError *error = nil;
@@ -135,12 +150,17 @@ static AJScoresManager *sharedAJScoresManager = nil;
 
 - (void)insertDummyData {
     NSManagedObjectContext *context = self.managedObjectContext;
-    NSManagedObject *game1 = [NSEntityDescription insertNewObjectForEntityForName:@"AJGame" inManagedObjectContext:context];
+    /*NSManagedObject *game1 = [NSEntityDescription insertNewObjectForEntityForName:@"AJGame" inManagedObjectContext:context];
     [game1 setValue:[NSNumber numberWithInt:1] forKey:@"rowId"];
     [game1 setValue:@"Game1" forKey:@"name"];
     NSManagedObject *game2 = [NSEntityDescription insertNewObjectForEntityForName:@"AJGame" inManagedObjectContext:context];
     [game2 setValue:[NSNumber numberWithInt:2] forKey:@"rowId"];
-    [game2 setValue:@"Game2" forKey:@"name"];
+    [game2 setValue:@"Game2" forKey:@"name"];*/
+    
+    AJGame *game1 = [AJGame createGameWithName:@"game1" inManagedObjectContext:context];
+    game1.rowId = [NSNumber numberWithInt:1];
+    AJGame *game2 = [AJGame createGameWithName:@"game2" inManagedObjectContext:context];
+    game2.rowId = [NSNumber numberWithInt:2];
     
     [self saveContext];
 }

@@ -9,6 +9,8 @@
 #import "AJGamesTableViewController.h"
 #import "AJScoresManager.h"
 
+#import "AJGame+Additions.h"
+
 @interface AJGamesTableViewController ()
 
 @end
@@ -24,21 +26,17 @@
     [super dealloc];
 }
 
+- (void)loadData {
+    self.gamesArray = [[AJScoresManager sharedInstance] getGamesArray];
+    [self.tableView reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.title = @"Score Pad";
-    
-    //self.gamesArray = [[NSArray alloc] initWithObjects:@"g1", @"g2", @"g3", @"game4", @"fds", @"fdfgds", @"game", nil];
-    
-    NSArray *fetchedObjects = [[AJScoresManager sharedInstance] getDummyData];
-    NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
-    for (NSManagedObject *object in fetchedObjects) {
-        [mutableArray addObject:[object valueForKey:@"name"]];
-    }
-    self.gamesArray = mutableArray;
-    [mutableArray release];
+    [self loadData];
 }
 
 #pragma mark - Table view data source
@@ -56,7 +54,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *gameCellIdentifier = @"GameCell";
-    static NSString *newGameCellIdentifier = @"newGameCell";
+    static NSString *newGameCellIdentifier = @"NewGameCell";
     
     NSString *CellIdentifier = (indexPath.section == 0) ? gameCellIdentifier : newGameCellIdentifier;
     
@@ -76,7 +74,7 @@
     if (indexPath.section == 1) {
         cell.textLabel.text = @"+ New Game";
     } else {
-        cell.textLabel.text = [_gamesArray objectAtIndex:indexPath.row];
+        cell.textLabel.text = [(AJGame *)[_gamesArray objectAtIndex:indexPath.row] name];
     }
     
     return cell;
@@ -127,13 +125,12 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1) {
-        NSMutableArray *dummyArray = [[NSMutableArray alloc] initWithArray:_gamesArray];
-        [dummyArray addObject:[NSString stringWithFormat:@"Game %d", [tableView numberOfRowsInSection:0] + 1]];
-        self.gamesArray = dummyArray;
-        [dummyArray release];
+        int maxNo = [tableView numberOfRowsInSection:0];
+        [[AJScoresManager sharedInstance] addGameWithName:[NSString stringWithFormat:@"Game %d", maxNo] andRowId:maxNo+1];
         
-        [tableView reloadData];
-        [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self loadData];
+        [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
+                         atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     
     // Navigation logic may go here. Create and push another view controller.

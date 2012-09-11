@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "AJGame+Additions.h"
+
 @interface AJScoresManager : NSObject
 
 + (AJScoresManager *)sharedInstance;
@@ -16,7 +18,14 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+// Public methods
+- (NSArray *)getGamesArray;
+- (void)addGameWithName:(NSString *)name andRowId:(int)rowId;
+
+// Other public methods
 - (BOOL)saveContext;
+
+// Methods used for testing
 - (NSArray *)getDummyData;
 
 @end
