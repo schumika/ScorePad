@@ -7,6 +7,7 @@
 //
 
 #import "AJGamesTableViewController.h"
+#import "AJScoresManager.h"
 
 @interface AJGamesTableViewController ()
 
@@ -27,9 +28,17 @@
 {
     [super viewDidLoad];
     
-    self.gamesArray = [[NSArray alloc] initWithObjects:@"g1", @"g2", @"g3", @"game4", @"fds", @"fdfgds", @"game", nil];
-    
     self.title = @"Score Pad";
+    
+    //self.gamesArray = [[NSArray alloc] initWithObjects:@"g1", @"g2", @"g3", @"game4", @"fds", @"fdfgds", @"game", nil];
+    
+    NSArray *fetchedObjects = [[AJScoresManager sharedInstance] getDummyData];
+    NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
+    for (NSManagedObject *object in fetchedObjects) {
+        [mutableArray addObject:[object valueForKey:@"name"]];
+    }
+    self.gamesArray = mutableArray;
+    [mutableArray release];
 }
 
 #pragma mark - Table view data source
