@@ -10,8 +10,11 @@
 #import "AJScoresManager.h"
 
 #import "AJGame+Additions.h"
+#import "NSString+Additions.h"
 
 @interface AJGamesTableViewController ()
+
+- (void)updateRowIdsForGames;
 
 @end
 
@@ -77,15 +80,27 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.textLabel.textAlignment = UITextAlignmentCenter;
-            cell.textLabel.textColor = [UIColor blueColor];
+            CGRect textFieldRect = cell.contentView.bounds;
+            textFieldRect.origin.y = ceil((textFieldRect.size.height - 42) / 2.0);
+            textFieldRect.size.height = 42.0;
+            _newGametextField= [[UITextField alloc] initWithFrame:textFieldRect];
+            _newGametextField.borderStyle = UITextBorderStyleNone;
+            _newGametextField.backgroundColor = [UIColor clearColor];
+            _newGametextField.font = [UIFont boldSystemFontOfSize:20.0];
+            _newGametextField.textColor = [UIColor blueColor];
+            _newGametextField.placeholder = @"+ New Game";
+            _newGametextField.text = @"";
+            _newGametextField.delegate = self;
+            _newGametextField.textAlignment = UITextAlignmentCenter;
+            _newGametextField.returnKeyType = UIReturnKeyDone;
+            [cell.contentView addSubview:_newGametextField];
+            [_newGametextField release];
         }
     }
     
-    if (indexPath.section == 1) {
-        cell.textLabel.text = @"+ New Game";
-    } else {
-        cell.textLabel.text = [(AJGame *)[_gamesArray objectAtIndex:indexPath.row] name];
+    if (indexPath.section == 0) {
+        AJGame *game = (AJGame *)[_gamesArray objectAtIndex:indexPath.row];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - %d",[game name], [game rowId].intValue];
     }
     
     return cell;
@@ -110,12 +125,23 @@
         // Delete the row from the data source
         [[AJScoresManager sharedInstance] deleteGame:[self.gamesArray objectAtIndex:indexPath.row]];
         [self loadDataAndUpdateUI:NO];
+        [self updateRowIdsForGames];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadData];
     }  
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+    NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithArray:self.gamesArray];
+    AJGame *gameToMove = [[mutableArray objectAtIndex:fromIndexPath.row] retain];
+    [mutableArray removeObjectAtIndex:fromIndexPath.row];
+    [mutableArray insertObject:gameToMove atIndex:toIndexPath.row];
+    [gameToMove release];
+    self.gamesArray = mutableArray;
+    [mutableArray release];
+    
+    [self updateRowIdsForGames];
     [self loadDataAndUpdateUI:YES];
 }
 
@@ -129,13 +155,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (self.editing) return;
+    
     if (indexPath.section == 1) {
-        int maxNo = [tableView numberOfRowsInSection:0];
-        [[AJScoresManager sharedInstance] addGameWithName:[NSString stringWithFormat:@"Game %d", maxNo] andRowId:maxNo+1];
-        
-        [self loadDataAndUpdateUI:YES];
-        [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
-                         atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [_newGametextField becomeFirstResponder];
     }
 }
 
@@ -147,6 +171,44 @@
 
 - (IBAction)doneButtonClicked:(id)sender {
     [self setEditing:NO animated:YES];
+}
+
+#pragma mark - UITextFieldDelegate methods
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    return !self.editing;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [_newGametextField resignFirstResponder];
+    
+    NSString *text = textField.text;
+    if (![NSString isNilOrEmpty:text]) {
+        int maxNo = [self.tableView numberOfRowsInSection:0];
+        [[AJScoresManager sharedInstance] addGameWithName:text andRowId:maxNo+1];
+        [_newGametextField setText:nil];
+        
+        [self loadDataAndUpdateUI:YES];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                              atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+    
+    return YES;
+}
+
+#pragma mark - Private methods
+
+- (void)updateRowIdsForGames {
+    int numberOfGames = [self.gamesArray count];
+    NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
+    for (AJGame *game in self.gamesArray) {
+        game.rowId = [NSNumber numberWithInt:numberOfGames - [self.gamesArray indexOfObject:game]];
+        [mutableArray addObject:game];
+    }
+    self.gamesArray = mutableArray;
+    [mutableArray release];
+    
+    [[AJScoresManager sharedInstance] saveContext];
 }
 
 @end

@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AJGamesTableViewController : UITableViewController {
+@interface AJGamesTableViewController : UITableViewController <UITextFieldDelegate> {
     NSArray *_gamesArray;
     
     UIBarButtonItem *_editBarButton;
     UIBarButtonItem *_doneBarButton;
+    
+    UITextField *_newGametextField;
 }
 
 @property (nonatomic, retain) NSArray *gamesArray;
