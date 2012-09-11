@@ -12,8 +12,16 @@
 
 @interface AJGame : NSManagedObject
 
+@property (nonatomic, retain) NSString * color;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * rowId;
-@property (nonatomic, retain) NSString * color;
+@property (nonatomic, retain) NSSet *players;
+@end
 
+@interface AJGame (CoreDataGeneratedAccessors)
+
+- (void)addPlayersObject:(NSManagedObject *)value;
+- (void)removePlayersObject:(NSManagedObject *)value;
+- (void)addPlayers:(NSSet *)values;
+- (void)removePlayers:(NSSet *)values;
 @end

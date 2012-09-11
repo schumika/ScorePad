@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "AJGame+Additions.h"
+#import "AJPlayer+Additions.h"
 
 @interface AJScoresManager : NSObject
 

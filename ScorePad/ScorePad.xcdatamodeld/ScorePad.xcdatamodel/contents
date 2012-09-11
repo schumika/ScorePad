@@ -4,8 +4,16 @@
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rowId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="players" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AJPlayer" inverseName="game" inverseEntity="AJPlayer" syncable="YES"/>
+    </entity>
+    <entity name="AJPlayer" representedClassName="AJPlayer" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AJGame" inverseName="players" inverseEntity="AJGame" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AJGame" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="AJGame" positionX="-171" positionY="-198" width="128" height="105"/>
+        <element name="AJPlayer" positionX="160" positionY="-204" width="128" height="105"/>
     </elements>
 </model>

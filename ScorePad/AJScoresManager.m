@@ -133,6 +133,24 @@ static AJScoresManager *sharedAJScoresManager = nil;
     [self saveContext];
 }
 
+- (NSArray *)getAllPlayersForGame:(AJGame *)game {
+    NSError *error = nil;
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"AJPlayer"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"game.name = %@ AND game.rowId = %@", game.name, game.rowId];
+    fetchRequest.predicate = predicate;
+    fetchRequest.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES]];
+    
+    return [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+}
+
+- (AJPlayer *)createPlayerWithName:(NSString *)playerName forGame:(AJGame *)game {
+    AJPlayer *player = [AJPlayer createPlayerWithName:playerName forGame:game];
+    
+    if (![self saveContext]) return nil;
+    
+    return player;
+}
+
 #pragma mark - Other public methods
 
 - (BOOL)saveContext {
@@ -163,10 +181,14 @@ static AJScoresManager *sharedAJScoresManager = nil;
     [game2 setValue:[NSNumber numberWithInt:2] forKey:@"rowId"];
     [game2 setValue:@"Game2" forKey:@"name"];*/
     
-    AJGame *game1 = [AJGame createGameWithName:@"game1" inManagedObjectContext:context];
-    game1.rowId = [NSNumber numberWithInt:1];
-    AJGame *game2 = [AJGame createGameWithName:@"game2" inManagedObjectContext:context];
-    game2.rowId = [NSNumber numberWithInt:2];
+    /*AJGame *game1 = [AJGame createGameWithName:@"game1" inManagedObjectContext:context];
+    game1.rowId = [NSNumber numberWithInt:1];*/
+    AJGame *game2 = [AJGame createGameWithName:@"game test" inManagedObjectContext:context];
+    game2.rowId = [NSNumber numberWithInt:7];
+    
+    [AJPlayer createPlayerWithName:@"player 1" forGame:game2];
+    [AJPlayer createPlayerWithName:@"player 2" forGame:game2];
+    [AJPlayer createPlayerWithName:@"player 3" forGame:game2];
     
     [self saveContext];
 }
@@ -176,8 +198,12 @@ static AJScoresManager *sharedAJScoresManager = nil;
     
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"AJGame"];
     fetchRequest.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"rowId" ascending:NO]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = %@", @"game test"];
+    fetchRequest.predicate = predicate;
     
-    return [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    AJGame *game = [[self.managedObjectContext executeFetchRequest:fetchRequest error:nil] lastObject];
+    
+    return [self getAllPlayersForGame:game];
 }
 
 @end

@@ -1,19 +1,20 @@
 //
-//  AJGame.m
+//  AJPlayer.m
 //  ScorePad
 //
 //  Created by Anca Julean on 9/11/12.
 //  Copyright (c) 2012 Anca Julean. All rights reserved.
 //
 
+#import "AJPlayer.h"
 #import "AJGame.h"
 
 
-@implementation AJGame
+@implementation AJPlayer
 
 @dynamic color;
 @dynamic name;
-@dynamic rowId;
-@dynamic players;
+@dynamic time;
+@dynamic game;
 
 @end

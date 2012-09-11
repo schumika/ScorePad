@@ -88,7 +88,7 @@
             _newGametextField.backgroundColor = [UIColor clearColor];
             _newGametextField.font = [UIFont boldSystemFontOfSize:20.0];
             _newGametextField.textColor = [UIColor blueColor];
-            _newGametextField.placeholder = @"+ New Game";
+            _newGametextField.placeholder = @"+ New Game ...";
             _newGametextField.text = @"";
             _newGametextField.delegate = self;
             _newGametextField.textAlignment = UITextAlignmentCenter;
@@ -100,7 +100,7 @@
     
     if (indexPath.section == 0) {
         AJGame *game = (AJGame *)[_gamesArray objectAtIndex:indexPath.row];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ - %d",[game name], [game rowId].intValue];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@",[game name]];
     }
     
     return cell;
@@ -160,6 +160,12 @@
     
     if (indexPath.section == 1) {
         [_newGametextField becomeFirstResponder];
+    } else {
+        NSArray *players = [[AJScoresManager sharedInstance] getDummyData];
+        //NSLog(@"players: %@", players);
+        for (AJPlayer *player in players) {
+            NSLog(@"player name: %@", player.name);
+        }
     }
 }
 
