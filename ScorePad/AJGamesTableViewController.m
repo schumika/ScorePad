@@ -59,6 +59,11 @@
     [self loadDataAndUpdateUI:YES];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return YES;
+}
+
 #pragma mark - Overidden from base class
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {

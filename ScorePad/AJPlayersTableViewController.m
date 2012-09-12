@@ -7,6 +7,7 @@
 //
 
 #import "AJPlayersTableViewController.h"
+#import "AJScoresTableViewController.h"
 #import "AJScoresManager.h"
 
 #import "NSString+Additions.h"
@@ -49,6 +50,11 @@
     [_playersArray release];
     
     [super dealloc];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return YES;
 }
 
 #pragma mark - Table view data source
@@ -135,9 +141,14 @@
     if (indexPath.section == 1) {
         [_newPlayerTextField becomeFirstResponder];
     } else {
-        AJPlayer *player = [_playersArray objectAtIndex:indexPath.row];
+        /*AJPlayer *player = [_playersArray objectAtIndex:indexPath.row];
         [[AJScoresManager sharedInstance] createScoreWithValue:10.0 inRound:([player.scores count]+1) forPlayer:player];
-        [self loadDataAndUpdateUI:YES];
+        [self loadDataAndUpdateUI:YES];*/
+        
+        AJScoresTableViewController *scoresViewController = [[AJScoresTableViewController alloc] initWithStyle:UITableViewStylePlain];
+        scoresViewController.player = [_playersArray objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:scoresViewController animated:YES];
+        [scoresViewController release];
     }
 }
 
