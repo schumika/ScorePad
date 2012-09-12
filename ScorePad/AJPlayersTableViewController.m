@@ -25,6 +25,8 @@
 {
     [super viewDidLoad];
     
+    self.title = self.game.name;
+    
     [self loadData];
 }
 
@@ -37,22 +39,53 @@
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_playersArray count];
+    return (section == 0) ? [_playersArray count] : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *gameCellIdentifier = @"PlayerCell";
+    static NSString *newGameCellIdentifier = @"NewPlayerCell";
+    
+    NSString *CellIdentifier = (indexPath.section == 0) ? gameCellIdentifier : newGameCellIdentifier;
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if (!cell) {
+    if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        if (indexPath.section == 0) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            CGRect textFieldRect = cell.contentView.bounds;
+            textFieldRect.origin.y = ceil((textFieldRect.size.height - 31.0) / 2.0);
+            textFieldRect.size.height = 31.0;
+            _newPlayerTextField= [[UITextField alloc] initWithFrame:textFieldRect];
+            _newPlayerTextField.borderStyle = UITextBorderStyleNone;
+            _newPlayerTextField.backgroundColor = [UIColor clearColor];
+            _newPlayerTextField.font = [UIFont boldSystemFontOfSize:20.0];
+            _newPlayerTextField.textColor = [UIColor blueColor];
+            _newPlayerTextField.placeholder = @"Add New Player ...";
+            _newPlayerTextField.text = @"";
+            _newPlayerTextField.delegate = self;
+            _newPlayerTextField.textAlignment = UITextAlignmentCenter;
+            _newPlayerTextField.returnKeyType = UIReturnKeyDone;
+            [cell.contentView addSubview:_newPlayerTextField];
+            [_newPlayerTextField release];
+        }
     }
     
-    cell.textLabel.text = [(AJPlayer *)[_playersArray objectAtIndex:indexPath.row] name];
+    if (indexPath.section == 0) {
+        AJPlayer *player = (AJPlayer *)[_playersArray objectAtIndex:indexPath.row];
+        cell.textLabel.text = [player name];
+    }
     
     return cell;
 }

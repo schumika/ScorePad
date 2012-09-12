@@ -89,7 +89,7 @@
             _newGametextField.backgroundColor = [UIColor clearColor];
             _newGametextField.font = [UIFont boldSystemFontOfSize:20.0];
             _newGametextField.textColor = [UIColor blueColor];
-            _newGametextField.placeholder = @"+ New Game ...";
+            _newGametextField.placeholder = @"Add New Game ...";
             _newGametextField.text = @"";
             _newGametextField.delegate = self;
             _newGametextField.textAlignment = UITextAlignmentCenter;
@@ -102,6 +102,7 @@
     if (indexPath.section == 0) {
         AJGame *game = (AJGame *)[_gamesArray objectAtIndex:indexPath.row];
         cell.textLabel.text = [NSString stringWithFormat:@"%@",[game name]];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d players", [[game players] count]];
     }
     
     return cell;

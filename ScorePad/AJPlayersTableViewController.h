@@ -10,10 +10,12 @@
 #import "AJGame+Additions.h"
 #import "AJPlayer+Additions.h"
 
-@interface AJPlayersTableViewController : UITableViewController {
+@interface AJPlayersTableViewController : UITableViewController <UITextFieldDelegate> {
     AJGame *_game;
     
     NSArray *_playersArray;
+    
+    UITextField *_newPlayerTextField;
 }
 
 @property (nonatomic, retain) AJGame *game;
