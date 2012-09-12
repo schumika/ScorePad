@@ -2,13 +2,14 @@
 //  AJGame.h
 //  ScorePad
 //
-//  Created by Anca Julean on 9/11/12.
+//  Created by Anca Julean on 9/12/12.
 //  Copyright (c) 2012 Anca Julean. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class AJPlayer;
 
 @interface AJGame : NSManagedObject
 
@@ -20,8 +21,8 @@
 
 @interface AJGame (CoreDataGeneratedAccessors)
 
-- (void)addPlayersObject:(NSManagedObject *)value;
-- (void)removePlayersObject:(NSManagedObject *)value;
+- (void)addPlayersObject:(AJPlayer *)value;
+- (void)removePlayersObject:(AJPlayer *)value;
 - (void)addPlayers:(NSSet *)values;
 - (void)removePlayers:(NSSet *)values;
 @end

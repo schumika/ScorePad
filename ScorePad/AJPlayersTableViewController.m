@@ -73,7 +73,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
         if (indexPath.section == 0) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.font = [UIFont boldSystemFontOfSize:20.0];
@@ -101,6 +101,7 @@
         AJPlayer *player = (AJPlayer *)[_playersArray objectAtIndex:indexPath.row];
         cell.textLabel.textColor = [UIColor colorWithHexString:[player color]];
         cell.textLabel.text = [player name];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%g", [player totalScore]];
     }
     
     return cell;
@@ -119,7 +120,7 @@
         [self loadDataAndUpdateUI:NO];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
         [tableView reloadData];
-    }   
+    }
 }
 
 
@@ -134,7 +135,9 @@
     if (indexPath.section == 1) {
         [_newPlayerTextField becomeFirstResponder];
     } else {
-        // open scores controller
+        AJPlayer *player = [_playersArray objectAtIndex:indexPath.row];
+        [[AJScoresManager sharedInstance] createScoreWithValue:10.0 inRound:([player.scores count]+1) forPlayer:player];
+        [self loadDataAndUpdateUI:YES];
     }
 }
 

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		521E132C1600B6D600022B1E /* AJGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 521E132B1600B6D500022B1E /* AJGame.m */; };
+		521E13301600B6D600022B1E /* AJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 521E132F1600B6D600022B1E /* AJPlayer.m */; };
+		521E13331600B6D600022B1E /* AJScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 521E13321600B6D600022B1E /* AJScore.m */; };
+		521E13391600B76300022B1E /* AJScore+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 521E13381600B76300022B1E /* AJScore+Additions.m */; };
 		5253287615FF115D00A28B84 /* ScorePad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5253287415FF115D00A28B84 /* ScorePad.xcdatamodeld */; };
 		5253287D15FF128600A28B84 /* AJScoresManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5253287C15FF128600A28B84 /* AJScoresManager.m */; };
 		5253287F15FF15D000A28B84 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5253287E15FF15D000A28B84 /* CoreData.framework */; };
@@ -20,13 +24,19 @@
 		525CC23915FE2A1F00E8F903 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CC23815FE2A1F00E8F903 /* main.m */; };
 		525CC23D15FE2A1F00E8F903 /* AJAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CC23C15FE2A1F00E8F903 /* AJAppDelegate.m */; };
 		525CC24515FE2C8200E8F903 /* AJGamesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CC24415FE2C8200E8F903 /* AJGamesTableViewController.m */; };
-		5275B83015FF7D39006E19FE /* AJGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275B82F15FF7D39006E19FE /* AJGame.m */; };
-		5275B83415FF7D39006E19FE /* AJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275B83315FF7D39006E19FE /* AJPlayer.m */; };
 		5275B83715FF7D66006E19FE /* AJPlayer+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275B83615FF7D66006E19FE /* AJPlayer+Additions.m */; };
 		5275B83A15FF83FD006E19FE /* AJPlayersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275B83915FF83FD006E19FE /* AJPlayersTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		521E132A1600B6D500022B1E /* AJGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJGame.h; sourceTree = "<group>"; };
+		521E132B1600B6D500022B1E /* AJGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJGame.m; sourceTree = "<group>"; };
+		521E132E1600B6D600022B1E /* AJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJPlayer.h; sourceTree = "<group>"; };
+		521E132F1600B6D600022B1E /* AJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJPlayer.m; sourceTree = "<group>"; };
+		521E13311600B6D600022B1E /* AJScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJScore.h; sourceTree = "<group>"; };
+		521E13321600B6D600022B1E /* AJScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJScore.m; sourceTree = "<group>"; };
+		521E13371600B76300022B1E /* AJScore+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AJScore+Additions.h"; sourceTree = "<group>"; };
+		521E13381600B76300022B1E /* AJScore+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AJScore+Additions.m"; sourceTree = "<group>"; };
 		5253287515FF115D00A28B84 /* ScorePad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScorePad.xcdatamodel; sourceTree = "<group>"; };
 		5253287B15FF128600A28B84 /* AJScoresManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJScoresManager.h; sourceTree = "<group>"; };
 		5253287C15FF128600A28B84 /* AJScoresManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJScoresManager.m; sourceTree = "<group>"; };
@@ -49,10 +59,6 @@
 		525CC23C15FE2A1F00E8F903 /* AJAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AJAppDelegate.m; sourceTree = "<group>"; };
 		525CC24315FE2C8200E8F903 /* AJGamesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJGamesTableViewController.h; sourceTree = "<group>"; };
 		525CC24415FE2C8200E8F903 /* AJGamesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJGamesTableViewController.m; sourceTree = "<group>"; };
-		5275B82E15FF7D39006E19FE /* AJGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJGame.h; sourceTree = "<group>"; };
-		5275B82F15FF7D39006E19FE /* AJGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJGame.m; sourceTree = "<group>"; };
-		5275B83215FF7D39006E19FE /* AJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJPlayer.h; sourceTree = "<group>"; };
-		5275B83315FF7D39006E19FE /* AJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJPlayer.m; sourceTree = "<group>"; };
 		5275B83515FF7D66006E19FE /* AJPlayer+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AJPlayer+Additions.h"; sourceTree = "<group>"; };
 		5275B83615FF7D66006E19FE /* AJPlayer+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AJPlayer+Additions.m"; sourceTree = "<group>"; };
 		5275B83815FF83FD006E19FE /* AJPlayersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJPlayersTableViewController.h; sourceTree = "<group>"; };
@@ -78,14 +84,18 @@
 			isa = PBXGroup;
 			children = (
 				5253287415FF115D00A28B84 /* ScorePad.xcdatamodeld */,
-				5275B82E15FF7D39006E19FE /* AJGame.h */,
-				5275B82F15FF7D39006E19FE /* AJGame.m */,
-				5275B83215FF7D39006E19FE /* AJPlayer.h */,
-				5275B83315FF7D39006E19FE /* AJPlayer.m */,
+				521E132A1600B6D500022B1E /* AJGame.h */,
+				521E132B1600B6D500022B1E /* AJGame.m */,
+				521E132E1600B6D600022B1E /* AJPlayer.h */,
+				521E132F1600B6D600022B1E /* AJPlayer.m */,
+				521E13311600B6D600022B1E /* AJScore.h */,
+				521E13321600B6D600022B1E /* AJScore.m */,
 				525328A215FF213400A28B84 /* AJGame+Additions.h */,
 				525328A315FF213400A28B84 /* AJGame+Additions.m */,
 				5275B83515FF7D66006E19FE /* AJPlayer+Additions.h */,
 				5275B83615FF7D66006E19FE /* AJPlayer+Additions.m */,
+				521E13371600B76300022B1E /* AJScore+Additions.h */,
+				521E13381600B76300022B1E /* AJScore+Additions.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -245,10 +255,12 @@
 				525328A415FF213400A28B84 /* AJGame+Additions.m in Sources */,
 				525328C315FF589700A28B84 /* NSString+Additions.m in Sources */,
 				525328C415FF589700A28B84 /* UIColor+Additions.m in Sources */,
-				5275B83015FF7D39006E19FE /* AJGame.m in Sources */,
-				5275B83415FF7D39006E19FE /* AJPlayer.m in Sources */,
 				5275B83715FF7D66006E19FE /* AJPlayer+Additions.m in Sources */,
 				5275B83A15FF83FD006E19FE /* AJPlayersTableViewController.m in Sources */,
+				521E132C1600B6D600022B1E /* AJGame.m in Sources */,
+				521E13301600B6D600022B1E /* AJPlayer.m in Sources */,
+				521E13331600B6D600022B1E /* AJScore.m in Sources */,
+				521E13391600B76300022B1E /* AJScore+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

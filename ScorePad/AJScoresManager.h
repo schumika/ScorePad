@@ -10,6 +10,7 @@
 
 #import "AJGame+Additions.h"
 #import "AJPlayer+Additions.h"
+#import "AJScore+Additions.h"
 
 @interface AJScoresManager : NSObject
 
@@ -26,6 +27,9 @@
 - (NSArray *)getAllPlayersForGame:(AJGame *)game;
 - (AJPlayer *)createPlayerWithName:(NSString *)playerName forGame:(AJGame *)game;
 - (void)deletePlayer:(AJPlayer *)player;
+- (NSArray *)getAllScoresForPlayer:(AJPlayer *)player;
+- (AJScore *)createScoreWithValue:(double)value inRound:(int)round forPlayer:(AJPlayer *)player;
+- (void)deleteScore:(AJScore *)score;
 
 // Other public methods
 - (BOOL)saveContext;

@@ -160,6 +160,30 @@ static AJScoresManager *sharedAJScoresManager = nil;
     [self saveContext];
 }
 
+- (NSArray *)getAllScoresForPlayer:(AJPlayer *)player {
+    NSError *error = nil;
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"AJScore"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"player.name = %@ AND player.time = %@", player.name, player.time];
+    fetchRequest.predicate = predicate;
+    fetchRequest.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"round" ascending:NO]];
+    
+    return [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+}
+
+- (AJScore *)createScoreWithValue:(double)value inRound:(int)round forPlayer:(AJPlayer *)player {
+    AJScore *score = [AJScore createScoreWithValue:value inRound:round forPlayer:player];
+    
+    if (![self saveContext]) return nil;
+    
+    return score;
+}
+
+- (void)deleteScore:(AJScore *)score {
+    [[self managedObjectContext] deleteObject:score];
+    
+    [self saveContext];
+}
+
 #pragma mark - Other public methods
 
 - (BOOL)saveContext {

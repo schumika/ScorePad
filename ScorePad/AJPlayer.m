@@ -2,7 +2,7 @@
 //  AJPlayer.m
 //  ScorePad
 //
-//  Created by Anca Julean on 9/11/12.
+//  Created by Anca Julean on 9/12/12.
 //  Copyright (c) 2012 Anca Julean. All rights reserved.
 //
 
@@ -16,5 +16,6 @@
 @dynamic name;
 @dynamic time;
 @dynamic game;
+@dynamic scores;
 
 @end

@@ -11,9 +11,16 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AJGame" inverseName="players" inverseEntity="AJGame" syncable="YES"/>
+        <relationship name="scores" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AJScore" inverseName="player" inverseEntity="AJScore" syncable="YES"/>
+    </entity>
+    <entity name="AJScore" representedClassName="AJScore" syncable="YES">
+        <attribute name="round" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AJPlayer" inverseName="scores" inverseEntity="AJPlayer" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AJGame" positionX="-171" positionY="-198" width="128" height="105"/>
-        <element name="AJPlayer" positionX="160" positionY="-204" width="128" height="105"/>
+        <element name="AJGame" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AJPlayer" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AJScore" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

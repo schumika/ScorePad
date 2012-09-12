@@ -8,9 +8,11 @@
 
 #import "AJPlayer.h"
 #import "AJGame+Additions.h"
+#import "AJScore+Additions.h"
 
 @interface AJPlayer (Additions)
 
 + (AJPlayer *)createPlayerWithName:(NSString *)name forGame:(AJGame *)game;
+- (double)totalScore;
 
 @end

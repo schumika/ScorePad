@@ -21,4 +21,14 @@
     return player;
 }
 
+- (double)totalScore {
+    double total = 0.0;
+    
+    for (AJScore *score in self.scores) {
+        total += [[score value] doubleValue];
+    }
+    
+    return total;
+}
+
 @end
