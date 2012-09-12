@@ -12,6 +12,7 @@
 
 #import "AJGame+Additions.h"
 #import "NSString+Additions.h"
+#import "UIColor+Additions.h"
 
 @interface AJGamesTableViewController ()
 
@@ -50,9 +51,22 @@
     _doneBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonClicked:)];
     
     self.navigationItem.rightBarButtonItem = _editBarButton;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self loadDataAndUpdateUI:YES];
 }
+
+#pragma mark - Overidden from base class
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    self.navigationItem.rightBarButtonItem = editing ? _doneBarButton : _editBarButton;
+    
+    [super setEditing:editing animated:animated];
+}
+
 
 #pragma mark - Table view data source
 
@@ -76,9 +90,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
         if (indexPath.section == 0) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:20.0];
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
             CGRect textFieldRect = cell.contentView.bounds;
@@ -101,8 +116,10 @@
     
     if (indexPath.section == 0) {
         AJGame *game = (AJGame *)[_gamesArray objectAtIndex:indexPath.row];
+        cell.textLabel.textColor = [UIColor colorWithHexString:[game color]];
         cell.textLabel.text = [NSString stringWithFormat:@"%@",[game name]];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d players", [[game players] count]];
+        int playersNumber = [[game players] count];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d %@", playersNumber, (playersNumber == 1) ? @"player" : @"players"];
     }
     
     return cell;
@@ -114,13 +131,6 @@
     return (indexPath.section == 0);
 }
 
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-    self.navigationItem.rightBarButtonItem = editing ? _doneBarButton : _editBarButton;
-    
-    [super setEditing:editing animated:animated];
-}
-
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -128,7 +138,7 @@
         [[AJScoresManager sharedInstance] deleteGame:[self.gamesArray objectAtIndex:indexPath.row]];
         [self loadDataAndUpdateUI:NO];
         [self updateRowIdsForGames];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
         [tableView reloadData];
     }  
 }
@@ -162,13 +172,7 @@
     
     if (indexPath.section == 1) {
         [_newGametextField becomeFirstResponder];
-    } else {
-        /*NSArray *players = [[AJScoresManager sharedInstance] getDummyData];
-        //NSLog(@"players: %@", players);
-        for (AJPlayer *player in players) {
-            NSLog(@"player name: %@", player.name);
-        }*/
-        
+    } else {        
         AJPlayersTableViewController *playersViewController = [[AJPlayersTableViewController alloc] initWithStyle:UITableViewStylePlain];
         playersViewController.game = (AJGame *)[_gamesArray objectAtIndex:indexPath.row];
         [self.navigationController pushViewController:playersViewController animated:YES];

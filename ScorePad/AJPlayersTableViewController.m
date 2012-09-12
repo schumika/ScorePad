@@ -9,6 +9,9 @@
 #import "AJPlayersTableViewController.h"
 #import "AJScoresManager.h"
 
+#import "NSString+Additions.h"
+#import "UIColor+Additions.h"
+
 @interface AJPlayersTableViewController ()
 
 @end
@@ -17,9 +20,13 @@
 
 @synthesize game = _game;
 
-- (void)loadData {
+- (void)loadDataAndUpdateUI:(BOOL)updateUI {
     _playersArray = [[[AJScoresManager sharedInstance] getAllPlayersForGame:self.game] retain];
+    if (updateUI) {
+        [self.tableView reloadData];
+    }
 }
+
 
 - (void)viewDidLoad
 {
@@ -27,7 +34,14 @@
     
     self.title = self.game.name;
     
-    [self loadData];
+    self.tableView.rowHeight = 65.0;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self loadDataAndUpdateUI:YES];
 }
 
 - (void)dealloc {
@@ -51,10 +65,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *gameCellIdentifier = @"PlayerCell";
-    static NSString *newGameCellIdentifier = @"NewPlayerCell";
+    static NSString *playerCellIdentifier = @"PlayerCell";
+    static NSString *newPlayerCellIdentifier = @"NewPlayerCell";
     
-    NSString *CellIdentifier = (indexPath.section == 0) ? gameCellIdentifier : newGameCellIdentifier;
+    NSString *CellIdentifier = (indexPath.section == 0) ? playerCellIdentifier : newPlayerCellIdentifier;
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -62,6 +76,7 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         if (indexPath.section == 0) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:20.0];
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
             CGRect textFieldRect = cell.contentView.bounds;
@@ -84,63 +99,65 @@
     
     if (indexPath.section == 0) {
         AJPlayer *player = (AJPlayer *)[_playersArray objectAtIndex:indexPath.row];
+        cell.textLabel.textColor = [UIColor colorWithHexString:[player color]];
         cell.textLabel.text = [player name];
     }
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return (indexPath.section == 0);
 }
-*/
 
-/*
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [[AJScoresManager sharedInstance] deletePlayer:[_playersArray objectAtIndex:indexPath.row]];
+        [self loadDataAndUpdateUI:NO];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
+        [tableView reloadData];
     }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (self.editing) return;
+    
+    if (indexPath.section == 1) {
+        [_newPlayerTextField becomeFirstResponder];
+    } else {
+        // open scores controller
+    }
+}
+
+#pragma mark - UITextFieldDelegate methods
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    return !self.editing;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [_newPlayerTextField resignFirstResponder];
+    
+    NSString *text = textField.text;
+    if (![NSString isNilOrEmpty:text]) {
+        [[AJScoresManager sharedInstance] createPlayerWithName:text forGame:self.game];
+        [_newPlayerTextField setText:nil];
+        
+        [self loadDataAndUpdateUI:YES];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                              atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+    
+    return YES;
 }
 
 @end

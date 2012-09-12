@@ -25,6 +25,7 @@
 - (void)deleteGame:(AJGame *)game;
 - (NSArray *)getAllPlayersForGame:(AJGame *)game;
 - (AJPlayer *)createPlayerWithName:(NSString *)playerName forGame:(AJGame *)game;
+- (void)deletePlayer:(AJPlayer *)player;
 
 // Other public methods
 - (BOOL)saveContext;
