@@ -9,6 +9,8 @@
 #import "AJScoresTableViewController.h"
 #import "AJScoresManager.h"
 
+#import "NSString+Additions.h"
+
 @interface AJScoresTableViewController ()
 
 @end
@@ -54,26 +56,51 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _scoresArray.count;
+    return (section == 0) ? _scoresArray.count : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *ScoreCellIdentifier = @"ScoreCell";
+    static NSString *NewScoreCellIdentifier = @"NewScoreCell";
+    
+    
+    NSString *CellIdentifier = (indexPath.section == 0) ? ScoreCellIdentifier : NewScoreCellIdentifier;
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        
+        if (indexPath.section == 1) {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            _newScoreTextField = [[UITextField alloc] initWithFrame:cell.contentView.bounds];
+            _newScoreTextField.borderStyle = UITextBorderStyleNone;
+            _newScoreTextField.backgroundColor = [UIColor clearColor];
+            _newScoreTextField.font = [UIFont boldSystemFontOfSize:20.0];
+            _newScoreTextField.textColor = [UIColor blueColor];
+            _newScoreTextField.placeholder = @"Add New Score ...";
+            _newScoreTextField.text = @"";
+            _newScoreTextField.delegate = self;
+            _newScoreTextField.textAlignment = UITextAlignmentCenter;
+            _newScoreTextField.returnKeyType = UIReturnKeyDone;
+            _newScoreTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            [cell.contentView addSubview:_newScoreTextField];
+            [_newScoreTextField release];
+            
+        }
     }
     
-    AJScore *score = [_scoresArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%g", score.value.doubleValue];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", score.round.intValue];
+    if (indexPath.section == 0) {
+        AJScore *score = [_scoresArray objectAtIndex:indexPath.row];
+        cell.textLabel.text = [NSString stringWithFormat:@"%g", score.value.doubleValue];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", score.round.intValue];
+    }
     
     return cell;
 }
@@ -121,14 +148,33 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 1) {
+        [_newScoreTextField becomeFirstResponder];
+    }
+}
+
+#pragma mark - UITextFieldDelegate methods
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    return !self.editing;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [_newScoreTextField resignFirstResponder];
+    
+    NSString *text = textField.text;
+    if (![NSString isNilOrEmpty:text]) {
+        [[AJScoresManager sharedInstance] createScoreWithValue:text.doubleValue inRound:([_scoresArray count] +1) forPlayer:self.player];
+        [_newScoreTextField setText:nil];
+        
+        [self loadDataAndUpdateUI:YES];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                              atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+    
+    return YES;
 }
 
 @end

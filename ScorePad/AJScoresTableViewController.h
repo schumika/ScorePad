@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "AJPlayer+Additions.h"
 
-@interface AJScoresTableViewController : UITableViewController {
+@interface AJScoresTableViewController : UITableViewController <UITextFieldDelegate> {
     NSArray *_scoresArray;
+    
+    UITextField *_newScoreTextField;
 }
 
 @property (nonatomic, retain) AJPlayer *player;

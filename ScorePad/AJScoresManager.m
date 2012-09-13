@@ -165,7 +165,7 @@ static AJScoresManager *sharedAJScoresManager = nil;
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"AJScore"];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"player.name = %@ AND player.time = %@", player.name, player.time];
     fetchRequest.predicate = predicate;
-    fetchRequest.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"round" ascending:NO]];
+    fetchRequest.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"round" ascending:YES]];
     
     return [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
 }
