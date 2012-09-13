@@ -13,6 +13,7 @@
 #import "AJGame+Additions.h"
 #import "NSString+Additions.h"
 #import "UIColor+Additions.h"
+#import "UIImage+Additions.h"
 
 @interface AJGamesTableViewController ()
 
@@ -123,6 +124,12 @@
         cell.textLabel.text = [NSString stringWithFormat:@"%@",[game name]];
         int playersNumber = [[game players] count];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%d %@", playersNumber, (playersNumber == 1) ? @"player" : @"players"];
+        
+        if (game.imageData == nil) {
+            cell.imageView.image = [UIImage defaultGamePicture];
+        } else {
+            cell.imageView.image = [UIImage imageWithData:game.imageData];
+        }
     }
     
     return cell;

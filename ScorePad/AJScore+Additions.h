@@ -13,6 +13,4 @@
 
 + (AJScore *)createScoreWithValue:(double)value inRound:(int)round forPlayer:(AJPlayer *)player;
 
-- (double)totalScore;
-
 @end

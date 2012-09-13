@@ -2,7 +2,7 @@
 //  AJGame.h
 //  ScorePad
 //
-//  Created by Anca Julean on 9/12/12.
+//  Created by Anca Julean on 9/13/12.
 //  Copyright (c) 2012 Anca Julean. All rights reserved.
 //
 
@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString * color;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * rowId;
+@property (nonatomic, retain) NSData * imageData;
 @property (nonatomic, retain) NSSet *players;
 @end
 

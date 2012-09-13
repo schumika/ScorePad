@@ -12,6 +12,7 @@
 
 #import "NSString+Additions.h"
 #import "UIColor+Additions.h"
+#import "UIImage+Additions.h"
 
 @interface AJPlayersTableViewController ()
 
@@ -108,6 +109,12 @@
         cell.textLabel.textColor = [UIColor colorWithHexString:[player color]];
         cell.textLabel.text = [player name];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%g", [player totalScore]];
+        
+        if (player.imageData == nil) {
+            cell.imageView.image = [UIImage defaultPlayerPicture];
+        } else {
+            cell.imageView.image = [UIImage imageWithData:player.imageData];
+        }
     }
     
     return cell;

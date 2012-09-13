@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		521E132C1600B6D600022B1E /* AJGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 521E132B1600B6D500022B1E /* AJGame.m */; };
-		521E13301600B6D600022B1E /* AJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 521E132F1600B6D600022B1E /* AJPlayer.m */; };
 		521E13331600B6D600022B1E /* AJScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 521E13321600B6D600022B1E /* AJScore.m */; };
 		521E13391600B76300022B1E /* AJScore+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 521E13381600B76300022B1E /* AJScore+Additions.m */; };
 		521E133C1600C2AF00022B1E /* AJScoresTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 521E133B1600C2AF00022B1E /* AJScoresTableViewController.m */; };
@@ -27,13 +25,14 @@
 		525CC24515FE2C8200E8F903 /* AJGamesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CC24415FE2C8200E8F903 /* AJGamesTableViewController.m */; };
 		5275B83715FF7D66006E19FE /* AJPlayer+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275B83615FF7D66006E19FE /* AJPlayer+Additions.m */; };
 		5275B83A15FF83FD006E19FE /* AJPlayersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275B83915FF83FD006E19FE /* AJPlayersTableViewController.m */; };
+		529E0E5B1601CF9700711F5B /* main_tile_default_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = 529E0E5A1601CF9700711F5B /* main_tile_default_pic.png */; };
+		529E0E5D1601CFAA00711F5B /* cards_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 529E0E5C1601CFAA00711F5B /* cards_icon.png */; };
+		529E0E601601D0E300711F5B /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 529E0E5F1601D0E300711F5B /* UIImage+Additions.m */; };
+		529E0E631601D2D400711F5B /* AJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 529E0E621601D2D400711F5B /* AJPlayer.m */; };
+		529E0E661601D2D400711F5B /* AJGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 529E0E651601D2D400711F5B /* AJGame.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		521E132A1600B6D500022B1E /* AJGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJGame.h; sourceTree = "<group>"; };
-		521E132B1600B6D500022B1E /* AJGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJGame.m; sourceTree = "<group>"; };
-		521E132E1600B6D600022B1E /* AJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJPlayer.h; sourceTree = "<group>"; };
-		521E132F1600B6D600022B1E /* AJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJPlayer.m; sourceTree = "<group>"; };
 		521E13311600B6D600022B1E /* AJScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJScore.h; sourceTree = "<group>"; };
 		521E13321600B6D600022B1E /* AJScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJScore.m; sourceTree = "<group>"; };
 		521E13371600B76300022B1E /* AJScore+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AJScore+Additions.h"; sourceTree = "<group>"; };
@@ -66,6 +65,14 @@
 		5275B83615FF7D66006E19FE /* AJPlayer+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AJPlayer+Additions.m"; sourceTree = "<group>"; };
 		5275B83815FF83FD006E19FE /* AJPlayersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJPlayersTableViewController.h; sourceTree = "<group>"; };
 		5275B83915FF83FD006E19FE /* AJPlayersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJPlayersTableViewController.m; sourceTree = "<group>"; };
+		529E0E5A1601CF9700711F5B /* main_tile_default_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_tile_default_pic.png; sourceTree = "<group>"; };
+		529E0E5C1601CFAA00711F5B /* cards_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cards_icon.png; sourceTree = "<group>"; };
+		529E0E5E1601D0E300711F5B /* UIImage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Additions.h"; sourceTree = "<group>"; };
+		529E0E5F1601D0E300711F5B /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
+		529E0E611601D2D400711F5B /* AJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJPlayer.h; sourceTree = "<group>"; };
+		529E0E621601D2D400711F5B /* AJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJPlayer.m; sourceTree = "<group>"; };
+		529E0E641601D2D400711F5B /* AJGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJGame.h; sourceTree = "<group>"; };
+		529E0E651601D2D400711F5B /* AJGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJGame.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,10 +94,10 @@
 			isa = PBXGroup;
 			children = (
 				5253287415FF115D00A28B84 /* ScorePad.xcdatamodeld */,
-				521E132A1600B6D500022B1E /* AJGame.h */,
-				521E132B1600B6D500022B1E /* AJGame.m */,
-				521E132E1600B6D600022B1E /* AJPlayer.h */,
-				521E132F1600B6D600022B1E /* AJPlayer.m */,
+				529E0E641601D2D400711F5B /* AJGame.h */,
+				529E0E651601D2D400711F5B /* AJGame.m */,
+				529E0E611601D2D400711F5B /* AJPlayer.h */,
+				529E0E621601D2D400711F5B /* AJPlayer.m */,
 				521E13311600B6D600022B1E /* AJScore.h */,
 				521E13321600B6D600022B1E /* AJScore.m */,
 				525328A215FF213400A28B84 /* AJGame+Additions.h */,
@@ -119,6 +126,8 @@
 				525328C015FF589700A28B84 /* NSString+Additions.m */,
 				525328C115FF589700A28B84 /* UIColor+Additions.h */,
 				525328C215FF589700A28B84 /* UIColor+Additions.m */,
+				529E0E5E1601D0E300711F5B /* UIImage+Additions.h */,
+				529E0E5F1601D0E300711F5B /* UIImage+Additions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -168,6 +177,7 @@
 		525CC23315FE2A1F00E8F903 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				529E0E581601CEFD00711F5B /* Images */,
 				525CC23415FE2A1F00E8F903 /* ScorePad-Info.plist */,
 				525CC23515FE2A1F00E8F903 /* InfoPlist.strings */,
 				525CC23815FE2A1F00E8F903 /* main.m */,
@@ -187,6 +197,15 @@
 				521E133B1600C2AF00022B1E /* AJScoresTableViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		529E0E581601CEFD00711F5B /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				529E0E5C1601CFAA00711F5B /* cards_icon.png */,
+				529E0E5A1601CF9700711F5B /* main_tile_default_pic.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +261,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				525CC23715FE2A1F00E8F903 /* InfoPlist.strings in Resources */,
+				529E0E5B1601CF9700711F5B /* main_tile_default_pic.png in Resources */,
+				529E0E5D1601CFAA00711F5B /* cards_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,11 +283,12 @@
 				525328C415FF589700A28B84 /* UIColor+Additions.m in Sources */,
 				5275B83715FF7D66006E19FE /* AJPlayer+Additions.m in Sources */,
 				5275B83A15FF83FD006E19FE /* AJPlayersTableViewController.m in Sources */,
-				521E132C1600B6D600022B1E /* AJGame.m in Sources */,
-				521E13301600B6D600022B1E /* AJPlayer.m in Sources */,
 				521E13331600B6D600022B1E /* AJScore.m in Sources */,
 				521E13391600B76300022B1E /* AJScore+Additions.m in Sources */,
 				521E133C1600C2AF00022B1E /* AJScoresTableViewController.m in Sources */,
+				529E0E601601D0E300711F5B /* UIImage+Additions.m in Sources */,
+				529E0E631601D2D400711F5B /* AJPlayer.m in Sources */,
+				529E0E661601D2D400711F5B /* AJGame.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
