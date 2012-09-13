@@ -23,8 +23,6 @@
 
 @implementation AJGamesTableViewController
 
-@synthesize gamesArray = _gamesArray;
-
 - (void)dealloc {
     [_gamesArray release];
     
@@ -35,7 +33,7 @@
 }
 
 - (void)loadDataAndUpdateUI:(BOOL)updateUI {
-    self.gamesArray = [[AJScoresManager sharedInstance] getGamesArray];
+    _gamesArray = [[[AJScoresManager sharedInstance] getGamesArray] retain];
     if (updateUI) {
         [self.tableView reloadData];
     }
@@ -140,7 +138,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [[AJScoresManager sharedInstance] deleteGame:[self.gamesArray objectAtIndex:indexPath.row]];
+        [[AJScoresManager sharedInstance] deleteGame:[_gamesArray objectAtIndex:indexPath.row]];
         [self loadDataAndUpdateUI:NO];
         [self updateRowIdsForGames];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
@@ -150,12 +148,13 @@
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithArray:self.gamesArray];
+    NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithArray:_gamesArray];
     AJGame *gameToMove = [[mutableArray objectAtIndex:fromIndexPath.row] retain];
     [mutableArray removeObjectAtIndex:fromIndexPath.row];
     [mutableArray insertObject:gameToMove atIndex:toIndexPath.row];
     [gameToMove release];
-    self.gamesArray = mutableArray;
+    [_gamesArray release];
+    _gamesArray = [mutableArray retain];
     [mutableArray release];
     
     [self updateRowIdsForGames];
@@ -221,13 +220,14 @@
 #pragma mark - Private methods
 
 - (void)updateRowIdsForGames {
-    int numberOfGames = [self.gamesArray count];
+    int numberOfGames = [_gamesArray count];
     NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
-    for (AJGame *game in self.gamesArray) {
-        game.rowId = [NSNumber numberWithInt:numberOfGames - [self.gamesArray indexOfObject:game]];
+    for (AJGame *game in _gamesArray) {
+        game.rowId = [NSNumber numberWithInt:numberOfGames - [_gamesArray indexOfObject:game]];
         [mutableArray addObject:game];
     }
-    self.gamesArray = mutableArray;
+    [_gamesArray release];
+    _gamesArray = [mutableArray retain];
     [mutableArray release];
     
     [[AJScoresManager sharedInstance] saveContext];

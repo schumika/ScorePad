@@ -17,6 +17,4 @@
     UITextField *_newGametextField;
 }
 
-@property (nonatomic, retain) NSArray *gamesArray;
-
 @end
