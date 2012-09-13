@@ -126,21 +126,6 @@
     }
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -151,6 +136,29 @@
     if (indexPath.section == 1) {
         [_newScoreTextField becomeFirstResponder];
     }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    if (section == 0) {
+        CGFloat tableWidth = CGRectGetWidth(tableView.bounds);
+        headerView.frame = CGRectMake(0.0, 0.0, tableWidth, 20.0);
+        headerView.backgroundColor = [UIColor lightGrayColor];
+        UILabel *scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, ceil(tableWidth / 2.0), 20.0)];
+        scoreLabel.text = @"Score";
+        scoreLabel.backgroundColor = [UIColor clearColor];
+        [headerView addSubview:scoreLabel];
+        [scoreLabel release];
+        UILabel *roundLabel = [[UILabel alloc] initWithFrame:CGRectMake(ceil(tableWidth / 2.0), 0.0, ceil(tableWidth / 2.0), 20.0)];
+        roundLabel.text = @"Round";
+        roundLabel.backgroundColor = [UIColor clearColor];
+        roundLabel.textAlignment = UITextAlignmentRight;
+        [headerView addSubview:roundLabel];
+        [roundLabel release];
+    }
+    
+    return [headerView autorelease];
 }
 
 #pragma mark - UITextFieldDelegate methods
