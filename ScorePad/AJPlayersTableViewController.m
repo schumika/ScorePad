@@ -35,8 +35,12 @@
     [super viewDidLoad];
     
     self.title = self.game.name;
-    
     self.tableView.rowHeight = 65.0;
+    
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Settings"
+                                                                               style:UIBarButtonItemStyleBordered
+                                                                              target:self
+                                                                              action:@selector(settingsButtonClicked:)] autorelease];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -175,6 +179,12 @@
     }
     
     return YES;
+}
+
+#pragma mark - Buttons Action
+
+- (IBAction)settingsButtonClicked:(id)sender {
+    
 }
 
 @end
