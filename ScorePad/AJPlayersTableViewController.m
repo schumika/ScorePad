@@ -8,6 +8,7 @@
 
 #import "AJPlayersTableViewController.h"
 #import "AJScoresTableViewController.h"
+#import "AJSettingsViewController.h"
 #import "AJScoresManager.h"
 
 #import "NSString+Additions.h"
@@ -184,7 +185,16 @@
 #pragma mark - Buttons Action
 
 - (IBAction)settingsButtonClicked:(id)sender {
-    
+    AJSettingsViewController *settingsViewController = [[AJSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    settingsViewController.delegate = self;
+    [self.navigationController pushViewController:settingsViewController animated:YES];
+    [settingsViewController release];
+}
+
+#pragma mark - AJSettingsViewControllerDelegate methods
+
+- (void)settingsViewControllerDidFinishEditing:(AJSettingsViewController *)settingsViewController {
+    [self.navigationController popToViewController:self animated:YES];
 }
 
 @end
