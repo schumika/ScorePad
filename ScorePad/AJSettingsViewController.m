@@ -7,6 +7,8 @@
 //
 
 #import "AJSettingsViewController.h"
+#import "AJGame+Additions.h"
+#import "AJPlayer+Additions.h"
 
 #import "UIColor+Additions.h"
 
@@ -17,6 +19,31 @@
 @implementation AJSettingsViewController
 
 @synthesize delegate = _delegate;
+@synthesize item = _item;
+
+- (void)dealloc {
+    [_settingsDictionary release];
+    [_item release];
+    
+    [super dealloc];
+}
+
+- (id)item {
+    return _item;
+}
+
+- (void)setItem:(id)item {
+    if (item != _item) {
+        [_settingsDictionary release];        
+        _settingsDictionary = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:[item imageData] ? [item imageData] : UIImagePNGRepresentation([UIImage imageNamed:@"cards_icon.png"]),
+                                                                            [item name], (NSString *)[item color], nil]
+                                                                   forKeys:[NSArray arrayWithObjects:@"SettingsImageData", @"SettingsName", @"SettingsColor", nil]];
+        
+        [_item release];
+        _item = [item retain];
+    }
+    
+}
 
 - (void)viewDidLoad
 {
@@ -69,9 +96,12 @@
                 break;
             case 1:
                 cell.textLabel.text = @"Name";
+                cell.detailTextLabel.text = [_settingsDictionary objectForKey:@"SettingsName"];
                 break;
             case 2:
                 cell.textLabel.text = @"Color";
+                cell.detailTextLabel.text = @"Color";
+                cell.detailTextLabel.textColor = [UIColor colorWithHexString:[_settingsDictionary objectForKey:@"SettingsColor"]];
                 break;
         }
     }
@@ -79,70 +109,29 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 1) {
+        [_settingsDictionary setObject:@"NewName" forKey:@"SettingsName"];
+    }
 }
 
 #pragma mark - Buttons Actions
 
 - (IBAction)cancelButtonClicked:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(settingsViewControllerDidFinishEditing:)]) {
-        [self.delegate settingsViewControllerDidFinishEditing:self];
+    if ([self.delegate respondsToSelector:@selector(settingsViewControllerDidFinishEditing:withDictionary:)]) {
+        [self.delegate settingsViewControllerDidFinishEditing:self withDictionary:nil];
     }
 }
 
 - (IBAction)doneButtonClicked:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(settingsViewControllerDidFinishEditing:)]) {
-        [self.delegate settingsViewControllerDidFinishEditing:self];
+    if ([self.delegate respondsToSelector:@selector(settingsViewControllerDidFinishEditing:withDictionary:)]) {
+        [self.delegate settingsViewControllerDidFinishEditing:self withDictionary:_settingsDictionary];
     }
 }
 

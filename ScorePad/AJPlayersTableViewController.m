@@ -25,6 +25,7 @@
 
 - (void)loadDataAndUpdateUI:(BOOL)updateUI {
     _playersArray = [[[AJScoresManager sharedInstance] getAllPlayersForGame:self.game] retain];
+    self.title = self.game.name;
     if (updateUI) {
         [self.tableView reloadData];
     }
@@ -35,7 +36,6 @@
 {
     [super viewDidLoad];
     
-    self.title = self.game.name;
     self.tableView.rowHeight = 65.0;
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Settings"
@@ -186,6 +186,7 @@
 
 - (IBAction)settingsButtonClicked:(id)sender {
     AJSettingsViewController *settingsViewController = [[AJSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    settingsViewController.item = self.game;
     settingsViewController.delegate = self;
     [self.navigationController pushViewController:settingsViewController animated:YES];
     [settingsViewController release];
@@ -193,8 +194,19 @@
 
 #pragma mark - AJSettingsViewControllerDelegate methods
 
-- (void)settingsViewControllerDidFinishEditing:(AJSettingsViewController *)settingsViewController {
+- (void)settingsViewControllerDidFinishEditing:(AJSettingsViewController *)settingsViewController withDictionary:(NSDictionary *)dictionary {
+    [dictionary retain];
+    
     [self.navigationController popToViewController:self animated:YES];
+    
+    if (dictionary != nil) {
+        [self.game setName:[dictionary objectForKey:@"SettingsName"]];
+    }
+    
+    [dictionary release];
+    
+    [[AJScoresManager sharedInstance] saveContext];
+    [self loadDataAndUpdateUI:YES];
 }
 
 @end

@@ -11,8 +11,13 @@
 @protocol AJSettingsViewControllerDelegate;
 
 @interface AJSettingsViewController : UITableViewController {
+    id _item;
+    NSMutableDictionary *_settingsDictionary;
+    
     id<AJSettingsViewControllerDelegate> _delegate;
 }
+
+@property (nonatomic, retain) id item;
 
 @property (nonatomic, assign) id<AJSettingsViewControllerDelegate> delegate;
 
@@ -21,6 +26,6 @@
 
 @protocol AJSettingsViewControllerDelegate<NSObject>
 
-- (void)settingsViewControllerDidFinishEditing:(AJSettingsViewController *)settingsViewController;
+- (void)settingsViewControllerDidFinishEditing:(AJSettingsViewController *)settingsViewController withDictionary:(NSDictionary *)dictionary;
 
 @end
