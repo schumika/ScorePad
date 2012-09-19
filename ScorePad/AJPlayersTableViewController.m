@@ -185,8 +185,9 @@
 #pragma mark - Buttons Action
 
 - (IBAction)settingsButtonClicked:(id)sender {
-    AJSettingsViewController *settingsViewController = [[AJSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    settingsViewController.item = self.game;
+    /*AJSettingsViewController *settingsViewController = [[AJSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    settingsViewController.item = self.game;*/
+    AJSettingsViewController *settingsViewController = [[AJSettingsViewController alloc] initWithImageData:self.game.imageData andName:self.game.name andColorString:self.game.color];
     settingsViewController.delegate = self;
     [self.navigationController pushViewController:settingsViewController animated:YES];
     [settingsViewController release];

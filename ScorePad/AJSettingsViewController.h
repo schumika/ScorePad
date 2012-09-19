@@ -11,15 +11,15 @@
 @protocol AJSettingsViewControllerDelegate;
 
 @interface AJSettingsViewController : UITableViewController {
-    id _item;
     NSMutableDictionary *_settingsDictionary;
     
     id<AJSettingsViewControllerDelegate> _delegate;
 }
 
-@property (nonatomic, retain) id item;
-
 @property (nonatomic, assign) id<AJSettingsViewControllerDelegate> delegate;
+
+
+- (id)initWithImageData:(NSData *)imageData andName:(NSString *)name andColorString:(NSString *)colorString;
 
 @end
 

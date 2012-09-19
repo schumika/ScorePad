@@ -19,30 +19,22 @@
 @implementation AJSettingsViewController
 
 @synthesize delegate = _delegate;
-@synthesize item = _item;
+
+- (id)initWithImageData:(NSData *)imageData andName:(NSString *)name andColorString:(NSString *)colorString {
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    
+    if (!self) return nil;
+    
+    _settingsDictionary = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:imageData ? imageData : UIImagePNGRepresentation([UIImage imageNamed:@"cards_icon.png"]), name, colorString, nil]
+                                                               forKeys:[NSArray arrayWithObjects:kSettingsImageKey, kSettingsNameKey, kSettingsColorKey, nil]];
+    
+    return self;
+}
 
 - (void)dealloc {
     [_settingsDictionary release];
-    [_item release];
     
     [super dealloc];
-}
-
-- (id)item {
-    return _item;
-}
-
-- (void)setItem:(id)item {
-    if (item != _item) {
-        [_settingsDictionary release];        
-        _settingsDictionary = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:[item imageData] ? [item imageData] : UIImagePNGRepresentation([UIImage imageNamed:@"cards_icon.png"]),
-                                                                            [item name], (NSString *)[item color], nil]
-                                                                   forKeys:[NSArray arrayWithObjects:kSettingsImageKey, kSettingsNameKey, kSettingsColorKey, nil]];
-        
-        [_item release];
-        _item = [item retain];
-    }
-    
 }
 
 - (void)viewDidLoad
