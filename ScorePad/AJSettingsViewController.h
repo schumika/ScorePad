@@ -10,8 +10,14 @@
 
 @protocol AJSettingsViewControllerDelegate;
 
-@interface AJSettingsViewController : UITableViewController {
+@class AJImageAndNameView;
+
+@interface AJSettingsViewController : UITableViewController <UITextFieldDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     NSMutableDictionary *_settingsDictionary;
+    NSArray *_colorsArray;
+    UITextField *_nameTextField;
+    
+    AJImageAndNameView *_headerView;
     
     id<AJSettingsViewControllerDelegate> _delegate;
 }

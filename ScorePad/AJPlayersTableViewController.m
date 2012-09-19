@@ -187,7 +187,8 @@
 - (IBAction)settingsButtonClicked:(id)sender {
     /*AJSettingsViewController *settingsViewController = [[AJSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
     settingsViewController.item = self.game;*/
-    AJSettingsViewController *settingsViewController = [[AJSettingsViewController alloc] initWithImageData:self.game.imageData andName:self.game.name andColorString:self.game.color];
+    AJSettingsViewController *settingsViewController = [[AJSettingsViewController alloc] initWithImageData:self.game.imageData ? self.game.imageData : UIImagePNGRepresentation([UIImage imageNamed:@"cards_icon.png"])
+                                                                                                   andName:self.game.name andColorString:self.game.color];
     settingsViewController.delegate = self;
     [self.navigationController pushViewController:settingsViewController animated:YES];
     [settingsViewController release];
@@ -202,6 +203,8 @@
     
     if (dictionary != nil) {
         [self.game setName:[dictionary objectForKey:kSettingsNameKey]];
+        [self.game setColor:[dictionary objectForKey:kSettingsColorKey]];
+        [self.game setImageData:[dictionary objectForKey:kSettingsImageKey]];
     }
     
     [dictionary release];
