@@ -23,6 +23,7 @@
 		525CC23915FE2A1F00E8F903 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CC23815FE2A1F00E8F903 /* main.m */; };
 		525CC23D15FE2A1F00E8F903 /* AJAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CC23C15FE2A1F00E8F903 /* AJAppDelegate.m */; };
 		525CC24515FE2C8200E8F903 /* AJGamesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CC24415FE2C8200E8F903 /* AJGamesTableViewController.m */; };
+		526472041609DE7100BBF019 /* AJUserDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = 526472031609DE7100BBF019 /* AJUserDefines.m */; };
 		5275B83715FF7D66006E19FE /* AJPlayer+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275B83615FF7D66006E19FE /* AJPlayer+Additions.m */; };
 		5275B83A15FF83FD006E19FE /* AJPlayersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275B83915FF83FD006E19FE /* AJPlayersTableViewController.m */; };
 		529E0E5B1601CF9700711F5B /* main_tile_default_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = 529E0E5A1601CF9700711F5B /* main_tile_default_pic.png */; };
@@ -62,6 +63,8 @@
 		525CC23C15FE2A1F00E8F903 /* AJAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AJAppDelegate.m; sourceTree = "<group>"; };
 		525CC24315FE2C8200E8F903 /* AJGamesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJGamesTableViewController.h; sourceTree = "<group>"; };
 		525CC24415FE2C8200E8F903 /* AJGamesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJGamesTableViewController.m; sourceTree = "<group>"; };
+		526472021609DE7100BBF019 /* AJUserDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJUserDefines.h; sourceTree = "<group>"; };
+		526472031609DE7100BBF019 /* AJUserDefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJUserDefines.m; sourceTree = "<group>"; };
 		5275B83515FF7D66006E19FE /* AJPlayer+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AJPlayer+Additions.h"; sourceTree = "<group>"; };
 		5275B83615FF7D66006E19FE /* AJPlayer+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AJPlayer+Additions.m"; sourceTree = "<group>"; };
 		5275B83815FF83FD006E19FE /* AJPlayersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJPlayersTableViewController.h; sourceTree = "<group>"; };
@@ -118,6 +121,8 @@
 			children = (
 				5253287B15FF128600A28B84 /* AJScoresManager.h */,
 				5253287C15FF128600A28B84 /* AJScoresManager.m */,
+				526472021609DE7100BBF019 /* AJUserDefines.h */,
+				526472031609DE7100BBF019 /* AJUserDefines.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 				529E0E631601D2D400711F5B /* AJPlayer.m in Sources */,
 				529E0E661601D2D400711F5B /* AJGame.m in Sources */,
 				529E0E691601F6DB00711F5B /* AJSettingsViewController.m in Sources */,
+				526472041609DE7100BBF019 /* AJUserDefines.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

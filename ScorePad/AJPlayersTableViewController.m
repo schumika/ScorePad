@@ -200,7 +200,7 @@
     [self.navigationController popToViewController:self animated:YES];
     
     if (dictionary != nil) {
-        [self.game setName:[dictionary objectForKey:@"SettingsName"]];
+        [self.game setName:[dictionary objectForKey:kSettingsNameKey]];
     }
     
     [dictionary release];

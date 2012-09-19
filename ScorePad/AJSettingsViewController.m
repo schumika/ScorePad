@@ -37,7 +37,7 @@
         [_settingsDictionary release];        
         _settingsDictionary = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:[item imageData] ? [item imageData] : UIImagePNGRepresentation([UIImage imageNamed:@"cards_icon.png"]),
                                                                             [item name], (NSString *)[item color], nil]
-                                                                   forKeys:[NSArray arrayWithObjects:@"SettingsImageData", @"SettingsName", @"SettingsColor", nil]];
+                                                                   forKeys:[NSArray arrayWithObjects:kSettingsImageKey, kSettingsNameKey, kSettingsColorKey, nil]];
         
         [_item release];
         _item = [item retain];
@@ -96,12 +96,12 @@
                 break;
             case 1:
                 cell.textLabel.text = @"Name";
-                cell.detailTextLabel.text = [_settingsDictionary objectForKey:@"SettingsName"];
+                cell.detailTextLabel.text = [_settingsDictionary objectForKey:kSettingsNameKey];
                 break;
             case 2:
                 cell.textLabel.text = @"Color";
                 cell.detailTextLabel.text = @"Color";
-                cell.detailTextLabel.textColor = [UIColor colorWithHexString:[_settingsDictionary objectForKey:@"SettingsColor"]];
+                cell.detailTextLabel.textColor = [UIColor colorWithHexString:[_settingsDictionary objectForKey:kSettingsColorKey]];
                 break;
         }
     }
@@ -117,7 +117,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.row == 1) {
-        [_settingsDictionary setObject:@"NewName" forKey:@"SettingsName"];
+        [_settingsDictionary setObject:@"NewName" forKey:kSettingsNameKey];
     }
 }
 
