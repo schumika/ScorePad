@@ -161,6 +161,14 @@
     return [headerView autorelease];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    if (section == 0) {
+        return [NSString stringWithFormat:@"Total: %g", [self.player totalScore]];
+    }
+    
+    return nil;
+}
+
 #pragma mark - UITextFieldDelegate methods
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
@@ -176,7 +184,7 @@
         [_newScoreTextField setText:nil];
         
         [self loadDataAndUpdateUI:YES];
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
                               atScrollPosition:UITableViewScrollPositionTop animated:NO];
     }
     
