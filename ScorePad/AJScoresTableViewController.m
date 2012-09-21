@@ -41,6 +41,8 @@
     [super viewDidLoad];
     self.title = self.player.name;
     self.tableView.rowHeight = 35.0;
+    
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStyleBordered target:self action:@selector(settingsButtonClicked:)] autorelease];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -204,6 +206,25 @@
     [mutableArray release];
     
     [[AJScoresManager sharedInstance] saveContext];
+}
+
+#pragma mark - Actions
+
+- (IBAction)settingsButtonClicked:(id)sender {
+    AJSettingsViewController *settingsViewController = [[AJSettingsViewController alloc] initWithImageData:self.player.imageData ? self.player.imageData : UIImagePNGRepresentation([UIImage imageNamed:@"main_tile_default_pic.png"])
+                                                                                                   andName:self.player.name andColorString:self.player.color];
+    settingsViewController.delegate = self;
+    [self.navigationController pushViewController:settingsViewController animated:YES];
+    [settingsViewController release];
+}
+
+#pragma mark - AJSettingsViewControllerDelegate methods
+
+- (void)settingsViewControllerDidFinishEditing:(AJSettingsViewController *)settingsViewController withDictionary:(NSDictionary *)dictionary {
+    [dictionary retain];
+    
+    [self.navigationController popToViewController:self animated:YES];
+    [dictionary release];
 }
 
 @end

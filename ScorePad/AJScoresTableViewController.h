@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AJPlayer+Additions.h"
+#import "AJSettingsViewController.h"
 
-@interface AJScoresTableViewController : UITableViewController <UITextFieldDelegate> {
+@interface AJScoresTableViewController : UITableViewController <UITextFieldDelegate, AJSettingsViewControllerDelegate> {
     NSArray *_scoresArray;
     
     UITextField *_newScoreTextField;
