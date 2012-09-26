@@ -224,7 +224,18 @@
     [dictionary retain];
     
     [self.navigationController popToViewController:self animated:YES];
+    
+    if (dictionary != nil) {
+        [self.player setName:[dictionary objectForKey:kSettingsNameKey]];
+        [self.player setColor:[dictionary objectForKey:kSettingsColorKey]];
+        [self.player setImageData:[dictionary objectForKey:kSettingsImageKey]];
+    }
+    
     [dictionary release];
+    
+    [[AJScoresManager sharedInstance] saveContext];
+    [self loadDataAndUpdateUI:YES];
 }
+
 
 @end
