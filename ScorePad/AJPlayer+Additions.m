@@ -7,6 +7,9 @@
 //
 
 #import "AJPlayer+Additions.h"
+#import "AJSettingsInfo.h"
+
+#import "UIImage+Additions.h"
 
 @implementation AJPlayer (Additions)
 
@@ -29,6 +32,12 @@
     }
     
     return total;
+}
+
+- (AJSettingsInfo *)settingsInfo {
+    return [AJSettingsInfo createSettingsInfoWithImageData:self.imageData ? self.imageData : UIImagePNGRepresentation([UIImage defaultPlayerPicture])
+                                                   andName:self.name
+                                            andColorString:self.color];
 }
 
 @end

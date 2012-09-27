@@ -8,8 +8,12 @@
 
 #import "AJGame.h"
 
+@class AJSettingsInfo;
+
 @interface AJGame (Additions)
 
 + (AJGame *)createGameWithName:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context;
+
+- (AJSettingsInfo *)settingsInfo;
 
 @end

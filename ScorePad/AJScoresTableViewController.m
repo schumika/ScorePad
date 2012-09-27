@@ -8,6 +8,7 @@
 
 #import "AJScoresTableViewController.h"
 #import "AJScoresManager.h"
+#import "AJSettingsInfo.h"
 
 #import "NSString+Additions.h"
 
@@ -42,7 +43,9 @@
     self.title = self.player.name;
     self.tableView.rowHeight = 35.0;
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStyleBordered target:self action:@selector(settingsButtonClicked:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStyleBordered
+                                                                              target:self
+                                                                              action:@selector(settingsButtonClicked:)] autorelease];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -209,10 +212,8 @@
 }
 
 #pragma mark - Actions
-
 - (IBAction)settingsButtonClicked:(id)sender {
-    AJSettingsViewController *settingsViewController = [[AJSettingsViewController alloc] initWithImageData:self.player.imageData ? self.player.imageData : UIImagePNGRepresentation([UIImage imageNamed:@"main_tile_default_pic.png"])
-                                                                                                   andName:self.player.name andColorString:self.player.color];
+    AJSettingsViewController *settingsViewController = [[AJSettingsViewController alloc] initWithSettingsInfo:[self.player settingsInfo] andItemType:AJPlayerItem];
     settingsViewController.delegate = self;
     [self.navigationController pushViewController:settingsViewController animated:YES];
     [settingsViewController release];
@@ -220,22 +221,20 @@
 
 #pragma mark - AJSettingsViewControllerDelegate methods
 
-- (void)settingsViewControllerDidFinishEditing:(AJSettingsViewController *)settingsViewController withDictionary:(NSDictionary *)dictionary {
-    [dictionary retain];
+- (void)settingsViewControllerDidFinishEditing:(AJSettingsViewController *)settingsViewController withSettingsInfo:(AJSettingsInfo *)settingsInfo {
+    [settingsInfo retain];
     
     [self.navigationController popToViewController:self animated:YES];
     
-    if (dictionary != nil) {
-        [self.player setName:[dictionary objectForKey:kSettingsNameKey]];
-        [self.player setColor:[dictionary objectForKey:kSettingsColorKey]];
-        [self.player setImageData:[dictionary objectForKey:kSettingsImageKey]];
+    if (settingsInfo != nil) {
+        [self.player setName:settingsInfo.name];
+        [self.player setColor:settingsInfo.colorString];
+        [self.player setImageData:settingsInfo.imageData];
     }
     
-    [dictionary release];
+    [settingsInfo release];
     
     [[AJScoresManager sharedInstance] saveContext];
     [self loadDataAndUpdateUI:YES];
 }
-
-
 @end

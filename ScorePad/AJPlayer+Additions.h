@@ -14,5 +14,5 @@
 
 + (AJPlayer *)createPlayerWithName:(NSString *)name forGame:(AJGame *)game;
 - (double)totalScore;
-
+- (AJSettingsInfo *)settingsInfo;
 @end

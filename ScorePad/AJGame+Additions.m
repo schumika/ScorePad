@@ -7,6 +7,9 @@
 //
 
 #import "AJGame+Additions.h"
+#import "AJSettingsInfo.h"
+
+#import "UIImage+Additions.h"
 
 @implementation AJGame (Additions)
 
@@ -18,6 +21,12 @@
     game.rowId = 0;
     
     return game;
+}
+
+- (AJSettingsInfo *)settingsInfo {
+    return [AJSettingsInfo createSettingsInfoWithImageData:self.imageData ? self.imageData : UIImagePNGRepresentation([UIImage defaultGamePicture])
+                                                   andName:self.name
+                                            andColorString:self.color];
 }
 
 @end

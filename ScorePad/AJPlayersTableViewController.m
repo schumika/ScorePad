@@ -9,6 +9,7 @@
 #import "AJPlayersTableViewController.h"
 #import "AJScoresTableViewController.h"
 #import "AJSettingsViewController.h"
+#import "AJSettingsInfo.h"
 #import "AJScoresManager.h"
 
 #import "NSString+Additions.h"
@@ -185,8 +186,7 @@
 #pragma mark - Buttons Action
 
 - (IBAction)settingsButtonClicked:(id)sender {
-    AJSettingsViewController *settingsViewController = [[AJSettingsViewController alloc] initWithImageData:self.game.imageData ? self.game.imageData : UIImagePNGRepresentation([UIImage imageNamed:@"cards_icon.png"])
-                                                                                                   andName:self.game.name andColorString:self.game.color];
+    AJSettingsViewController *settingsViewController = [[AJSettingsViewController alloc] initWithSettingsInfo:[self.game settingsInfo] andItemType:AJGameItem];
     settingsViewController.delegate = self;
     [self.navigationController pushViewController:settingsViewController animated:YES];
     [settingsViewController release];
@@ -194,18 +194,18 @@
 
 #pragma mark - AJSettingsViewControllerDelegate methods
 
-- (void)settingsViewControllerDidFinishEditing:(AJSettingsViewController *)settingsViewController withDictionary:(NSDictionary *)dictionary {
-    [dictionary retain];
+- (void)settingsViewControllerDidFinishEditing:(AJSettingsViewController *)settingsViewController withSettingsInfo:(AJSettingsInfo *)settingsInfo {
+    [settingsInfo retain];
     
     [self.navigationController popToViewController:self animated:YES];
     
-    if (dictionary != nil) {
-        [self.game setName:[dictionary objectForKey:kSettingsNameKey]];
-        [self.game setColor:[dictionary objectForKey:kSettingsColorKey]];
-        [self.game setImageData:[dictionary objectForKey:kSettingsImageKey]];
+    if (settingsInfo != nil) {
+        [self.game setName:settingsInfo.name];
+        [self.game setColor:settingsInfo.colorString];
+        [self.game setImageData:settingsInfo.imageData];
     }
     
-    [dictionary release];
+    [settingsInfo release];
     
     [[AJScoresManager sharedInstance] saveContext];
     [self loadDataAndUpdateUI:YES];

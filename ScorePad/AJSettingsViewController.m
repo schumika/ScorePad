@@ -9,8 +9,10 @@
 #import "AJSettingsViewController.h"
 #import "AJGame+Additions.h"
 #import "AJPlayer+Additions.h"
+#import "AJSettingsInfo.h"
 
 #import "UIColor+Additions.h"
+#import "UIImage+Additions.h"
 
 
 #define COLORS_TABLE_VIEW_TAG (1)
@@ -60,16 +62,17 @@
 
 @implementation AJSettingsViewController
 
+@synthesize settingsInfo = _settingsInfo;
+@synthesize itemType = _itemType;
 @synthesize delegate = _delegate;
 
-- (id)initWithImageData:(NSData *)imageData andName:(NSString *)name andColorString:(NSString *)colorString {
+- (id)initWithSettingsInfo:(AJSettingsInfo *)settingsInfo andItemType:(AJItemType)itemType {
     self = [super initWithStyle:UITableViewStyleGrouped];
     
     if (!self) return nil;
     
-    _settingsDictionary = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:imageData, name, colorString, nil]
-                                                               forKeys:[NSArray arrayWithObjects:kSettingsImageKey, kSettingsNameKey, kSettingsColorKey, nil]];
-    
+    self.settingsInfo = settingsInfo;
+    self.itemType = itemType;
     _colorsArray = [[NSArray alloc] initWithObjects:[UIColor blackColor], [UIColor darkGrayColor], [UIColor lightGrayColor], [UIColor whiteColor], [UIColor grayColor], [UIColor redColor],
                     [UIColor greenColor], [UIColor blueColor], [UIColor cyanColor], [UIColor yellowColor], [UIColor magentaColor], [UIColor orangeColor], [UIColor purpleColor], [UIColor brownColor], nil];
     
@@ -77,8 +80,10 @@
 }
 
 - (void)dealloc {
-    [_settingsDictionary release];
+    [_settingsInfo release];
     [_colorsArray release];
+    
+    [_nameTextField setDelegate:nil];
     
     [super dealloc];
 }
@@ -89,8 +94,8 @@
 
     CGRect bounds = self.view.bounds;
     _headerView = [[AJImageAndNameView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(bounds), 95.0)
-                                                                      andImage:[UIImage imageWithData:[_settingsDictionary objectForKey:kSettingsImageKey]]
-                                                                       andName:[_settingsDictionary objectForKey:kSettingsNameKey]];
+                                                                      andImage:[UIImage imageWithData:self.settingsInfo.imageData]
+                                                                       andName:self.settingsInfo.name];
     _headerView.tableView.dataSource = self;
     _headerView.tableView.delegate = self;
     _headerView.tableView.tag = NAME_TABLE_VIEW_TAG;
@@ -107,7 +112,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.title = [_settingsDictionary objectForKey:kSettingsNameKey];
+    self.title = self.settingsInfo.name;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -138,7 +143,7 @@
         
         UIColor *rowColor = [_colorsArray objectAtIndex:indexPath.row];
         [cell setColor:rowColor];
-        cell.accessoryType = ([[_settingsDictionary objectForKey:kSettingsColorKey] isEqualToString:[rowColor toHexString:YES]]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+        cell.accessoryType = ([self.settingsInfo.colorString isEqualToString:[rowColor toHexString:YES]]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
         
         aCell = cell;
     } else {
@@ -158,7 +163,7 @@
             [_nameTextField release];
         }
         
-         _nameTextField.text = [_settingsDictionary objectForKey:kSettingsNameKey];
+         _nameTextField.text = self.settingsInfo.name;
         
         aCell = cell;
     }
@@ -178,7 +183,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (tableView.tag == COLORS_TABLE_VIEW_TAG) {
-        [_settingsDictionary setObject:[(UIColor *)[_colorsArray objectAtIndex:indexPath.row] toHexString:YES] forKey:kSettingsColorKey];
+        [self.settingsInfo setColorString:[(UIColor *)[_colorsArray objectAtIndex:indexPath.row] toHexString:YES]];
         [tableView reloadData];
     } else {
         [_nameTextField becomeFirstResponder];
@@ -188,14 +193,16 @@
 #pragma mark - Buttons Actions
 
 - (IBAction)cancelButtonClicked:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(settingsViewControllerDidFinishEditing:withDictionary:)]) {
-        [self.delegate settingsViewControllerDidFinishEditing:self withDictionary:nil];
+    if ([self.delegate respondsToSelector:@selector(settingsViewControllerDidFinishEditing:withSettingsInfo:)]) {
+        [self.delegate settingsViewControllerDidFinishEditing:self withSettingsInfo:nil];
     }
 }
 
 - (IBAction)doneButtonClicked:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(settingsViewControllerDidFinishEditing:withDictionary:)]) {
-        [self.delegate settingsViewControllerDidFinishEditing:self withDictionary:_settingsDictionary];
+    [self.settingsInfo  setName:[_nameTextField text]];
+    
+    if ([self.delegate respondsToSelector:@selector(settingsViewControllerDidFinishEditing:withSettingsInfo:)]) {
+        [self.delegate settingsViewControllerDidFinishEditing:self withSettingsInfo:self.settingsInfo];
     }
 }
 
@@ -203,7 +210,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [_nameTextField resignFirstResponder];
-    [_settingsDictionary setObject:[textField text] forKey:kSettingsNameKey];
+    [self.settingsInfo  setName:[textField text]];
     
     return YES;
 }
@@ -258,7 +265,7 @@
 	}
     
     [_headerView setImage:editedImage];
-    [_settingsDictionary setObject:UIImagePNGRepresentation(editedImage) forKey:kSettingsImageKey];
+    [self.settingsInfo setImageData:UIImagePNGRepresentation(editedImage)];
 }
 
 #pragma mark - Private Actions
@@ -284,7 +291,10 @@
 }
 
 - (IBAction)setDefaultButtonClicked {
-    //[self setPicture:nil];TBD...
+    UIImage *defaultImage = (_itemType == AJGameItem) ? [UIImage defaultGamePicture] : [UIImage defaultPlayerPicture];
+    
+    [_headerView setImage:defaultImage];
+    [self.settingsInfo setImageData:UIImagePNGRepresentation(defaultImage)];
 }
 
 

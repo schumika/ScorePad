@@ -11,9 +11,16 @@
 @protocol AJSettingsViewControllerDelegate;
 
 @class AJImageAndNameView;
+@class AJSettingsInfo;
+
+typedef enum {
+    AJGameItem,
+    AJPlayerItem
+} AJItemType;
 
 @interface AJSettingsViewController : UITableViewController <UITextFieldDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
-    NSMutableDictionary *_settingsDictionary;
+    AJItemType _itemType;
+    AJSettingsInfo *_settingsInfo;
     NSArray *_colorsArray;
     UITextField *_nameTextField;
     
@@ -22,16 +29,17 @@
     id<AJSettingsViewControllerDelegate> _delegate;
 }
 
+@property (nonatomic, assign) AJItemType itemType;
+@property (nonatomic, retain) AJSettingsInfo *settingsInfo;
 @property (nonatomic, assign) id<AJSettingsViewControllerDelegate> delegate;
 
-
-- (id)initWithImageData:(NSData *)imageData andName:(NSString *)name andColorString:(NSString *)colorString;
+- (id)initWithSettingsInfo:(AJSettingsInfo *)settingsInfo andItemType:(AJItemType)itemType;
 
 @end
 
 
 @protocol AJSettingsViewControllerDelegate<NSObject>
 
-- (void)settingsViewControllerDidFinishEditing:(AJSettingsViewController *)settingsViewController withDictionary:(NSDictionary *)dictionary;
+- (void)settingsViewControllerDidFinishEditing:(AJSettingsViewController *)settingsViewController withSettingsInfo:(AJSettingsInfo *)settingsInfo;
 
 @end
