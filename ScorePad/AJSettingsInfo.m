@@ -30,4 +30,12 @@
     return [[[self alloc] initWithImageData:imageData andName:name andColorString:colorString] autorelease];
 }
 
+- (void)dealloc {
+    [_imageData release];
+    [_name release];
+    [_colorString release];
+    
+    [super dealloc];
+}
+
 @end
