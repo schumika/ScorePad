@@ -24,6 +24,8 @@
 
 @implementation AJGamesTableViewController
 
+@synthesize gamesArray = _gamesArray;
+
 - (void)dealloc {
     [_gamesArray release];
     
@@ -34,7 +36,7 @@
 }
 
 - (void)loadDataAndUpdateUI:(BOOL)updateUI {
-    _gamesArray = [[[AJScoresManager sharedInstance] getGamesArray] retain];
+    self.gamesArray = [[AJScoresManager sharedInstance] getGamesArray];
     if (updateUI) {
         [self.tableView reloadData];
     }
@@ -81,7 +83,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return (section == 0) ? [_gamesArray count] : 1;
+    return (section == 0) ? [self.gamesArray count] : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -119,7 +121,7 @@
     }
     
     if (indexPath.section == 0) {
-        AJGame *game = (AJGame *)[_gamesArray objectAtIndex:indexPath.row];
+        AJGame *game = (AJGame *)[self.gamesArray objectAtIndex:indexPath.row];
         cell.textLabel.textColor = [UIColor colorWithHexString:[game color]];
         cell.textLabel.text = [NSString stringWithFormat:@"%@",[game name]];
         int playersNumber = [[game players] count];
@@ -145,7 +147,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [[AJScoresManager sharedInstance] deleteGame:[_gamesArray objectAtIndex:indexPath.row]];
+        [[AJScoresManager sharedInstance] deleteGame:[self.gamesArray objectAtIndex:indexPath.row]];
         [self loadDataAndUpdateUI:NO];
         [self updateRowIdsForGames];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
@@ -155,14 +157,12 @@
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithArray:_gamesArray];
+    NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithArray:self.gamesArray];
     AJGame *gameToMove = [[mutableArray objectAtIndex:fromIndexPath.row] retain];
     [mutableArray removeObjectAtIndex:fromIndexPath.row];
     [mutableArray insertObject:gameToMove atIndex:toIndexPath.row];
     [gameToMove release];
-    [_gamesArray release];
-    _gamesArray = [mutableArray retain];
-    [mutableArray release];
+    [self setGamesArray:mutableArray];
     
     [self updateRowIdsForGames];
     [self loadDataAndUpdateUI:YES];
@@ -185,7 +185,7 @@
         [_newGametextField becomeFirstResponder];
     } else {        
         AJPlayersTableViewController *playersViewController = [[AJPlayersTableViewController alloc] initWithStyle:UITableViewStylePlain];
-        playersViewController.game = (AJGame *)[_gamesArray objectAtIndex:indexPath.row];
+        playersViewController.game = (AJGame *)[self.gamesArray objectAtIndex:indexPath.row];
         [self.navigationController pushViewController:playersViewController animated:YES];
         [playersViewController release];
     }
@@ -227,15 +227,13 @@
 #pragma mark - Private methods
 
 - (void)updateRowIdsForGames {
-    int numberOfGames = [_gamesArray count];
+    int numberOfGames = [self.gamesArray count];
     NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
-    for (AJGame *game in _gamesArray) {
-        game.rowId = [NSNumber numberWithInt:numberOfGames - [_gamesArray indexOfObject:game]];
+    for (AJGame *game in self.gamesArray) {
+        game.rowId = [NSNumber numberWithInt:numberOfGames - [self.gamesArray indexOfObject:game]];
         [mutableArray addObject:game];
     }
-    [_gamesArray release];
-    _gamesArray = [mutableArray retain];
-    [mutableArray release];
+    [self setGamesArray:mutableArray];
     
     [[AJScoresManager sharedInstance] saveContext];
 }

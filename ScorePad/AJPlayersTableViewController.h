@@ -21,5 +21,6 @@
 }
 
 @property (nonatomic, retain) AJGame *game;
+@property (nonatomic, retain) NSArray *playersArray;
 
 @end

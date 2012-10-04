@@ -17,5 +17,6 @@
 }
 
 @property (nonatomic, retain) AJPlayer *player;
+@property (nonatomic, retain) NSArray *scoresArray;
 
 @end

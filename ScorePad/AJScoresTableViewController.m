@@ -22,6 +22,7 @@
 @implementation AJScoresTableViewController
 
 @synthesize player = _player;
+@synthesize scoresArray = _scoresArray;
 
 - (void)dealloc {
     [_player release];
@@ -31,7 +32,7 @@
 }
 
 - (void)loadDataAndUpdateUI:(BOOL)updateUI {
-     _scoresArray = [[[AJScoresManager sharedInstance] getAllScoresForPlayer:self.player] retain];
+     self.scoresArray = [[AJScoresManager sharedInstance] getAllScoresForPlayer:self.player];
     if (updateUI) {
         [self.tableView reloadData];
     }
@@ -68,7 +69,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return (section == 0) ? _scoresArray.count : 1;
+    return (section == 0) ? self.scoresArray.count : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -104,7 +105,7 @@
     }
     
     if (indexPath.section == 0) {
-        AJScore *score = [_scoresArray objectAtIndex:indexPath.row];
+        AJScore *score = [self.scoresArray objectAtIndex:indexPath.row];
         cell.textLabel.text = [NSString stringWithFormat:@"%g", score.value.doubleValue];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", score.round.intValue];
     }
@@ -123,7 +124,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [[AJScoresManager sharedInstance] deleteScore:[_scoresArray objectAtIndex:indexPath.row]];
+        [[AJScoresManager sharedInstance] deleteScore:[self.scoresArray objectAtIndex:indexPath.row]];
         [self loadDataAndUpdateUI:NO];
         [self updateRoundsForScores];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
@@ -185,7 +186,7 @@
     
     NSString *text = textField.text;
     if (![NSString isNilOrEmpty:text]) {
-        [[AJScoresManager sharedInstance] createScoreWithValue:text.doubleValue inRound:([_scoresArray count] +1) forPlayer:self.player];
+        [[AJScoresManager sharedInstance] createScoreWithValue:text.doubleValue inRound:([self.scoresArray count] +1) forPlayer:self.player];
         [_newScoreTextField setText:nil];
         
         [self loadDataAndUpdateUI:YES];
@@ -200,12 +201,11 @@
 
 - (void)updateRoundsForScores {
     NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
-    for (AJScore *score in _scoresArray) {
-        score.round = [NSNumber numberWithInt:([_scoresArray indexOfObject:score]+1)];
+    for (AJScore *score in self.scoresArray) {
+        score.round = [NSNumber numberWithInt:([self.scoresArray indexOfObject:score]+1)];
         [mutableArray addObject:score];
     }
-    [_scoresArray release];
-    _scoresArray = [mutableArray retain];
+    [self setScoresArray:mutableArray];
     [mutableArray release];
     
     [[AJScoresManager sharedInstance] saveContext];

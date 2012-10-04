@@ -23,9 +23,10 @@
 @implementation AJPlayersTableViewController
 
 @synthesize game = _game;
+@synthesize playersArray = _playersArray;
 
 - (void)loadDataAndUpdateUI:(BOOL)updateUI {
-    _playersArray = [[[AJScoresManager sharedInstance] getAllPlayersForGame:self.game] retain];
+    self.playersArray = [[AJScoresManager sharedInstance] getAllPlayersForGame:self.game];
     self.title = self.game.name;
     if (updateUI) {
         [self.tableView reloadData];
@@ -73,7 +74,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return (section == 0) ? [_playersArray count] : 1;
+    return (section == 0) ? [self.playersArray count] : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -111,7 +112,7 @@
     }
     
     if (indexPath.section == 0) {
-        AJPlayer *player = (AJPlayer *)[_playersArray objectAtIndex:indexPath.row];
+        AJPlayer *player = (AJPlayer *)[self.playersArray objectAtIndex:indexPath.row];
         cell.textLabel.textColor = [UIColor colorWithHexString:[player color]];
         cell.textLabel.text = [player name];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%g", [player totalScore]];
@@ -135,7 +136,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [[AJScoresManager sharedInstance] deletePlayer:[_playersArray objectAtIndex:indexPath.row]];
+        [[AJScoresManager sharedInstance] deletePlayer:[self.playersArray objectAtIndex:indexPath.row]];
         [self loadDataAndUpdateUI:NO];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
         [tableView reloadData];
@@ -155,7 +156,7 @@
         [_newPlayerTextField becomeFirstResponder];
     } else {        
         AJScoresTableViewController *scoresViewController = [[AJScoresTableViewController alloc] initWithStyle:UITableViewStylePlain];
-        scoresViewController.player = [_playersArray objectAtIndex:indexPath.row];
+        scoresViewController.player = [self.playersArray objectAtIndex:indexPath.row];
         [self.navigationController pushViewController:scoresViewController animated:YES];
         [scoresViewController release];
     }
