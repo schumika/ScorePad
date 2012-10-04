@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AJTableViewController.h"
 
-@interface AJGamesTableViewController : UITableViewController <UITextFieldDelegate> {
+@interface AJGamesTableViewController : AJTableViewController <UITextFieldDelegate> {
     NSArray *_gamesArray;
     
     UIBarButtonItem *_editBarButton;

@@ -32,6 +32,7 @@
 		529E0E661601D2D400711F5B /* AJGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 529E0E651601D2D400711F5B /* AJGame.m */; };
 		529E0E691601F6DB00711F5B /* AJSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 529E0E681601F6DB00711F5B /* AJSettingsViewController.m */; };
 		52A59A251614249500AB4341 /* AJSettingsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A59A241614249500AB4341 /* AJSettingsInfo.m */; };
+		52EF57EB161DB01B004B069B /* AJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EF57EA161DB01B004B069B /* AJTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,8 @@
 		529E0E681601F6DB00711F5B /* AJSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJSettingsViewController.m; sourceTree = "<group>"; };
 		52A59A231614249500AB4341 /* AJSettingsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJSettingsInfo.h; sourceTree = "<group>"; };
 		52A59A241614249500AB4341 /* AJSettingsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJSettingsInfo.m; sourceTree = "<group>"; };
+		52EF57E9161DB01B004B069B /* AJTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJTableViewController.h; sourceTree = "<group>"; };
+		52EF57EA161DB01B004B069B /* AJTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +200,8 @@
 		525CC24615FE2C8900E8F903 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				52EF57E9161DB01B004B069B /* AJTableViewController.h */,
+				52EF57EA161DB01B004B069B /* AJTableViewController.m */,
 				525CC24315FE2C8200E8F903 /* AJGamesTableViewController.h */,
 				525CC24415FE2C8200E8F903 /* AJGamesTableViewController.m */,
 				5275B83815FF83FD006E19FE /* AJPlayersTableViewController.h */,
@@ -301,6 +306,7 @@
 				529E0E661601D2D400711F5B /* AJGame.m in Sources */,
 				529E0E691601F6DB00711F5B /* AJSettingsViewController.m in Sources */,
 				52A59A251614249500AB4341 /* AJSettingsInfo.m in Sources */,
+				52EF57EB161DB01B004B069B /* AJTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

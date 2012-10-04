@@ -9,6 +9,7 @@
 #import "AJGamesTableViewController.h"
 #import "AJPlayersTableViewController.h"
 #import "AJScoresManager.h"
+#import "AJTableViewController.h"
 
 #import "AJGame+Additions.h"
 #import "NSString+Additions.h"
@@ -65,14 +66,13 @@
     return YES;
 }
 
-#pragma mark - Overidden from base class
+#pragma mark - Keyboard notifications
 
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-    self.navigationItem.rightBarButtonItem = editing ? _doneBarButton : _editBarButton;
+- (void)keyboardWillShow:(NSNotification *)aNotif {
+    [super keyboardWillShow:aNotif];
     
-    [super setEditing:editing animated:animated];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
-
 
 #pragma mark - Table view data source
 
@@ -179,7 +179,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (self.editing) return;
+    if (self.tableView.editing) return;
     
     if (indexPath.section == 1) {
         [_newGametextField becomeFirstResponder];
@@ -193,18 +193,21 @@
 
 #pragma mark - Buttons Actions
 
+
 - (IBAction)editButtonClicked:(id)sender {
-    [self setEditing:YES animated:YES];
+    [self.tableView setEditing:YES animated:YES];
+    self.navigationItem.rightBarButtonItem = _doneBarButton;
 }
 
 - (IBAction)doneButtonClicked:(id)sender {
-    [self setEditing:NO animated:YES];
+    [self.tableView setEditing:NO animated:YES];
+    self.navigationItem.rightBarButtonItem = _editBarButton;
 }
 
 #pragma mark - UITextFieldDelegate methods
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    return !self.editing;
+    return !self.tableView.editing;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
