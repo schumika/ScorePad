@@ -27,7 +27,8 @@
 
 - (void)loadDataAndUpdateUI:(BOOL)updateUI {
     self.playersArray = [[AJScoresManager sharedInstance] getAllPlayersForGame:self.game];
-    self.title = self.game.name;
+    //self.title = self.game.name;
+    [self reloadTitleView];
     if (updateUI) {
         [self.tableView reloadData];
     }
@@ -40,10 +41,9 @@
     
     self.tableView.rowHeight = 65.0;
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Settings"
-                                                                               style:UIBarButtonItemStyleBordered
-                                                                              target:self
-                                                                              action:@selector(settingsButtonClicked:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem clearBarButtonItemWithTitle:@"Settings" target:self action:@selector(settingsButtonClicked:)];
+    self.navigationItem.leftBarButtonItem = [self backButtonItem];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -63,6 +63,10 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
+}
+
+- (NSString*)titleViewText {
+	return self.game.name;
 }
 
 #pragma mark - Keyboard notifications

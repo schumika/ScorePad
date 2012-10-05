@@ -47,12 +47,11 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Score Pad";
-    
-    _editBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonClicked:)];
-    _doneBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonClicked:)];
+    _editBarButton = [[UIBarButtonItem clearBarButtonItemWithTitle:@"Edit" target:self action:@selector(editButtonClicked:)] retain];
+    _doneBarButton = [[UIBarButtonItem clearBarButtonItemWithTitle:@"Done" target:self action:@selector(doneButtonClicked:)] retain];
     
     self.navigationItem.rightBarButtonItem = _editBarButton;
+    self.navigationItem.leftBarButtonItem = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,6 +63,10 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
+}
+
+- (NSString*)titleViewText {
+	return @"Score Pad";
 }
 
 #pragma mark - Keyboard notifications

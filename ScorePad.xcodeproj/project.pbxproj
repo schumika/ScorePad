@@ -25,12 +25,19 @@
 		525CC24515FE2C8200E8F903 /* AJGamesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CC24415FE2C8200E8F903 /* AJGamesTableViewController.m */; };
 		5275B83715FF7D66006E19FE /* AJPlayer+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275B83615FF7D66006E19FE /* AJPlayer+Additions.m */; };
 		5275B83A15FF83FD006E19FE /* AJPlayersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275B83915FF83FD006E19FE /* AJPlayersTableViewController.m */; };
-		529E0E5B1601CF9700711F5B /* main_tile_default_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = 529E0E5A1601CF9700711F5B /* main_tile_default_pic.png */; };
-		529E0E5D1601CFAA00711F5B /* cards_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 529E0E5C1601CFAA00711F5B /* cards_icon.png */; };
 		529E0E601601D0E300711F5B /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 529E0E5F1601D0E300711F5B /* UIImage+Additions.m */; };
 		529E0E631601D2D400711F5B /* AJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 529E0E621601D2D400711F5B /* AJPlayer.m */; };
 		529E0E661601D2D400711F5B /* AJGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 529E0E651601D2D400711F5B /* AJGame.m */; };
 		529E0E691601F6DB00711F5B /* AJSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 529E0E681601F6DB00711F5B /* AJSettingsViewController.m */; };
+		52A10859161F0C86006FCACD /* back-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A10851161F0C86006FCACD /* back-button.png */; };
+		52A1085A161F0C86006FCACD /* back-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A10852161F0C86006FCACD /* back-button@2x.png */; };
+		52A1085B161F0C86006FCACD /* bar-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A10853161F0C86006FCACD /* bar-button.png */; };
+		52A1085C161F0C86006FCACD /* bar-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A10854161F0C86006FCACD /* bar-button@2x.png */; };
+		52A1085D161F0C86006FCACD /* cards_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A10855161F0C86006FCACD /* cards_icon.png */; };
+		52A1085E161F0C86006FCACD /* main_tile_default_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A10856161F0C86006FCACD /* main_tile_default_pic.png */; };
+		52A1085F161F0C86006FCACD /* nav-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A10857161F0C86006FCACD /* nav-bar.png */; };
+		52A10860161F0C86006FCACD /* nav-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A10858161F0C86006FCACD /* nav-bar@2x.png */; };
+		52A10863161F25B4006FCACD /* UIBarButtonItem+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A10862161F232F006FCACD /* UIBarButtonItem+Additions.m */; };
 		52A59A251614249500AB4341 /* AJSettingsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A59A241614249500AB4341 /* AJSettingsInfo.m */; };
 		52EF57EB161DB01B004B069B /* AJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EF57EA161DB01B004B069B /* AJTableViewController.m */; };
 /* End PBXBuildFile section */
@@ -68,8 +75,6 @@
 		5275B83615FF7D66006E19FE /* AJPlayer+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AJPlayer+Additions.m"; sourceTree = "<group>"; };
 		5275B83815FF83FD006E19FE /* AJPlayersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJPlayersTableViewController.h; sourceTree = "<group>"; };
 		5275B83915FF83FD006E19FE /* AJPlayersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJPlayersTableViewController.m; sourceTree = "<group>"; };
-		529E0E5A1601CF9700711F5B /* main_tile_default_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_tile_default_pic.png; sourceTree = "<group>"; };
-		529E0E5C1601CFAA00711F5B /* cards_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cards_icon.png; sourceTree = "<group>"; };
 		529E0E5E1601D0E300711F5B /* UIImage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Additions.h"; sourceTree = "<group>"; };
 		529E0E5F1601D0E300711F5B /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
 		529E0E611601D2D400711F5B /* AJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJPlayer.h; sourceTree = "<group>"; };
@@ -78,6 +83,16 @@
 		529E0E651601D2D400711F5B /* AJGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJGame.m; sourceTree = "<group>"; };
 		529E0E671601F6DB00711F5B /* AJSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJSettingsViewController.h; sourceTree = "<group>"; };
 		529E0E681601F6DB00711F5B /* AJSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJSettingsViewController.m; sourceTree = "<group>"; };
+		52A10851161F0C86006FCACD /* back-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-button.png"; sourceTree = "<group>"; };
+		52A10852161F0C86006FCACD /* back-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-button@2x.png"; sourceTree = "<group>"; };
+		52A10853161F0C86006FCACD /* bar-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-button.png"; sourceTree = "<group>"; };
+		52A10854161F0C86006FCACD /* bar-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-button@2x.png"; sourceTree = "<group>"; };
+		52A10855161F0C86006FCACD /* cards_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cards_icon.png; sourceTree = "<group>"; };
+		52A10856161F0C86006FCACD /* main_tile_default_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_tile_default_pic.png; sourceTree = "<group>"; };
+		52A10857161F0C86006FCACD /* nav-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar.png"; sourceTree = "<group>"; };
+		52A10858161F0C86006FCACD /* nav-bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar@2x.png"; sourceTree = "<group>"; };
+		52A10861161F232F006FCACD /* UIBarButtonItem+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Additions.h"; sourceTree = "<group>"; };
+		52A10862161F232F006FCACD /* UIBarButtonItem+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Additions.m"; sourceTree = "<group>"; };
 		52A59A231614249500AB4341 /* AJSettingsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJSettingsInfo.h; sourceTree = "<group>"; };
 		52A59A241614249500AB4341 /* AJSettingsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJSettingsInfo.m; sourceTree = "<group>"; };
 		52EF57E9161DB01B004B069B /* AJTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJTableViewController.h; sourceTree = "<group>"; };
@@ -139,6 +154,8 @@
 				525328C215FF589700A28B84 /* UIColor+Additions.m */,
 				529E0E5E1601D0E300711F5B /* UIImage+Additions.h */,
 				529E0E5F1601D0E300711F5B /* UIImage+Additions.m */,
+				52A10861161F232F006FCACD /* UIBarButtonItem+Additions.h */,
+				52A10862161F232F006FCACD /* UIBarButtonItem+Additions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -188,7 +205,7 @@
 		525CC23315FE2A1F00E8F903 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				529E0E581601CEFD00711F5B /* Images */,
+				52A10850161F0C86006FCACD /* Images */,
 				525CC23415FE2A1F00E8F903 /* ScorePad-Info.plist */,
 				525CC23515FE2A1F00E8F903 /* InfoPlist.strings */,
 				525CC23815FE2A1F00E8F903 /* main.m */,
@@ -214,13 +231,19 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		529E0E581601CEFD00711F5B /* Images */ = {
+		52A10850161F0C86006FCACD /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				529E0E5C1601CFAA00711F5B /* cards_icon.png */,
-				529E0E5A1601CF9700711F5B /* main_tile_default_pic.png */,
+				52A10851161F0C86006FCACD /* back-button.png */,
+				52A10852161F0C86006FCACD /* back-button@2x.png */,
+				52A10853161F0C86006FCACD /* bar-button.png */,
+				52A10854161F0C86006FCACD /* bar-button@2x.png */,
+				52A10855161F0C86006FCACD /* cards_icon.png */,
+				52A10856161F0C86006FCACD /* main_tile_default_pic.png */,
+				52A10857161F0C86006FCACD /* nav-bar.png */,
+				52A10858161F0C86006FCACD /* nav-bar@2x.png */,
 			);
-			name = Images;
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,8 +299,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				525CC23715FE2A1F00E8F903 /* InfoPlist.strings in Resources */,
-				529E0E5B1601CF9700711F5B /* main_tile_default_pic.png in Resources */,
-				529E0E5D1601CFAA00711F5B /* cards_icon.png in Resources */,
+				52A10859161F0C86006FCACD /* back-button.png in Resources */,
+				52A1085A161F0C86006FCACD /* back-button@2x.png in Resources */,
+				52A1085B161F0C86006FCACD /* bar-button.png in Resources */,
+				52A1085C161F0C86006FCACD /* bar-button@2x.png in Resources */,
+				52A1085D161F0C86006FCACD /* cards_icon.png in Resources */,
+				52A1085E161F0C86006FCACD /* main_tile_default_pic.png in Resources */,
+				52A1085F161F0C86006FCACD /* nav-bar.png in Resources */,
+				52A10860161F0C86006FCACD /* nav-bar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +336,7 @@
 				529E0E691601F6DB00711F5B /* AJSettingsViewController.m in Sources */,
 				52A59A251614249500AB4341 /* AJSettingsInfo.m in Sources */,
 				52EF57EB161DB01B004B069B /* AJTableViewController.m in Sources */,
+				52A10863161F25B4006FCACD /* UIBarButtonItem+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,6 +33,7 @@
 
 - (void)loadDataAndUpdateUI:(BOOL)updateUI {
      self.scoresArray = [[AJScoresManager sharedInstance] getAllScoresForPlayer:self.player];
+    [self reloadTitleView];
     if (updateUI) {
         [self.tableView reloadData];
     }
@@ -41,12 +42,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = self.player.name;
     self.tableView.rowHeight = 35.0;
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStyleBordered
-                                                                              target:self
-                                                                              action:@selector(settingsButtonClicked:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem clearBarButtonItemWithTitle:@"Settings" target:self action:@selector(settingsButtonClicked:)];
+    self.navigationItem.leftBarButtonItem = [self backButtonItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -58,6 +57,10 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
+}
+
+- (NSString *)textViewTitle {
+    return self.player.name;
 }
 
 #pragma mark - Table view data source
