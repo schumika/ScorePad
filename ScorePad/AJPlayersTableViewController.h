@@ -12,7 +12,7 @@
 
 #import "AJSettingsViewController.h"
 
-@interface AJPlayersTableViewController : UITableViewController <UITextFieldDelegate, AJSettingsViewControllerDelegate> {
+@interface AJPlayersTableViewController : AJTableViewController <UITextFieldDelegate, AJSettingsViewControllerDelegate> {
     AJGame *_game;
     
     NSArray *_playersArray;

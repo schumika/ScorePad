@@ -84,6 +84,8 @@
     [_colorsArray release];
     
     [_nameTextField setDelegate:nil];
+    _headerView.tableView.dataSource = nil;
+    _headerView.tableView.delegate = nil;
     
     [super dealloc];
 }
@@ -91,19 +93,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    CGRect bounds = self.view.bounds;
-    _headerView = [[AJImageAndNameView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(bounds), 95.0)
-                                                                      andImage:[UIImage imageWithData:self.settingsInfo.imageData]
-                                                                       andName:self.settingsInfo.name];
-    _headerView.tableView.dataSource = self;
-    _headerView.tableView.delegate = self;
-    _headerView.tableView.tag = NAME_TABLE_VIEW_TAG;
-    [_headerView.pictureButton addTarget:self action:@selector(pictureButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    self.tableView.tableHeaderView = _headerView;
-    [_headerView release];
-    
-    self.tableView.tag = COLORS_TABLE_VIEW_TAG;
     
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonClicked:)] autorelease];
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonClicked:)] autorelease];
@@ -113,11 +102,31 @@
     [super viewWillAppear:animated];
     
     self.title = self.settingsInfo.name;
+    self.tableView.tag = COLORS_TABLE_VIEW_TAG;
+    
+    CGRect bounds = self.view.bounds;
+    _headerView = [[AJImageAndNameView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(bounds), 95.0)
+                                                   andImage:[UIImage imageWithData:self.settingsInfo.imageData]
+                                                    andName:self.settingsInfo.name];
+    _headerView.tableView.dataSource = self;
+    _headerView.tableView.delegate = self;
+    _headerView.tableView.tag = NAME_TABLE_VIEW_TAG;
+    [_headerView.pictureButton addTarget:self action:@selector(pictureButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    self.tableView.tableHeaderView = _headerView;
+    [_headerView release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
+}
+
+#pragma mark - Keyboard notifications
+
+- (void)keyboardWillShow:(NSNotification *)aNotif {
+    [super keyboardWillShow:aNotif];
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 #pragma mark - Table view data source

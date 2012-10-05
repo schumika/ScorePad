@@ -65,6 +65,14 @@
     return YES;
 }
 
+#pragma mark - Keyboard notifications
+
+- (void)keyboardWillShow:(NSNotification *)aNotif {
+    [super keyboardWillShow:aNotif];
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -150,7 +158,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (self.editing) return;
+    if (self.tableView.editing) return;
     
     if (indexPath.section == 1) {
         [_newPlayerTextField becomeFirstResponder];
@@ -165,7 +173,7 @@
 #pragma mark - UITextFieldDelegate methods
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    return !self.editing;
+    return !self.tableView.editing;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
