@@ -38,10 +38,13 @@
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:tableViewStyle];
+        self.view.backgroundColor = [UIColor brownColor];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectInset(self.view.bounds, 10.0, 0.0) style:tableViewStyle];
+        _tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"table_background.png"]];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _tableView.separatorColor = [UIColor clearColor];
         [self.view addSubview:_tableView];
         [_tableView release];
     }
