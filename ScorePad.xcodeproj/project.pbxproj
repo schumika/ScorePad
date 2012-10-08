@@ -41,6 +41,8 @@
 		52A10866161F2976006FCACD /* table_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A10864161F2975006FCACD /* table_background.png */; };
 		52A10867161F2976006FCACD /* table_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52A10865161F2975006FCACD /* table_background@2x.png */; };
 		52A59A251614249500AB4341 /* AJSettingsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A59A241614249500AB4341 /* AJSettingsInfo.m */; };
+		52AF6B691622FAE40034F06A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 52AF6B671622FAE40034F06A /* background.png */; };
+		52AF6B6A1622FAE40034F06A /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52AF6B681622FAE40034F06A /* background@2x.png */; };
 		52EF57EB161DB01B004B069B /* AJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EF57EA161DB01B004B069B /* AJTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +101,8 @@
 		52A10865161F2975006FCACD /* table_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "table_background@2x.png"; sourceTree = "<group>"; };
 		52A59A231614249500AB4341 /* AJSettingsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJSettingsInfo.h; sourceTree = "<group>"; };
 		52A59A241614249500AB4341 /* AJSettingsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJSettingsInfo.m; sourceTree = "<group>"; };
+		52AF6B671622FAE40034F06A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		52AF6B681622FAE40034F06A /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		52EF57E9161DB01B004B069B /* AJTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJTableViewController.h; sourceTree = "<group>"; };
 		52EF57EA161DB01B004B069B /* AJTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -238,6 +242,8 @@
 		52A10850161F0C86006FCACD /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				52AF6B671622FAE40034F06A /* background.png */,
+				52AF6B681622FAE40034F06A /* background@2x.png */,
 				52A10851161F0C86006FCACD /* back-button.png */,
 				52A10852161F0C86006FCACD /* back-button@2x.png */,
 				52A10853161F0C86006FCACD /* bar-button.png */,
@@ -315,6 +321,8 @@
 				52A10860161F0C86006FCACD /* nav-bar@2x.png in Resources */,
 				52A10866161F2976006FCACD /* table_background.png in Resources */,
 				52A10867161F2976006FCACD /* table_background@2x.png in Resources */,
+				52AF6B691622FAE40034F06A /* background.png in Resources */,
+				52AF6B6A1622FAE40034F06A /* background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

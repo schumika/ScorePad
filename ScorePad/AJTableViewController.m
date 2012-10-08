@@ -40,11 +40,11 @@
     if (self) {
         self.view.backgroundColor = [UIColor brownColor];
         _tableView = [[UITableView alloc] initWithFrame:CGRectInset(self.view.bounds, 10.0, 0.0) style:tableViewStyle];
-        _tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"table_background.png"]];
+        _tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        _tableView.separatorColor = [UIColor clearColor];
+        _tableView.separatorColor = [UIColor colorWithRed:112.0/255.0 green:112.0/255.0 blue:112.0/255.0 alpha:0.3];
         [self.view addSubview:_tableView];
         [_tableView release];
     }
