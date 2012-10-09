@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "UIBarButtonItem+Additions.h"
+#import "AJViewController.h"
 
-@interface AJTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface AJTableViewController : AJViewController <UITableViewDataSource, UITableViewDelegate> {
     UITableView *_tableView;
     
     // UI customizations

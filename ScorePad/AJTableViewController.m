@@ -9,15 +9,6 @@
 #import "AJTableViewController.h"
 #import "UIColor+Additions.h"
 
-@implementation UINavigationBar (UINavigationBarCustomDraw)
-
-- (void)drawRect:(CGRect)rect
-{
-    [[UIImage imageNamed:@"nav-bar.png"] drawInRect:rect];
-}
-
-@end
-
 @interface AJTableViewController ()
 
 - (void)addKeyboardNotifications;

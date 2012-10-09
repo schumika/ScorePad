@@ -25,6 +25,7 @@
 		525CC24515FE2C8200E8F903 /* AJGamesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525CC24415FE2C8200E8F903 /* AJGamesTableViewController.m */; };
 		5275B83715FF7D66006E19FE /* AJPlayer+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275B83615FF7D66006E19FE /* AJPlayer+Additions.m */; };
 		5275B83A15FF83FD006E19FE /* AJPlayersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275B83915FF83FD006E19FE /* AJPlayersTableViewController.m */; };
+		5284384C162441CE00B471B5 /* AJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5284384B162441CE00B471B5 /* AJViewController.m */; };
 		529E0E601601D0E300711F5B /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 529E0E5F1601D0E300711F5B /* UIImage+Additions.m */; };
 		529E0E631601D2D400711F5B /* AJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 529E0E621601D2D400711F5B /* AJPlayer.m */; };
 		529E0E661601D2D400711F5B /* AJGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 529E0E651601D2D400711F5B /* AJGame.m */; };
@@ -79,6 +80,8 @@
 		5275B83615FF7D66006E19FE /* AJPlayer+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AJPlayer+Additions.m"; sourceTree = "<group>"; };
 		5275B83815FF83FD006E19FE /* AJPlayersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJPlayersTableViewController.h; sourceTree = "<group>"; };
 		5275B83915FF83FD006E19FE /* AJPlayersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJPlayersTableViewController.m; sourceTree = "<group>"; };
+		5284384A162441CE00B471B5 /* AJViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJViewController.h; sourceTree = "<group>"; };
+		5284384B162441CE00B471B5 /* AJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJViewController.m; sourceTree = "<group>"; };
 		529E0E5E1601D0E300711F5B /* UIImage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Additions.h"; sourceTree = "<group>"; };
 		529E0E5F1601D0E300711F5B /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
 		529E0E611601D2D400711F5B /* AJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJPlayer.h; sourceTree = "<group>"; };
@@ -225,6 +228,8 @@
 		525CC24615FE2C8900E8F903 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5284384A162441CE00B471B5 /* AJViewController.h */,
+				5284384B162441CE00B471B5 /* AJViewController.m */,
 				52EF57E9161DB01B004B069B /* AJTableViewController.h */,
 				52EF57EA161DB01B004B069B /* AJTableViewController.m */,
 				525CC24315FE2C8200E8F903 /* AJGamesTableViewController.h */,
@@ -353,6 +358,7 @@
 				52A59A251614249500AB4341 /* AJSettingsInfo.m in Sources */,
 				52EF57EB161DB01B004B069B /* AJTableViewController.m in Sources */,
 				52A10863161F25B4006FCACD /* UIBarButtonItem+Additions.m in Sources */,
+				5284384C162441CE00B471B5 /* AJViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
