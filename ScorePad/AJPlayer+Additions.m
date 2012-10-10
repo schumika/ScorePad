@@ -40,4 +40,14 @@
                                             andColorString:self.color];
 }
 
+- (NSArray *)scoreValues {
+    NSMutableArray *values = [[NSMutableArray alloc] init];
+    
+    for (AJScore *score in self.scores) {
+        [values addObject:score.value];
+    }
+    
+    return [values autorelease];
+}
+
 @end

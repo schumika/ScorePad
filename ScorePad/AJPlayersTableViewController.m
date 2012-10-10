@@ -45,7 +45,7 @@
                 CGFloat viewHeight = [[player scores] count] * 30.0 + 50.0;
                 maxHeight = MAX(maxHeight, viewHeight);
                 AJVerticalPlayerView *verticalPlayerView = [[AJVerticalPlayerView alloc] initWithFrame:CGRectMake(playerIndex * 120.0, 0.0, 120.0, viewHeight)
-                                                            andName:player.name andScores:[player.scores allObjects] andColor:player.color];
+                                                            andName:player.name andScores:[player scoreValues] andColor:player.color];
                 [_scrollView addSubview:verticalPlayerView];
                 [verticalPlayerView release];
             }

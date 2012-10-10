@@ -35,6 +35,15 @@
         [_nameButton setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.3]];
         [_nameButton setTitleColor:[UIColor colorWithHexString:color] forState:UIControlStateNormal];
         [self addSubview:_nameButton];
+        
+        for (int scoreIndex = 0; scoreIndex < [self.scores count]; scoreIndex++) {
+            UILabel *scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 50.0 + 30 * scoreIndex, 120.0, 30.0)];
+            [scoreLabel setBackgroundColor:[UIColor clearColor]];
+            [scoreLabel setTextAlignment:UITextAlignmentCenter];
+            [scoreLabel setText:[NSString stringWithFormat:@"%g",[[scores objectAtIndex:scoreIndex] doubleValue]]];
+            [self addSubview:scoreLabel];
+            [scoreLabel release];
+        }
     }
     return self;
 }
