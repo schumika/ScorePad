@@ -9,6 +9,7 @@
 #import "AJPlayersTableViewController.h"
 #import "AJScoresTableViewController.h"
 #import "AJSettingsViewController.h"
+#import "AJVerticalPlayerView.h"
 #import "AJSettingsInfo.h"
 #import "AJScoresManager.h"
 
@@ -16,9 +17,15 @@
 #import "UIColor+Additions.h"
 #import "UIImage+Additions.h"
 
-@interface AJPlayersTableViewController ()
+
+@interface AJPlayersTableViewController () {
+    UIImageView *_backView;
+}
+
+- (void)prepareUIForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 
 @end
+
 
 @implementation AJPlayersTableViewController
 
@@ -27,10 +34,23 @@
 
 - (void)loadDataAndUpdateUI:(BOOL)updateUI {
     self.playersArray = [[AJScoresManager sharedInstance] getAllPlayersForGame:self.game];
-    //self.title = self.game.name;
     [self reloadTitleView];
     if (updateUI) {
-        [self.tableView reloadData];
+        if (self.tableView.hidden == NO) {
+            [self.tableView reloadData];
+        } else {
+            CGFloat maxHeight = 50.0;
+            for (int playerIndex = 0; playerIndex < self.playersArray.count; playerIndex++) {
+                AJPlayer *player = (AJPlayer *)[self.playersArray objectAtIndex:playerIndex];
+                CGFloat viewHeight = [[player scores] count] * 30.0 + 50.0;
+                maxHeight = MAX(maxHeight, viewHeight);
+                AJVerticalPlayerView *verticalPlayerView = [[AJVerticalPlayerView alloc] initWithFrame:CGRectMake(playerIndex * 120.0, 0.0, 120.0, viewHeight)
+                                                            andName:player.name andScores:[player.scores allObjects] andColor:player.color];
+                [_scrollView addSubview:verticalPlayerView];
+                [verticalPlayerView release];
+            }
+            _scrollView.contentSize = CGSizeMake(self.playersArray.count * 120.0, maxHeight);
+        }
     }
 }
 
@@ -39,7 +59,21 @@
 {
     [super viewDidLoad];
     
+    // Portrait
     self.tableView.rowHeight = 65.0;
+    
+    // Landscape
+    _backView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"landscape_background.png"]];
+    [self.view addSubview:_backView];
+    [_backView release];
+    [_backView setHidden:YES];
+    
+    CGRect bounds = self.view.bounds;
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, bounds.size.height + 20.0, bounds.size.width)];
+    _scrollView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_scrollView];
+    [_scrollView setHidden:YES];
+    [_scrollView release];
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem clearBarButtonItemWithTitle:@"Settings" target:self action:@selector(settingsButtonClicked:)];
     self.navigationItem.leftBarButtonItem = [self backButtonItem];
@@ -50,6 +84,7 @@
 {
     [super viewWillAppear:animated];
     
+    [self prepareUIForInterfaceOrientation:self.interfaceOrientation];
     [self loadDataAndUpdateUI:YES];
 }
 
@@ -67,6 +102,13 @@
 
 - (NSString*)titleViewText {
 	return self.game.name;
+}
+
+#pragma mark - Rotation methods
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [self prepareUIForInterfaceOrientation:toInterfaceOrientation];
+    [self loadDataAndUpdateUI:YES];
 }
 
 #pragma mark - Keyboard notifications
@@ -222,6 +264,18 @@
     
     [[AJScoresManager sharedInstance] saveContext];
     [self loadDataAndUpdateUI:YES];
+}
+
+- (void)prepareUIForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+        self.tableView.hidden = YES;
+        _scrollView.hidden = NO;
+        _backView.hidden = NO;
+    } else {
+        self.tableView.hidden = NO;
+        _scrollView.hidden = YES;
+        _backView.hidden = YES;
+    }
 }
 
 @end

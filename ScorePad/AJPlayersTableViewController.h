@@ -18,6 +18,7 @@
     NSArray *_playersArray;
     
     UITextField *_newPlayerTextField;
+    UIScrollView *_scrollView;
 }
 
 @property (nonatomic, retain) AJGame *game;

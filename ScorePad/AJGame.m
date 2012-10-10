@@ -2,7 +2,7 @@
 //  AJGame.m
 //  ScorePad
 //
-//  Created by Anca Julean on 9/13/12.
+//  Created by Anca Calugar on 10/9/12.
 //  Copyright (c) 2012 Anca Julean. All rights reserved.
 //
 
@@ -13,9 +13,9 @@
 @implementation AJGame
 
 @dynamic color;
+@dynamic imageData;
 @dynamic name;
 @dynamic rowId;
-@dynamic imageData;
 @dynamic players;
 
 @end

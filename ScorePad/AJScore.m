@@ -2,7 +2,7 @@
 //  AJScore.m
 //  ScorePad
 //
-//  Created by Anca Julean on 9/12/12.
+//  Created by Anca Calugar on 10/9/12.
 //  Copyright (c) 2012 Anca Julean. All rights reserved.
 //
 
@@ -12,8 +12,8 @@
 
 @implementation AJScore
 
-@dynamic value;
 @dynamic round;
+@dynamic value;
 @dynamic player;
 
 @end
