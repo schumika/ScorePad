@@ -108,7 +108,7 @@
     _nameButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _nameButton.frame = CGRectMake(0.0, 0.0, frame.size.width, 40.0);
     _nameButton.backgroundColor = [UIColor clearColor];
-    [_nameButton.titleLabel setFont:[UIFont boldSystemFontOfSize:17.0]];
+    [_nameButton.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0]];
     [_nameButton.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [self addSubview:_nameButton];
     
