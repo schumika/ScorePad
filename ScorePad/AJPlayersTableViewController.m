@@ -38,6 +38,11 @@
         if (self.tableView.hidden == NO) {
             [self.tableView reloadData];
         } else {
+            // remove old vertical columns
+            for (UIView *subView in [_scrollView subviews]) {
+                [subView removeFromSuperview];
+            }
+            
             CGFloat playerViewWidth = (self.playersArray.count == 0) ? 0.0 : MAX(100.0, 480.0 / (self.playersArray.count));
             CGFloat maxScrollViewContentHeight = 60.0 + 30.0 * [self.game maxNumberOfScores];
             for (int playerIndex = 0; playerIndex < self.playersArray.count; playerIndex++) {
@@ -85,14 +90,6 @@
     
     [self prepareUIForInterfaceOrientation:self.interfaceOrientation];
     [self loadDataAndUpdateUI:YES];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-    for (UIView *subView in [_scrollView subviews]) {
-        [subView removeFromSuperview];
-    }
 }
 
 - (void)dealloc {
