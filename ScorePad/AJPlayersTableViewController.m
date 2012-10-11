@@ -9,7 +9,6 @@
 #import "AJPlayersTableViewController.h"
 #import "AJScoresTableViewController.h"
 #import "AJSettingsViewController.h"
-#import "AJVerticalPlayerView.h"
 #import "AJSettingsInfo.h"
 #import "AJScoresManager.h"
 
@@ -45,6 +44,7 @@
                 AJPlayer *player = (AJPlayer *)[self.playersArray objectAtIndex:playerIndex];
                 AJVerticalPlayerView *verticalPlayerView = [[AJVerticalPlayerView alloc] initWithFrame:CGRectMake(playerIndex * playerViewWidth, 0.0, playerViewWidth, maxScrollViewContentHeight)
                                                             andName:player.name andScores:[player scoreValues] andColor:player.color];
+                [verticalPlayerView setDelegate:self];
                 [_scrollView addSubview:verticalPlayerView];
                 [verticalPlayerView release];
             }
@@ -283,6 +283,15 @@
         _scrollView.hidden = YES;
         _backView.hidden = YES;
     }
+}
+
+#pragma mark - AJVerticalPlayerViewDelegate methods
+
+- (void)verticalPlayerViewDidClickName:(AJVerticalPlayerView *)verticalPlayerView {
+    AJScoresTableViewController *scoresViewController = [[AJScoresTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    scoresViewController.player = [self.playersArray objectAtIndex:[[_scrollView subviews] indexOfObject:verticalPlayerView]];
+    [self.navigationController pushViewController:scoresViewController animated:YES];
+    [scoresViewController release];
 }
 
 @end

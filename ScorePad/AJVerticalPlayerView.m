@@ -32,6 +32,8 @@
 @synthesize scores = _scores;
 @synthesize color = _color;
 
+@synthesize delegate = _delegate;
+
 - (id)initWithFrame:(CGRect)frame andName:(NSString *)name andScores:(NSArray *)scores andColor:(NSString *)color
 {
     self = [super initWithFrame:frame];
@@ -43,6 +45,7 @@
         
         AJVerticalPlayerHeaderView *headerView = [[AJVerticalPlayerHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, 60.0)];
         [headerView.nameButton setTitle:self.name forState:UIControlStateNormal];
+        [headerView.nameButton addTarget:self action:@selector(nameButtonCliked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:headerView];
         [headerView release];
         
@@ -80,7 +83,15 @@
     CGContextStrokePath(context);
 }
 
+- (IBAction)nameButtonCliked:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(verticalPlayerViewDidClickName:)]) {
+        [self.delegate verticalPlayerViewDidClickName:self];
+    }
+}
+
 @end
+
+
 
 @implementation AJVerticalPlayerHeaderView
 

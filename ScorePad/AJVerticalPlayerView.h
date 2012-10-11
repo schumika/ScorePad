@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol AJVerticalPlayerViewDelegate;
+
 @interface AJVerticalPlayerView : UIView {
     NSString *_name;
     NSArray *_scores;
     NSString *_color;
     
     double _maxViewHeight;
+    
+    id<AJVerticalPlayerViewDelegate> _delegate;
 }
 
 @property (nonatomic, copy) NSString *name;
@@ -22,6 +26,15 @@
 
 @property (nonatomic, assign) double maxViewHeight;
 
+@property (nonatomic, assign) id<AJVerticalPlayerViewDelegate> delegate;
+
 - (id)initWithFrame:(CGRect)frame andName:(NSString *)name andScores:(NSArray *)scores andColor:(NSString *)color;
+
+@end
+
+
+@protocol AJVerticalPlayerViewDelegate <NSObject>
+
+- (void)verticalPlayerViewDidClickName:(AJVerticalPlayerView *)verticalPlayerView;
 
 @end
