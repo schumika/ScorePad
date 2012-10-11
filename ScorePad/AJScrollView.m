@@ -14,27 +14,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        /*UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
-        [self addGestureRecognizer:panRecognizer];
-        [panRecognizer release];*/
-        
+        self.directionalLockEnabled = YES;
     }
     return self;
-}
-
-- (void)panGestureRecognized:(UIPanGestureRecognizer *)panRecognizer {
-    if (panRecognizer.state == UIGestureRecognizerStateChanged || panRecognizer.state == UIGestureRecognizerStateEnded) {
-        CGPoint translation = [panRecognizer translationInView:self];
-        NSLog(@"gesture changed point %@", NSStringFromCGPoint(translation));
-        
-        if (ABS(translation.y) < 30.0) {
-            [self setContentOffset:CGPointMake(-translation.x, 0.0)];
-        } else {
-            [self setContentOffset:CGPointMake(-translation.x, -translation.y)];
-        }
-        
-        //[panRecognizer setTranslation:CGPointZero inView:self];
-    }
 }
 
 @end
