@@ -40,7 +40,7 @@
             [self.tableView reloadData];
         } else {
             CGFloat playerViewWidth = (self.playersArray.count == 0) ? 0.0 : MAX(120.0, 480.0 / (self.playersArray.count));
-            CGFloat maxScrollViewContentHeight = 50.0 + 30.0 * [self.game maxNumberOfScores];
+            CGFloat maxScrollViewContentHeight = 60.0 + 30.0 * [self.game maxNumberOfScores];
             for (int playerIndex = 0; playerIndex < self.playersArray.count; playerIndex++) {
                 AJPlayer *player = (AJPlayer *)[self.playersArray objectAtIndex:playerIndex];
                 AJVerticalPlayerView *verticalPlayerView = [[AJVerticalPlayerView alloc] initWithFrame:CGRectMake(playerIndex * playerViewWidth, 0.0, playerViewWidth, maxScrollViewContentHeight)
@@ -85,6 +85,14 @@
     
     [self prepareUIForInterfaceOrientation:self.interfaceOrientation];
     [self loadDataAndUpdateUI:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    for (UIView *subView in [_scrollView subviews]) {
+        [subView removeFromSuperview];
+    }
 }
 
 - (void)dealloc {
@@ -257,12 +265,12 @@
         [self.game setName:settingsInfo.name];
         [self.game setColor:settingsInfo.colorString];
         [self.game setImageData:settingsInfo.imageData];
+        
+        [[AJScoresManager sharedInstance] saveContext];
+        [self loadDataAndUpdateUI:YES];
     }
     
     [settingsInfo release];
-    
-    [[AJScoresManager sharedInstance] saveContext];
-    [self loadDataAndUpdateUI:YES];
 }
 
 - (void)prepareUIForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
