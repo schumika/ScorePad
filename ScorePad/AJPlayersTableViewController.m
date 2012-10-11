@@ -39,17 +39,16 @@
         if (self.tableView.hidden == NO) {
             [self.tableView reloadData];
         } else {
-            CGFloat maxHeight = 50.0;
+            CGFloat playerViewWidth = (self.playersArray.count == 0) ? 0.0 : MAX(120.0, 480.0 / (self.playersArray.count));
+            CGFloat maxScrollViewContentHeight = 50.0 + 30.0 * [self.game maxNumberOfScores];
             for (int playerIndex = 0; playerIndex < self.playersArray.count; playerIndex++) {
                 AJPlayer *player = (AJPlayer *)[self.playersArray objectAtIndex:playerIndex];
-                CGFloat viewHeight = [[player scores] count] * 30.0 + 50.0;
-                maxHeight = MAX(maxHeight, viewHeight);
-                AJVerticalPlayerView *verticalPlayerView = [[AJVerticalPlayerView alloc] initWithFrame:CGRectMake(playerIndex * 120.0, 0.0, 120.0, viewHeight)
+                AJVerticalPlayerView *verticalPlayerView = [[AJVerticalPlayerView alloc] initWithFrame:CGRectMake(playerIndex * playerViewWidth, 0.0, playerViewWidth, maxScrollViewContentHeight)
                                                             andName:player.name andScores:[player scoreValues] andColor:player.color];
                 [_scrollView addSubview:verticalPlayerView];
                 [verticalPlayerView release];
             }
-            _scrollView.contentSize = CGSizeMake(self.playersArray.count * 120.0, maxHeight);
+            _scrollView.contentSize = CGSizeMake(self.playersArray.count * 120.0, maxScrollViewContentHeight + 30.0);
         }
     }
 }
@@ -69,7 +68,7 @@
     [_backView setHidden:YES];
     
     CGRect bounds = self.view.bounds;
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, bounds.size.height + 20.0, bounds.size.width)];
+    _scrollView = [[AJScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, bounds.size.height + 20.0, bounds.size.width)];
     _scrollView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_scrollView];
     [_scrollView setHidden:YES];

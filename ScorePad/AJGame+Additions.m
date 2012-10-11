@@ -8,6 +8,7 @@
 
 #import "AJGame+Additions.h"
 #import "AJSettingsInfo.h"
+#import "AJPlayer+Additions.h"
 
 #import "UIImage+Additions.h"
 
@@ -27,6 +28,16 @@
     return [AJSettingsInfo createSettingsInfoWithImageData:self.imageData ? self.imageData : UIImagePNGRepresentation([UIImage defaultGamePicture])
                                                    andName:self.name
                                             andColorString:self.color];
+}
+
+- (int)maxNumberOfScores; {
+    int maxNumber = 0;
+    
+    for (AJPlayer *player in self.players) {
+        maxNumber = MAX(maxNumber, [player.scores count]);
+    }
+    
+    return maxNumber;
 }
 
 @end

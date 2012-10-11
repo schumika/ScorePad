@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		521BC2D316255A5A000C2EE0 /* AJScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 521BC2D216255A5A000C2EE0 /* AJScrollView.m */; };
 		521E13391600B76300022B1E /* AJScore+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 521E13381600B76300022B1E /* AJScore+Additions.m */; };
 		521E133C1600C2AF00022B1E /* AJScoresTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 521E133B1600C2AF00022B1E /* AJScoresTableViewController.m */; };
 		5253287615FF115D00A28B84 /* ScorePad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5253287415FF115D00A28B84 /* ScorePad.xcdatamodeld */; };
@@ -51,6 +52,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		521BC2D116255A5A000C2EE0 /* AJScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJScrollView.h; sourceTree = "<group>"; };
+		521BC2D216255A5A000C2EE0 /* AJScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJScrollView.m; sourceTree = "<group>"; };
 		521E13371600B76300022B1E /* AJScore+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AJScore+Additions.h"; sourceTree = "<group>"; };
 		521E13381600B76300022B1E /* AJScore+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AJScore+Additions.m"; sourceTree = "<group>"; };
 		521E133A1600C2AF00022B1E /* AJScoresTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJScoresTableViewController.h; sourceTree = "<group>"; };
@@ -278,6 +281,8 @@
 			children = (
 				52A663EE1624561300554254 /* AJVerticalPlayerView.h */,
 				52A663EF1624561300554254 /* AJVerticalPlayerView.m */,
+				521BC2D116255A5A000C2EE0 /* AJScrollView.h */,
+				521BC2D216255A5A000C2EE0 /* AJScrollView.m */,
 			);
 			name = Widgets;
 			sourceTree = "<group>";
@@ -381,6 +386,7 @@
 				52A663E51624489000554254 /* AJScore.m in Sources */,
 				52A663E81624489000554254 /* AJGame.m in Sources */,
 				52A663F01624561300554254 /* AJVerticalPlayerView.m in Sources */,
+				521BC2D316255A5A000C2EE0 /* AJScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,6 +37,7 @@
 - (BOOL)saveContext;
 
 + (AJSettingsInfo *)createSettingsInfo;
+- (int)maxNumberOfScoresInGame:(AJGame *)game;
 
 // Methods used for testing
 - (NSArray *)getDummyData;

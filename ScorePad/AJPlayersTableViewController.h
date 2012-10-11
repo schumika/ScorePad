@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AJGame+Additions.h"
 #import "AJPlayer+Additions.h"
+#import "AJScrollView.h"
 
 #import "AJSettingsViewController.h"
 
@@ -18,7 +19,7 @@
     NSArray *_playersArray;
     
     UITextField *_newPlayerTextField;
-    UIScrollView *_scrollView;
+    AJScrollView *_scrollView;
 }
 
 @property (nonatomic, retain) AJGame *game;

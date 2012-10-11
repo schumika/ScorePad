@@ -25,19 +25,20 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor clearColor];
         self.name = name;
         self.scores = scores;
         self.color = color;
         
         _nameButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _nameButton.frame = CGRectMake(0.0, 0.0, 120.0, 50.0);
+        _nameButton.frame = CGRectMake(0.0, 0.0, frame.size.width, 50.0);
         [_nameButton setTitle:name forState:UIControlStateNormal];
         [_nameButton setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.3]];
         [_nameButton setTitleColor:[UIColor colorWithHexString:color] forState:UIControlStateNormal];
         [self addSubview:_nameButton];
         
         for (int scoreIndex = 0; scoreIndex < [self.scores count]; scoreIndex++) {
-            UILabel *scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 50.0 + 30 * scoreIndex, 120.0, 30.0)];
+            UILabel *scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 50.0 + 30 * scoreIndex, frame.size.width, 30.0)];
             [scoreLabel setBackgroundColor:[UIColor clearColor]];
             [scoreLabel setTextAlignment:UITextAlignmentCenter];
             [scoreLabel setText:[NSString stringWithFormat:@"%g",[[scores objectAtIndex:scoreIndex] doubleValue]]];
@@ -56,13 +57,14 @@
     [super dealloc];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (void)drawRect:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGColorRef redColor = [UIColor lightGrayColor].CGColor;
+    CGContextBeginPath(context);
+    CGContextMoveToPoint(context, rect.size.width, rect.origin.y);
+    CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
+    CGContextSetStrokeColorWithColor(context, redColor);
+    CGContextStrokePath(context);
 }
-*/
 
 @end

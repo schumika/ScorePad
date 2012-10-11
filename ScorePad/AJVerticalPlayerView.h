@@ -12,11 +12,15 @@
     NSString *_name;
     NSArray *_scores;
     NSString *_color;
+    
+    double _maxViewHeight;
 }
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *color;
 @property (nonatomic, retain) NSArray *scores;
+
+@property (nonatomic, assign) double maxViewHeight;
 
 - (id)initWithFrame:(CGRect)frame andName:(NSString *)name andScores:(NSArray *)scores andColor:(NSString *)color;
 

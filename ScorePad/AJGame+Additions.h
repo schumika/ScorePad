@@ -15,5 +15,6 @@
 + (AJGame *)createGameWithName:(NSString *)name inManagedObjectContext:(NSManagedObjectContext *)context;
 
 - (AJSettingsInfo *)settingsInfo;
+- (int)maxNumberOfScores;
 
 @end

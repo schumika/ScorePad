@@ -185,6 +185,34 @@ static AJScoresManager *sharedAJScoresManager = nil;
     [self saveContext];
 }
 
+- (int)maxNumberOfScoresInGame:(AJGame *)game {
+   /* NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"AJPlayer"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"game.name = %@ AND game.rowId = %@", game.name, game.rowId];
+    fetchRequest.predicate = predicate;
+    
+    [fetchRequest setResultType:NSDictionaryResultType];
+    
+    NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"scores"];
+    NSExpression *countExpression = [NSExpression expressionForFunction:@"count:" arguments:[NSArray arrayWithObject:keyPathExpression]];
+    
+    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
+    
+    [expressionDescription setName:@"countScores"];
+    [expressionDescription setExpression:countExpression];
+    [expressionDescription setExpressionResultType:NSInteger32AttributeType];
+    
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
+    
+    NSError *error = nil;
+    NSArray *objects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    for (id object in objects ) {
+        NSLog(@"object: %@", object);
+    }*/
+    
+    return 0;
+}
+
 #pragma mark - Other public methods
 
 - (BOOL)saveContext {
