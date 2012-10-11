@@ -63,9 +63,6 @@
 {
     [super viewDidLoad];
     
-    // Portrait
-    self.tableView.rowHeight = 65.0;
-    
     // Landscape
     _backView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"landscape_background.png"]];
     [self.view addSubview:_backView];
@@ -87,6 +84,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    self.tableView.rowHeight = 65.0;
     
     [self prepareUIForInterfaceOrientation:self.interfaceOrientation];
     [self loadDataAndUpdateUI:YES];

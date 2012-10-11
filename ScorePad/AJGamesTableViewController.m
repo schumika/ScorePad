@@ -57,6 +57,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.tableView.rowHeight = 60.0;
     [self loadDataAndUpdateUI:YES];
 }
 

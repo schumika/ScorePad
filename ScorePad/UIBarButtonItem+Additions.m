@@ -18,11 +18,11 @@
     
     UIButton *button = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
     [button setBackgroundImage:backImage forState:UIControlStateNormal];
-    [button setTitleShadowColor:[UIColor colorWithWhite:0.0 alpha:0.35] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithWhite:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [button setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitle:title forState:UIControlStateNormal];
     [button.titleLabel setShadowOffset:CGSizeMake(0, -1)];
-    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]]];
+    [button.titleLabel setFont:[UIFont fontWithName:@"Thonburi-Bold" size:17.0]];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     CGSize buttonSize = [title sizeWithFont:button.titleLabel.font];
     CGFloat marginSpace = 20.0f;

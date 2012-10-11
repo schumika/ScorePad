@@ -196,12 +196,12 @@
         
         _backButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         [_backButton setBackgroundImage:backImage forState:UIControlStateNormal];
-        [_backButton setTitleShadowColor:[UIColor colorWithWhite:0.0 alpha:0.35] forState:UIControlStateNormal];
+        [_backButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_backButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:1.0] forState:UIControlStateNormal];
         [_backButton setTitle:[self backButtonTitle] forState:UIControlStateNormal];
         [_backButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, -4.0)];
         [_backButton.titleLabel setShadowOffset:CGSizeMake(0, -1)];
-        [_backButton.titleLabel setFont:[UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]]];
+        [_backButton.titleLabel setFont:[UIFont fontWithName:@"Thonburi-Bold" size:17.0]];
         [_backButton addTarget:self action:@selector(backButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         CGSize buttonSize = [[self backButtonTitle] sizeWithFont:_backButton.titleLabel.font];
         CGFloat marginSpace = 20.0f;
