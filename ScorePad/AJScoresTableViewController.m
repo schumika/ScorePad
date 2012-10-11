@@ -59,7 +59,7 @@
     return YES;
 }
 
-- (NSString *)textViewTitle {
+- (NSString*)titleViewText {
     return self.player.name;
 }
 
