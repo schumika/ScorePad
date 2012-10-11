@@ -39,12 +39,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
+        
         self.name = name;
         self.scores = scores;
         self.color = color;
         
         AJVerticalPlayerHeaderView *headerView = [[AJVerticalPlayerHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, 60.0)];
         [headerView.nameButton setTitle:self.name forState:UIControlStateNormal];
+        [headerView.nameButton setTitleColor:[UIColor colorWithHexString:self.color] forState:UIControlStateNormal];
         [headerView.nameButton addTarget:self action:@selector(nameButtonCliked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:headerView];
         [headerView release];
@@ -103,7 +105,7 @@
     
     if (!self) return nil;
     
-    [self setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.3]];
+    [self setBackgroundColor:[UIColor clearColor]];
     
     _nameButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _nameButton.frame = CGRectMake(0.0, 0.0, frame.size.width, 40.0);
@@ -115,11 +117,22 @@
     
     _totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 35.0, frame.size.width, 20.0)];
     [_totalLabel setBackgroundColor:[UIColor clearColor]];
+    [_totalLabel setTextColor:[UIColor darkGrayColor]];
     [_totalLabel setTextAlignment:UITextAlignmentCenter];
     [self addSubview:_totalLabel];
     [_totalLabel release];
     
     return self;
+}
+
+- (void)drawRect:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGColorRef redColor = [UIColor lightGrayColor].CGColor;
+    CGContextBeginPath(context);
+    CGContextMoveToPoint(context, rect.origin.x, rect.size.height);
+    CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
+    CGContextSetStrokeColorWithColor(context, redColor);
+    CGContextStrokePath(context);
 }
 
 @end

@@ -38,7 +38,7 @@
         if (self.tableView.hidden == NO) {
             [self.tableView reloadData];
         } else {
-            CGFloat playerViewWidth = (self.playersArray.count == 0) ? 0.0 : MAX(120.0, 480.0 / (self.playersArray.count));
+            CGFloat playerViewWidth = (self.playersArray.count == 0) ? 0.0 : MAX(100.0, 480.0 / (self.playersArray.count));
             CGFloat maxScrollViewContentHeight = 60.0 + 30.0 * [self.game maxNumberOfScores];
             for (int playerIndex = 0; playerIndex < self.playersArray.count; playerIndex++) {
                 AJPlayer *player = (AJPlayer *)[self.playersArray objectAtIndex:playerIndex];
@@ -48,7 +48,7 @@
                 [_scrollView addSubview:verticalPlayerView];
                 [verticalPlayerView release];
             }
-            _scrollView.contentSize = CGSizeMake(self.playersArray.count * 120.0, maxScrollViewContentHeight + 30.0);
+            _scrollView.contentSize = CGSizeMake(self.playersArray.count * 100.0, maxScrollViewContentHeight + 40.0);
         }
     }
 }
