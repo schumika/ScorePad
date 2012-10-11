@@ -12,5 +12,7 @@
 
 + (UIImage *)defaultGamePicture;
 + (UIImage *)defaultPlayerPicture;
++ (UIImage *)separatorImage;
 
 @end
+

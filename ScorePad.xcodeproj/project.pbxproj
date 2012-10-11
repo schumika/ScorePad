@@ -48,6 +48,9 @@
 		52A663F01624561300554254 /* AJVerticalPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A663EF1624561300554254 /* AJVerticalPlayerView.m */; };
 		52AF6B691622FAE40034F06A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 52AF6B671622FAE40034F06A /* background.png */; };
 		52AF6B6A1622FAE40034F06A /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52AF6B681622FAE40034F06A /* background@2x.png */; };
+		52E6695F1626F0880035CAAC /* AJGameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E6695E1626F0880035CAAC /* AJGameTableViewCell.m */; };
+		52E669661626FC7F0035CAAC /* separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E669641626FC7F0035CAAC /* separator.png */; };
+		52E669671626FC7F0035CAAC /* separator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E669651626FC7F0035CAAC /* separator@2x.png */; };
 		52EF57EB161DB01B004B069B /* AJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EF57EA161DB01B004B069B /* AJTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +119,10 @@
 		52A663EF1624561300554254 /* AJVerticalPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJVerticalPlayerView.m; sourceTree = "<group>"; };
 		52AF6B671622FAE40034F06A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		52AF6B681622FAE40034F06A /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
+		52E6695D1626F0880035CAAC /* AJGameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJGameTableViewCell.h; sourceTree = "<group>"; };
+		52E6695E1626F0880035CAAC /* AJGameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJGameTableViewCell.m; sourceTree = "<group>"; };
+		52E669641626FC7F0035CAAC /* separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = separator.png; sourceTree = "<group>"; };
+		52E669651626FC7F0035CAAC /* separator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "separator@2x.png"; sourceTree = "<group>"; };
 		52EF57E9161DB01B004B069B /* AJTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJTableViewController.h; sourceTree = "<group>"; };
 		52EF57EA161DB01B004B069B /* AJTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -258,6 +265,8 @@
 		52A10850161F0C86006FCACD /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				52E669641626FC7F0035CAAC /* separator.png */,
+				52E669651626FC7F0035CAAC /* separator@2x.png */,
 				52A663E91624533500554254 /* landscape_background.png */,
 				52A663EA1624533500554254 /* landscape_background@2x.png */,
 				52AF6B671622FAE40034F06A /* background.png */,
@@ -279,12 +288,22 @@
 		52A663ED162455FA00554254 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				52E6695B1626F0580035CAAC /* TableViewCells */,
 				52A663EE1624561300554254 /* AJVerticalPlayerView.h */,
 				52A663EF1624561300554254 /* AJVerticalPlayerView.m */,
 				521BC2D116255A5A000C2EE0 /* AJScrollView.h */,
 				521BC2D216255A5A000C2EE0 /* AJScrollView.m */,
 			);
 			name = Widgets;
+			sourceTree = "<group>";
+		};
+		52E6695B1626F0580035CAAC /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				52E6695D1626F0880035CAAC /* AJGameTableViewCell.h */,
+				52E6695E1626F0880035CAAC /* AJGameTableViewCell.m */,
+			);
+			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,6 +373,8 @@
 				52AF6B6A1622FAE40034F06A /* background@2x.png in Resources */,
 				52A663EB1624533500554254 /* landscape_background.png in Resources */,
 				52A663EC1624533500554254 /* landscape_background@2x.png in Resources */,
+				52E669661626FC7F0035CAAC /* separator.png in Resources */,
+				52E669671626FC7F0035CAAC /* separator@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +408,7 @@
 				52A663E81624489000554254 /* AJGame.m in Sources */,
 				52A663F01624561300554254 /* AJVerticalPlayerView.m in Sources */,
 				521BC2D316255A5A000C2EE0 /* AJScrollView.m in Sources */,
+				52E6695F1626F0880035CAAC /* AJGameTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 #import "AJPlayersTableViewController.h"
 #import "AJScoresManager.h"
 #import "AJTableViewController.h"
+#import "AJGameTableViewCell.h"
 
 #import "AJGame+Additions.h"
 #import "NSString+Additions.h"
@@ -57,7 +58,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.tableView.rowHeight = 60.0;
+    self.tableView.rowHeight = 70.0;
     [self loadDataAndUpdateUI:YES];
 }
 
@@ -95,16 +96,34 @@
     static NSString *gameCellIdentifier = @"GameCell";
     static NSString *newGameCellIdentifier = @"NewGameCell";
     
-    NSString *CellIdentifier = (indexPath.section == 0) ? gameCellIdentifier : newGameCellIdentifier;
+    UITableViewCell *aCell = nil;
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
-        if (indexPath.section == 0) {
+    if (indexPath.section == 0) {
+        AJGameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:gameCellIdentifier];
+        
+        if (cell == nil) {
+            cell = [[[AJGameTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:gameCellIdentifier] autorelease];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textLabel.font = [UIFont boldSystemFontOfSize:20.0];
+        }
+        
+        AJGame *game = (AJGame *)[self.gamesArray objectAtIndex:indexPath.row];
+        cell.name = game.name;
+        int playersNumber = [[game players] count];
+        cell.numberOfPlayers = playersNumber;
+        
+        if (game.imageData == nil) {
+            cell.picture = [UIImage defaultGamePicture];
         } else {
+            cell.picture = [UIImage imageWithData:game.imageData];
+        }
+        
+        aCell = cell;
+    } else {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:newGameCellIdentifier];
+        
+        if (cell == nil) {
+            
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:newGameCellIdentifier] autorelease];
             cell.accessoryType = UITableViewCellAccessoryNone;
             CGRect textFieldRect = cell.contentView.bounds;
             textFieldRect.origin.y = ceil((textFieldRect.size.height - 31.0) / 2.0);
@@ -122,23 +141,10 @@
             [cell.contentView addSubview:_newGametextField];
             [_newGametextField release];
         }
+        aCell = cell;
     }
     
-    if (indexPath.section == 0) {
-        AJGame *game = (AJGame *)[self.gamesArray objectAtIndex:indexPath.row];
-        cell.textLabel.textColor = [UIColor colorWithHexString:[game color]];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@",[game name]];
-        int playersNumber = [[game players] count];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d %@", playersNumber, (playersNumber == 1) ? @"player" : @"players"];
-        
-        if (game.imageData == nil) {
-            cell.imageView.image = [UIImage defaultGamePicture];
-        } else {
-            cell.imageView.image = [UIImage imageWithData:game.imageData];
-        }
-    }
-    
-    return cell;
+    return aCell;
 }
 
 
