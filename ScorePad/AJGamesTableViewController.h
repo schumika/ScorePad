@@ -14,8 +14,6 @@
     
     UIBarButtonItem *_editBarButton;
     UIBarButtonItem *_doneBarButton;
-    
-    UITextField *_newGametextField;
 }
 
 @property (nonatomic, retain) NSArray *gamesArray;

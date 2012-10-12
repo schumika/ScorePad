@@ -11,6 +11,7 @@
 #import "AJScoresManager.h"
 #import "AJTableViewController.h"
 #import "AJGameTableViewCell.h"
+#import "AJNewItemTableViewCell.h"
 
 #import "AJGame+Additions.h"
 #import "NSString+Additions.h"
@@ -120,27 +121,15 @@
         
         aCell = cell;
     } else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:newGameCellIdentifier];
+        AJNewItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:newGameCellIdentifier];
         
         if (cell == nil) {
             
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:newGameCellIdentifier] autorelease];
+            cell = [[[AJNewItemTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:newGameCellIdentifier] autorelease];
             cell.accessoryType = UITableViewCellAccessoryNone;
-            CGRect textFieldRect = cell.contentView.bounds;
-            textFieldRect.origin.y = ceil((textFieldRect.size.height - 31.0) / 2.0);
-            textFieldRect.size.height = 31.0;
-            _newGametextField= [[UITextField alloc] initWithFrame:textFieldRect];
-            _newGametextField.borderStyle = UITextBorderStyleNone;
-            _newGametextField.backgroundColor = [UIColor clearColor];
-            _newGametextField.font = [UIFont boldSystemFontOfSize:20.0];
-            _newGametextField.textColor = [UIColor blueColor];
-            _newGametextField.placeholder = @"Add New Game ...";
-            _newGametextField.text = @"";
-            _newGametextField.delegate = self;
-            _newGametextField.textAlignment = UITextAlignmentCenter;
-            _newGametextField.returnKeyType = UIReturnKeyDone;
-            [cell.contentView addSubview:_newGametextField];
-            [_newGametextField release];
+            cell.textField.placeholder = @"Add New Game ...";
+            cell.textField.text = @"";
+            cell.textField.delegate = self;
         }
         aCell = cell;
     }
@@ -194,7 +183,7 @@
     if (self.tableView.editing) return;
     
     if (indexPath.section == 1) {
-        [_newGametextField becomeFirstResponder];
+        [((AJNewItemTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]).textField becomeFirstResponder];
     } else {        
         AJPlayersTableViewController *playersViewController = [[AJPlayersTableViewController alloc] initWithStyle:UITableViewStylePlain];
         playersViewController.game = (AJGame *)[self.gamesArray objectAtIndex:indexPath.row];
@@ -223,13 +212,13 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [_newGametextField resignFirstResponder];
+    [textField resignFirstResponder];
     
     NSString *text = textField.text;
     if (![NSString isNilOrEmpty:text]) {
         int maxNo = [self.tableView numberOfRowsInSection:0];
         [[AJScoresManager sharedInstance] addGameWithName:text andRowId:maxNo+1];
-        [_newGametextField setText:nil];
+        [textField setText:nil];
         
         [self loadDataAndUpdateUI:YES];
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
