@@ -14,5 +14,8 @@
 + (UIImage *)defaultPlayerPicture;
 + (UIImage *)separatorImage;
 
+- (UIImage*)resizeToNewSize:(CGSize)newSize;
+- (UIImage*)applyMask:(UIImage*)mask;
+
 @end
 

@@ -7,7 +7,9 @@
 //
 
 #import "AJGameTableViewCell.h"
+
 #import "UIImage+Additions.h"
+#import "UIColor+Additions.h"
 
 @interface AJGameTableViewCell () {
     UIImageView *_pictureView;
@@ -20,6 +22,7 @@
 @implementation AJGameTableViewCell
 
 @synthesize name = _name;
+@synthesize color = _color;
 @synthesize picture = _picture;
 @synthesize numberOfPlayers = _numberOfPlayers;
 
@@ -33,7 +36,7 @@
     [self.contentView addSubview:_pictureView];
     [_pictureView release];
     
-    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(70.0, 3.0, 240.0, 30.0)];
+    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(70.0, 3.0, 240.0, 40.0)];
     _nameLabel.backgroundColor = [UIColor clearColor];
     _nameLabel.textColor = [UIColor brownColor];
     _nameLabel.font = [UIFont fontWithName:@"Thonburi-Bold" size:30.0];
@@ -42,7 +45,7 @@
     [self.contentView addSubview:_nameLabel];
     [_nameLabel release];
     
-    _playersLabel = [[UILabel alloc] initWithFrame:CGRectMake(70.0, 25.0, 240.0, 20.0)];
+    _playersLabel = [[UILabel alloc] initWithFrame:CGRectMake(70.0, 40.0, 240.0, 20.0)];
     _playersLabel.backgroundColor = [UIColor clearColor];
     _playersLabel.textColor = [UIColor grayColor];
     _playersLabel.font = [UIFont fontWithName:@"Thonburi" size:15.0];
@@ -54,6 +57,14 @@
     return self;
 }
 
+- (void)dealloc {
+    [_name release];
+    [_color release];
+    [_picture release];
+    
+    [super dealloc];
+}
+
 - (void)setName:(NSString *)name {
     if (name != _name) {
         [_name release];
@@ -63,12 +74,21 @@
     }
 }
 
+- (void)setColor:(NSString *)color {
+    if (color != _color) {
+        [_color release];
+        _color = [color retain];
+        
+        _nameLabel.textColor = [UIColor colorWithHexString:_color];
+    }
+}
+
 - (void)setPicture:(UIImage *)picture {
     if (picture != _picture) {
         [_picture release];
         _picture = [picture retain];
         
-        [_pictureView setImage:_picture];
+        [_pictureView setImage:[_picture applyMask:[UIImage imageNamed:@"mask.png"]]];
     }
 }
 

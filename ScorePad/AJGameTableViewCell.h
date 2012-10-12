@@ -10,11 +10,13 @@
 
 @interface AJGameTableViewCell : UITableViewCell {
     NSString *_name;
+    NSString *_color;
     UIImage *_picture;
     int _numberOfPlayers;
 }
 
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSString *color;
 @property (nonatomic, retain) UIImage *picture;
 @property (nonatomic, assign) int numberOfPlayers;
 

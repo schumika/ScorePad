@@ -174,13 +174,17 @@
         cell.textLabel.text = [player name];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%g", [player totalScore]];
         
+        UIImage *playerImage = nil;
         if (player.imageData == nil) {
-            cell.imageView.image = [UIImage defaultPlayerPicture];
+           playerImage  = [[UIImage defaultPlayerPicture] resizeToNewSize:CGSizeMake(50.0, 50.0)];
         } else {
-            cell.imageView.image = [UIImage imageWithData:player.imageData];
+            playerImage = [[UIImage imageWithData:player.imageData] resizeToNewSize:CGSizeMake(50.0, 50.0)];
         }
+        
+        cell.imageView.image = [playerImage applyMask:[UIImage imageNamed:@"mask.png"]];
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     return cell;
 }
 
