@@ -16,12 +16,9 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        CGRect textFieldRect = CGRectMake(0.0, 0.0, 320.0, 60.0);
-        textFieldRect.origin.y = ceil((textFieldRect.size.height - 31.0) / 2.0);
-        textFieldRect.size.height = 31.0;
-        _textField = [[UITextField alloc] initWithFrame:textFieldRect];
+        _textField = [[UITextField alloc] initWithFrame:CGRectZero];
         _textField.borderStyle = UITextBorderStyleNone;
-        _textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        _textField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _textField.backgroundColor = [UIColor clearColor];
         _textField.font = [UIFont fontWithName:@"Thonburi-Bold" size:30.0];
         _textField.textColor = [UIColor darkGrayColor];
@@ -31,6 +28,14 @@
         [_textField release];
     }
     return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CGFloat cellHeight = self.contentView.bounds.size.height, cellWidth = self.contentView.bounds.size.width;
+    CGFloat tfY = ceil((cellHeight - 31.0) / 2.0);
+    _textField.frame = CGRectMake(0.0, tfY, cellWidth, 31.0);
 }
 
 @end

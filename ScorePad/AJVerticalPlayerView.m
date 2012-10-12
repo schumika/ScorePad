@@ -32,6 +32,8 @@
 @synthesize scores = _scores;
 @synthesize color = _color;
 
+@synthesize isFirstColumn = _isFirstColumn;
+
 @synthesize delegate = _delegate;
 
 - (id)initWithFrame:(CGRect)frame andName:(NSString *)name andScores:(NSArray *)scores andColor:(NSString *)color
@@ -77,12 +79,37 @@
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGColorRef redColor = [UIColor lightGrayColor].CGColor;
+    CGColorRef grayColor = [UIColor lightGrayColor].CGColor;
+    
+    // Right line
     CGContextBeginPath(context);
     CGContextMoveToPoint(context, rect.size.width, rect.origin.y);
     CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
-    CGContextSetStrokeColorWithColor(context, redColor);
+    CGContextSetStrokeColorWithColor(context, grayColor);
     CGContextStrokePath(context);
+    
+    // Top line
+    CGContextBeginPath(context);
+    CGContextMoveToPoint(context, rect.origin.x, rect.origin.y);
+    CGContextAddLineToPoint(context, rect.size.width, rect.origin.y);
+    CGContextSetStrokeColorWithColor(context, grayColor);
+    CGContextStrokePath(context);
+    
+    // Bottom line
+    CGContextBeginPath(context);
+    CGContextMoveToPoint(context, rect.origin.x, rect.size.height);
+    CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
+    CGContextSetStrokeColorWithColor(context, grayColor);
+    CGContextStrokePath(context);
+    
+    if (_isFirstColumn) {
+        // Left line
+        CGContextBeginPath(context);
+        CGContextMoveToPoint(context, rect.origin.x, rect.origin.y);
+        CGContextAddLineToPoint(context, rect.origin.x, rect.size.height);
+        CGContextSetStrokeColorWithColor(context, grayColor);
+        CGContextStrokePath(context);
+    }
 }
 
 - (IBAction)nameButtonCliked:(id)sender {
@@ -108,17 +135,18 @@
     [self setBackgroundColor:[UIColor clearColor]];
     
     _nameButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _nameButton.frame = CGRectMake(0.0, 0.0, frame.size.width, 40.0);
+    _nameButton.frame = CGRectMake(0.0, 0.0, frame.size.width, 25.0);
     _nameButton.backgroundColor = [UIColor clearColor];
-    [_nameButton.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0]];
+    [_nameButton.titleLabel setFont:[UIFont fontWithName:@"Thonburi" size:20.0]];
     [_nameButton.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [self addSubview:_nameButton];
     
     
-    _totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 35.0, frame.size.width, 20.0)];
+    _totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 25.0, frame.size.width, 35.0)];
     [_totalLabel setBackgroundColor:[UIColor clearColor]];
-    [_totalLabel setTextColor:[UIColor darkGrayColor]];
+    [_totalLabel setTextColor:[UIColor brownColor]];
     [_totalLabel setTextAlignment:UITextAlignmentCenter];
+    [_totalLabel setFont:[UIFont fontWithName:@"Thonburi-Bold" size:25.0]];
     [self addSubview:_totalLabel];
     [_totalLabel release];
     
@@ -127,11 +155,18 @@
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGColorRef redColor = [UIColor lightGrayColor].CGColor;
+    CGColorRef grayColor = [UIColor lightGrayColor].CGColor;
+    
+    CGContextBeginPath(context);
+    CGContextMoveToPoint(context, rect.origin.x, rect.size.height - 3.0);
+    CGContextAddLineToPoint(context, rect.size.width, rect.size.height - 3.0);
+    CGContextSetStrokeColorWithColor(context, grayColor);
+    CGContextStrokePath(context);
+    
     CGContextBeginPath(context);
     CGContextMoveToPoint(context, rect.origin.x, rect.size.height);
     CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
-    CGContextSetStrokeColorWithColor(context, redColor);
+    CGContextSetStrokeColorWithColor(context, grayColor);
     CGContextStrokePath(context);
 }
 

@@ -51,6 +51,7 @@
                 AJPlayer *player = (AJPlayer *)[self.playersArray objectAtIndex:playerIndex];
                 AJVerticalPlayerView *verticalPlayerView = [[AJVerticalPlayerView alloc] initWithFrame:CGRectMake(playerIndex * playerViewWidth, 0.0, playerViewWidth, maxScrollViewContentHeight)
                                                             andName:player.name andScores:[player scoreValues] andColor:player.color];
+                verticalPlayerView.isFirstColumn = (playerIndex == 0);
                 [verticalPlayerView setDelegate:self];
                 [_scrollView addSubview:verticalPlayerView];
                 [verticalPlayerView release];
@@ -87,7 +88,7 @@
 {
     [super viewWillAppear:animated];
     
-    self.tableView.rowHeight = 65.0;
+    self.tableView.rowHeight = 80.0;
     
     [self prepareUIForInterfaceOrientation:self.interfaceOrientation];
     [self loadDataAndUpdateUI:YES];
@@ -155,6 +156,7 @@
         aCell.color = player.color;
         int totalScore = [player totalScore];
         aCell.totalScores = totalScore;
+        aCell.numberOfRounds = [[player scores] count];
         
         UIImage *playerImage = nil;
         if (player.imageData == nil) {

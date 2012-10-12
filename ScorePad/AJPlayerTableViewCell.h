@@ -13,11 +13,13 @@
     NSString *_color;
     UIImage *_picture;
     double _totalScores;
+    int _numberOfRounds;
 }
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *color;
 @property (nonatomic, retain) UIImage *picture;
 @property (nonatomic, assign) double totalScores;
+@property (nonatomic, assign) int numberOfRounds;
 
 @end

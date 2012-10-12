@@ -16,6 +16,7 @@
     NSString *_color;
     
     double _maxViewHeight;
+    BOOL _isFirstColumn;
     
     id<AJVerticalPlayerViewDelegate> _delegate;
 }
@@ -25,6 +26,7 @@
 @property (nonatomic, retain) NSArray *scores;
 
 @property (nonatomic, assign) double maxViewHeight;
+@property (nonatomic, assign) BOOL isFirstColumn;
 
 @property (nonatomic, assign) id<AJVerticalPlayerViewDelegate> delegate;
 

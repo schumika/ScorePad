@@ -65,6 +65,16 @@
     [super dealloc];
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CGFloat cellHeight = self.contentView.bounds.size.height, cellWidth = self.contentView.bounds.size.width;
+    _pictureView.frame = CGRectMake(5.0, ceil((cellHeight - 50.0) / 2.0), 50.0, 50.0);
+    CGFloat pictureMaxX = CGRectGetMaxX(_pictureView.frame) + 10.0;
+    _nameLabel.frame = CGRectMake(pictureMaxX, 3.0, cellWidth - pictureMaxX, 40.0);
+    _playersLabel.frame = CGRectMake(pictureMaxX, cellHeight - 17.0, cellWidth - pictureMaxX, 15.0);
+}
+
 - (void)setName:(NSString *)name {
     if (name != _name) {
         [_name release];
