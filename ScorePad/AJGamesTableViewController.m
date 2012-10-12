@@ -124,7 +124,6 @@
         AJNewItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:newGameCellIdentifier];
         
         if (cell == nil) {
-            
             cell = [[[AJNewItemTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:newGameCellIdentifier] autorelease];
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.textField.placeholder = @"Add New Game ...";

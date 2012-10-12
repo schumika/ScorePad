@@ -18,8 +18,6 @@
     AJGame *_game;
     
     NSArray *_playersArray;
-    
-    UITextField *_newPlayerTextField;
     AJScrollView *_scrollView;
 }
 

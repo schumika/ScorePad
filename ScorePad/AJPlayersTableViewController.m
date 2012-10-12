@@ -11,6 +11,8 @@
 #import "AJSettingsViewController.h"
 #import "AJSettingsInfo.h"
 #import "AJScoresManager.h"
+#import "AJPlayerTableViewCell.h"
+#import "AJNewItemTableViewCell.h"
 
 #import "NSString+Additions.h"
 #import "UIColor+Additions.h"
@@ -139,49 +141,42 @@
     static NSString *playerCellIdentifier = @"PlayerCell";
     static NSString *newPlayerCellIdentifier = @"NewPlayerCell";
     
-    NSString *CellIdentifier = (indexPath.section == 0) ? playerCellIdentifier : newPlayerCellIdentifier;
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
-        if (indexPath.section == 0) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textLabel.font = [UIFont boldSystemFontOfSize:20.0];
-        } else {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            CGRect textFieldRect = cell.contentView.bounds;
-            textFieldRect.origin.y = ceil((textFieldRect.size.height - 31.0) / 2.0);
-            textFieldRect.size.height = 31.0;
-            _newPlayerTextField= [[UITextField alloc] initWithFrame:textFieldRect];
-            _newPlayerTextField.borderStyle = UITextBorderStyleNone;
-            _newPlayerTextField.backgroundColor = [UIColor clearColor];
-            _newPlayerTextField.font = [UIFont boldSystemFontOfSize:20.0];
-            _newPlayerTextField.textColor = [UIColor blueColor];
-            _newPlayerTextField.placeholder = @"Add New Player ...";
-            _newPlayerTextField.text = @"";
-            _newPlayerTextField.delegate = self;
-            _newPlayerTextField.textAlignment = UITextAlignmentCenter;
-            _newPlayerTextField.returnKeyType = UIReturnKeyDone;
-            [cell.contentView addSubview:_newPlayerTextField];
-            [_newPlayerTextField release];
-        }
-    }
+    UITableViewCell *cell = nil;
     
     if (indexPath.section == 0) {
+        AJPlayerTableViewCell *aCell = [tableView dequeueReusableCellWithIdentifier:playerCellIdentifier];
+        if (!aCell) {
+            aCell = [[[AJPlayerTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:playerCellIdentifier] autorelease];
+            aCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
         AJPlayer *player = (AJPlayer *)[self.playersArray objectAtIndex:indexPath.row];
-        cell.textLabel.textColor = [UIColor colorWithHexString:[player color]];
-        cell.textLabel.text = [player name];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%g", [player totalScore]];
+        aCell.name = player.name;
+        aCell.color = player.color;
+        int totalScore = [player totalScore];
+        aCell.totalScores = totalScore;
         
         UIImage *playerImage = nil;
         if (player.imageData == nil) {
-           playerImage  = [[UIImage defaultPlayerPicture] resizeToNewSize:CGSizeMake(50.0, 50.0)];
+            playerImage  = [[UIImage defaultPlayerPicture] resizeToNewSize:CGSizeMake(50.0, 50.0)];
         } else {
             playerImage = [[UIImage imageWithData:player.imageData] resizeToNewSize:CGSizeMake(50.0, 50.0)];
         }
         
-        cell.imageView.image = [playerImage applyMask:[UIImage imageNamed:@"mask.png"]];
+        aCell.picture = [playerImage applyMask:[UIImage imageNamed:@"mask.png"]];
+        
+        cell = aCell;
+    } else {
+        AJNewItemTableViewCell *aCell = [tableView dequeueReusableCellWithIdentifier:newPlayerCellIdentifier];
+        if (!aCell) {
+            aCell = [[[AJNewItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:newPlayerCellIdentifier] autorelease];
+            aCell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        aCell.textField.placeholder = @"Add New Player ...";
+        aCell.textField.text = @"";
+        aCell.textField.delegate = self;
+        
+        cell = aCell;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -214,7 +209,7 @@
     if (self.tableView.editing) return;
     
     if (indexPath.section == 1) {
-        [_newPlayerTextField becomeFirstResponder];
+        [((AJNewItemTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]).textField becomeFirstResponder];
     } else {        
         AJScoresTableViewController *scoresViewController = [[AJScoresTableViewController alloc] initWithStyle:UITableViewStylePlain];
         scoresViewController.player = [self.playersArray objectAtIndex:indexPath.row];
@@ -230,12 +225,12 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [_newPlayerTextField resignFirstResponder];
+    [textField resignFirstResponder];
     
     NSString *text = textField.text;
     if (![NSString isNilOrEmpty:text]) {
         [[AJScoresManager sharedInstance] createPlayerWithName:text forGame:self.game];
-        [_newPlayerTextField setText:nil];
+        [textField setText:nil];
         
         [self loadDataAndUpdateUI:YES];
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
