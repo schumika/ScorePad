@@ -158,12 +158,6 @@
     CGColorRef grayColor = [UIColor lightGrayColor].CGColor;
     
     CGContextBeginPath(context);
-    CGContextMoveToPoint(context, rect.origin.x, rect.size.height - 3.0);
-    CGContextAddLineToPoint(context, rect.size.width, rect.size.height - 3.0);
-    CGContextSetStrokeColorWithColor(context, grayColor);
-    CGContextStrokePath(context);
-    
-    CGContextBeginPath(context);
     CGContextMoveToPoint(context, rect.origin.x, rect.size.height);
     CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
     CGContextSetStrokeColorWithColor(context, grayColor);
