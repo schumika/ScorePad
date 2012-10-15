@@ -11,9 +11,7 @@
 #import "AJSettingsViewController.h"
 #import "AJSettingsInfo.h"
 #import "AJScoresManager.h"
-#import "AJPlayerTableViewCell.h"
 #import "AJNewItemTableViewCell.h"
-
 #import "NSString+Additions.h"
 #import "UIColor+Additions.h"
 #import "UIImage+Additions.h"
@@ -148,11 +146,12 @@
         AJPlayerTableViewCell *aCell = [tableView dequeueReusableCellWithIdentifier:playerCellIdentifier];
         if (!aCell) {
             aCell = [[[AJPlayerTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:playerCellIdentifier] autorelease];
+            aCell.delegate = self;
             aCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         
         AJPlayer *player = (AJPlayer *)[self.playersArray objectAtIndex:indexPath.row];
-        aCell.name = player.name;
+        aCell.name = player.name; 
         aCell.color = player.color;
         int totalScore = [player totalScore];
         aCell.totalScores = totalScore;
@@ -166,6 +165,8 @@
         }
         
         aCell.picture = [playerImage applyMask:[UIImage imageNamed:@"mask.png"]];
+        aCell.scoreTextField.text = @"";
+        aCell.scoreTextField.placeholder = [NSString stringWithFormat:@"%g", ((AJScore *)[[player.scores allObjects] lastObject]).value.doubleValue];
         
         cell = aCell;
     } else {
@@ -289,6 +290,29 @@
     scoresViewController.player = [self.playersArray objectAtIndex:[[_scrollView subviews] indexOfObject:verticalPlayerView]];
     [self.navigationController pushViewController:scoresViewController animated:YES];
     [scoresViewController release];
+}
+
+#pragma mark - AJPlayerTableViewCellDelegate methods
+
+- (void)playerCellClickedPlusButton:(AJPlayerTableViewCell *)cell {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    AJPlayer *player = [self.playersArray objectAtIndex:indexPath.row];
+    
+    [[AJScoresManager sharedInstance] createScoreWithValue:cell.scoreTextField.text.doubleValue
+                                                   inRound:([[player scores] count] + 1) forPlayer:player];
+    [cell.scoreTextField resignFirstResponder];
+    [self loadDataAndUpdateUI:YES];
+    
+}
+
+- (void)playerCellClickedMinusButton:(AJPlayerTableViewCell *)cell {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    AJPlayer *player = [self.playersArray objectAtIndex:indexPath.row];
+    
+    [[AJScoresManager sharedInstance] createScoreWithValue:-(cell.scoreTextField.text.doubleValue)
+                                                   inRound:([[player scores] count] + 1) forPlayer:player];
+    [cell.scoreTextField resignFirstResponder];
+    [self loadDataAndUpdateUI:YES];
 }
 
 @end

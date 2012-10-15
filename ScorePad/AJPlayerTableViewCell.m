@@ -17,6 +17,10 @@
     UILabel *_nameLabel;
     UILabel *_totalScoresLabel;
     UILabel *_roundsPlayedLabel;
+    
+    UITextField *_scoreTextField;
+    UIButton *_plusButton;
+    UIButton *_minusButton;
 }
 
 @end
@@ -29,6 +33,8 @@
 @synthesize picture = _picture;
 @synthesize totalScores = _totalScores;
 @synthesize numberOfRounds = _numberOfRounds;
+
+@synthesize scoreTextField = _scoreTextField;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -65,9 +71,39 @@
         _roundsPlayedLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self.contentView addSubview:_roundsPlayedLabel];
         [_roundsPlayedLabel release];
+        
+        _scoreTextField = [[UITextField alloc] initWithFrame:CGRectZero];
+        _scoreTextField.borderStyle = UITextBorderStyleNone;
+        _scoreTextField.background = [UIImage roundTextFieldImage];
+        _scoreTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+        _scoreTextField.placeholder = [NSString stringWithFormat:@"%g",0.0];
+        _scoreTextField.font = [UIFont fontWithName:@"Thonburi" size:17.0];
+        _scoreTextField.textColor = [UIColor brownColor];
+        _scoreTextField.textAlignment = UITextAlignmentCenter;
+        _scoreTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        [self.contentView addSubview:_scoreTextField];
+        [_scoreTextField release];
+        
+        _plusButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_plusButton setBackgroundImage:[UIImage roundTextFieldImage] forState:UIControlStateNormal];
+        _plusButton.titleLabel.font = [UIFont fontWithName:@"Thonburi-Bold" size:17.0];
+        [_plusButton setTitleColor:[UIColor brownColor] forState:UIControlStateNormal];
+        [_plusButton setTitle:@"+" forState:UIControlStateNormal];
+        [_plusButton addTarget:self action:@selector(plusButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:_plusButton];
+        
+        _minusButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_minusButton setBackgroundImage:[UIImage roundTextFieldImage] forState:UIControlStateNormal];
+        _minusButton.titleLabel.font = [UIFont fontWithName:@"Thonburi-Bold" size:17.0];
+        [_minusButton setTitleColor:[UIColor brownColor] forState:UIControlStateNormal];
+        [_minusButton setTitle:@"-" forState:UIControlStateNormal];
+        [_minusButton addTarget:self action:@selector(minusButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:_minusButton];
     }
     return self;
 }
+
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -77,6 +113,10 @@
     _nameLabel.frame = CGRectMake(pictureMaxX, 0.0, cellWidth - pictureMaxX, 25.0);
     _totalScoresLabel.frame = CGRectMake(pictureMaxX + 10.0, CGRectGetMaxY(_nameLabel.frame), cellWidth - pictureMaxX - 10.0, cellHeight - CGRectGetMaxY(_nameLabel.frame) - 17.0);
     _roundsPlayedLabel.frame = CGRectMake(pictureMaxX, cellHeight - 17.0, cellWidth - pictureMaxX, 15.0);
+    
+    _scoreTextField.frame = CGRectMake(cellWidth - 90.0, 5.0, 85.0, 31.0);
+    _plusButton.frame = CGRectMake(cellWidth - 90.0, 40.0, 40.0, 31.0);
+    _minusButton.frame = CGRectMake(cellWidth - 45.0, 40.0, 40.0, 31.0);
 }
 
 - (void)dealloc {
@@ -124,6 +164,20 @@
     _numberOfRounds = numberOfRounds;
     
     _roundsPlayedLabel.text = [NSString stringWithFormat:@"%d %@ played", _numberOfRounds, (_numberOfRounds == 1) ? @"round" : @"rounds"];
+}
+
+#pragma mark - Buttons actions
+
+- (IBAction)plusButtonClicked:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(playerCellClickedPlusButton:)]) {
+        [self.delegate playerCellClickedPlusButton:self];
+    }
+}
+
+- (IBAction)minusButtonClicked:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(playerCellClickedMinusButton:)]) {
+        [self.delegate playerCellClickedMinusButton:self];
+    }
 }
 
 @end

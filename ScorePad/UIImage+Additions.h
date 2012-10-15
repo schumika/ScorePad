@@ -13,6 +13,7 @@
 + (UIImage *)defaultGamePicture;
 + (UIImage *)defaultPlayerPicture;
 + (UIImage *)separatorImage;
++ (UIImage *)roundTextFieldImage;
 
 - (UIImage*)resizeToNewSize:(CGSize)newSize;
 - (UIImage*)applyMask:(UIImage*)mask;

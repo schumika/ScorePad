@@ -30,6 +30,10 @@
     return [UIImage imageNamed:@"separator.png"];
 }
 
++ (UIImage *)roundTextFieldImage {
+    return [[UIImage imageNamed:@"round.png"] stretchableImageWithLeftCapWidth:23.0 topCapHeight:10.0];
+}
+
 - (UIImage*)resizeToNewSize:(CGSize)newSize {
 	if (self.size.height == 0 || self.size.width == 0) {
 		return [[self retain] autorelease];

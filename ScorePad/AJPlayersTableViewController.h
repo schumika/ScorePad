@@ -11,10 +11,12 @@
 #import "AJPlayer+Additions.h"
 #import "AJScrollView.h"
 #import "AJVerticalPlayerView.h"
+#import "AJPlayerTableViewCell.h"
 
 #import "AJSettingsViewController.h"
 
-@interface AJPlayersTableViewController : AJTableViewController <UITextFieldDelegate, AJSettingsViewControllerDelegate, AJVerticalPlayerViewDelegate> {
+@interface AJPlayersTableViewController : AJTableViewController <UITextFieldDelegate, AJSettingsViewControllerDelegate,
+                                            AJVerticalPlayerViewDelegate, AJPlayerTableViewCellDelegate> {
     AJGame *_game;
     
     NSArray *_playersArray;

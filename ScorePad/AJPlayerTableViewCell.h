@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol AJPlayerTableViewCellDelegate;
+
 @interface AJPlayerTableViewCell : UITableViewCell {
     NSString *_name;
     NSString *_color;
     UIImage *_picture;
     double _totalScores;
     int _numberOfRounds;
+    
+    id<AJPlayerTableViewCellDelegate> _delegate;
 }
 
 @property (nonatomic, retain) NSString *name;
@@ -21,5 +25,17 @@
 @property (nonatomic, retain) UIImage *picture;
 @property (nonatomic, assign) double totalScores;
 @property (nonatomic, assign) int numberOfRounds;
+
+@property (nonatomic, assign) id<AJPlayerTableViewCellDelegate> delegate;
+
+@property (nonatomic, readonly) UITextField *scoreTextField;
+
+@end
+
+
+@protocol AJPlayerTableViewCellDelegate <NSObject>
+
+- (void)playerCellClickedPlusButton:(AJPlayerTableViewCell *)cell;
+- (void)playerCellClickedMinusButton:(AJPlayerTableViewCell *)cell;
 
 @end
