@@ -48,7 +48,7 @@
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _nameLabel.backgroundColor = [UIColor clearColor];
         _nameLabel.textColor = [UIColor brownColor];
-        _nameLabel.font = [UIFont fontWithName:@"Thonburi" size:25.0];
+        _nameLabel.font = [UIFont fontWithName:@"Thonburi-Bold" size:22.0];
         _nameLabel.adjustsFontSizeToFitWidth = YES;
         _nameLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self.contentView addSubview:_nameLabel];
@@ -60,13 +60,14 @@
         _totalScoresLabel.font = [UIFont fontWithName:@"Thonburi-Bold" size:40.0];
         _totalScoresLabel.adjustsFontSizeToFitWidth = YES;
         _totalScoresLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        _totalScoresLabel.textAlignment = UITextAlignmentCenter;
         [self.contentView addSubview:_totalScoresLabel];
         [_totalScoresLabel release];
         
         _roundsPlayedLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _roundsPlayedLabel.backgroundColor = [UIColor clearColor];
         _roundsPlayedLabel.textColor = [UIColor grayColor];
-        _roundsPlayedLabel.font = [UIFont fontWithName:@"Thonburi" size:15.0];
+        _roundsPlayedLabel.font = [UIFont fontWithName:@"Thonburi" size:12.0];
         _roundsPlayedLabel.adjustsFontSizeToFitWidth = YES;
         _roundsPlayedLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self.contentView addSubview:_roundsPlayedLabel];
@@ -107,12 +108,17 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat cellHeight = self.contentView.bounds.size.height, cellWidth = self.contentView.bounds.size.width;
-    _pictureView.frame = CGRectMake(5.0, ceil((cellHeight - 50.0) / 2.0), 50.0, 50.0);
-    CGFloat pictureMaxX = CGRectGetMaxX(_pictureView.frame) + 20.0;
-    _nameLabel.frame = CGRectMake(pictureMaxX, 0.0, cellWidth - pictureMaxX, 25.0);
-    _totalScoresLabel.frame = CGRectMake(pictureMaxX + 10.0, CGRectGetMaxY(_nameLabel.frame), cellWidth - pictureMaxX - 10.0, cellHeight - CGRectGetMaxY(_nameLabel.frame) - 17.0);
-    _roundsPlayedLabel.frame = CGRectMake(pictureMaxX, cellHeight - 17.0, cellWidth - pictureMaxX, 15.0);
+    CGFloat cellWidth = self.contentView.bounds.size.width;
+
+    CGSize nameSize = [_nameLabel sizeThatFits:CGSizeMake(0.0, 30.0)];
+    _nameLabel.frame = CGRectMake(37.0, 0.0, nameSize.width, 30.0);
+    _pictureView.frame = CGRectMake(10.0, 3.0, 25.0, 25.0);
+    _totalScoresLabel.frame = CGRectMake(10.0, 27.0, CGRectGetMaxX(_nameLabel.frame) - 10.0, 40.0);
+    _roundsPlayedLabel.frame = CGRectMake(20.0, 69.0, CGRectGetMaxX(_nameLabel.frame) - 10.0, 10.0);
+    
+   /* CGFloat pictureMaxX = CGRectGetMaxX(_pictureView.frame) + 10.0;
+    _totalScoresLabel.frame = CGRectMake(pictureMaxX + 10.0, 28.0, cellWidth - pictureMaxX - 10.0, 40.0;
+    _roundsPlayedLabel.frame = CGRectMake(25.0, cellHeight - 11.0, cellWidth - pictureMaxX, 10.0);*/
     
     _scoreTextField.frame = CGRectMake(cellWidth - 90.0, 5.0, 85.0, 31.0);
     _plusButton.frame = CGRectMake(cellWidth - 90.0, 40.0, 40.0, 31.0);

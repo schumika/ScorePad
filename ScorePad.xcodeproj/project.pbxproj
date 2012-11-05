@@ -54,6 +54,7 @@
 		52A663F01624561300554254 /* AJVerticalPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A663EF1624561300554254 /* AJVerticalPlayerView.m */; };
 		52AF6B691622FAE40034F06A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 52AF6B671622FAE40034F06A /* background.png */; };
 		52AF6B6A1622FAE40034F06A /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52AF6B681622FAE40034F06A /* background@2x.png */; };
+		52E5228B163AA49900E99702 /* AJPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E5228A163AA49900E99702 /* AJPlayerView.xib */; };
 		52E6695F1626F0880035CAAC /* AJGameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E6695E1626F0880035CAAC /* AJGameTableViewCell.m */; };
 		52E669661626FC7F0035CAAC /* separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E669641626FC7F0035CAAC /* separator.png */; };
 		52E669671626FC7F0035CAAC /* separator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E669651626FC7F0035CAAC /* separator@2x.png */; };
@@ -133,6 +134,7 @@
 		52A663EF1624561300554254 /* AJVerticalPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJVerticalPlayerView.m; sourceTree = "<group>"; };
 		52AF6B671622FAE40034F06A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		52AF6B681622FAE40034F06A /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
+		52E5228A163AA49900E99702 /* AJPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AJPlayerView.xib; sourceTree = "<group>"; };
 		52E6695D1626F0880035CAAC /* AJGameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJGameTableViewCell.h; sourceTree = "<group>"; };
 		52E6695E1626F0880035CAAC /* AJGameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJGameTableViewCell.m; sourceTree = "<group>"; };
 		52E669641626FC7F0035CAAC /* separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = separator.png; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				52E6695E1626F0880035CAAC /* AJGameTableViewCell.m */,
 				52634D7F162831D200B46693 /* AJPlayerTableViewCell.h */,
 				52634D80162831D300B46693 /* AJPlayerTableViewCell.m */,
+				52E5228A163AA49900E99702 /* AJPlayerView.xib */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				52634D7B16281C8600B46693 /* mask@2x.png in Resources */,
 				52473BB6162BEDA1008455F3 /* round.png in Resources */,
 				52473BB7162BEDA1008455F3 /* round@2x.png in Resources */,
+				52E5228B163AA49900E99702 /* AJPlayerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
